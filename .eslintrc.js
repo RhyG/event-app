@@ -38,7 +38,10 @@ module.exports = {
   settings: {
     'import/resolver': {
       'babel-module': {
-        '@/ui': './app/core/ui',
+        '@app': './app',
+        '@core': './app/core',
+        '@ui': './app/core/ui',
+        '@domains': './app/domains',
       },
     },
   },
