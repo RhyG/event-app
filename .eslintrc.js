@@ -41,7 +41,7 @@ module.exports = {
         '@app': './app',
         '@core': './app/core',
         '@ui': './app/core/ui',
-        '@domains': './app/domains',
+        '@features': './app/features',
       },
     },
   },

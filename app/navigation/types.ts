@@ -2,10 +2,11 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type TabParamList = {
-  Home: NavigatorScreenParams<{}>;
-  Account: NavigatorScreenParams<{}>;
+  HomeTab: NavigatorScreenParams<Record<string, never>>;
+  AccountTab: NavigatorScreenParams<Record<string, never>>;
 };
 
 export type RootStackParamList = {
   TabNavigator: BottomTabScreenProps<TabParamList>;
+  WelcomeScreen: undefined;
 };
