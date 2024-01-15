@@ -2,7 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { WelcomeScreen } from '@app/features/auth/screens/WelcomeScreen/WelcomeScreen';
+import { WelcomeScreen } from '@app/features/auth';
+import { useIsLoggedIn } from '@app/features/auth/providers/AuthProvider';
+import { JoinEventScreen } from '@app/features/event-joining';
 
 import { RootStackParamList, TabParamList } from './types';
 
@@ -24,7 +26,7 @@ export function TabNavigator() {
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export function AppNavigator() {
-  const isLoggedIn = false;
+  const isLoggedIn = useIsLoggedIn();
 
   return (
     <NavigationContainer>
@@ -39,7 +41,7 @@ export function AppNavigator() {
           </>
         )}
 
-        {/* <RootStack.Screen name="OpenEventScreen" component={EmptyComponent} /> */}
+        <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} />
 
         {/* Auth screens */}
         {/* <RootStack.Screen name="SignUpScreen" component={EmptyComponent} options={{ headerShown: true, headerBackTitleVisible: false }} /> */}

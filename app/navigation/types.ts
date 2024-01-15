@@ -1,4 +1,3 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type TabParamList = {
@@ -7,6 +6,13 @@ export type TabParamList = {
 };
 
 export type RootStackParamList = {
-  TabNavigator: BottomTabScreenProps<TabParamList>;
+  TabNavigator: undefined;
+
+  // Auth Screens
   WelcomeScreen: undefined;
+  SignUpScreen: undefined;
+  LoginScreen: undefined;
+
+  // App Screens
+  JoinEventScreen: undefined;
 };

@@ -4,23 +4,19 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { RootStackParamList } from '@app/navigation/types';
 
-import { useAuthContext } from '../../providers/AuthProvider';
-
-export function WelcomeScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'WelcomeScreen'>) {
-  const { toggleLoggedIn } = useAuthContext();
-
+export function JoinEventScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'JoinEventScreen'>) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Text>Welcome!</Text>
-      <TouchableOpacity onPress={toggleLoggedIn}>
+      <Text>Join Event</Text>
+      {/* <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
         <Text>Login!</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
         <Text>Signup!</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('JoinEventScreen')}>
+      <TouchableOpacity onPress={() => navigation.navigate('TabNavigator')}>
         <Text>Open event!</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 }
