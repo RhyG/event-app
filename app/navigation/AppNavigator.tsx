@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { WelcomeScreen } from '@app/features/auth';
+import { SignUpScreen, WelcomeScreen } from '@app/features/auth';
 import { useIsLoggedIn } from '@app/features/auth/providers/AuthProvider';
 import { JoinEventScreen } from '@app/features/event-joining';
 
@@ -38,6 +38,7 @@ export function AppNavigator() {
         ) : (
           <>
             <RootStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+            <RootStack.Screen name="SignUpScreen" component={SignUpScreen} />
           </>
         )}
 

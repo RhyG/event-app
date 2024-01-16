@@ -10,7 +10,7 @@ export const AuthContext = createContext<AuthContextProps>({
   toggleLoggedIn: () => {},
 });
 
-export function AuthProvider({ children }: PropsWithChildren<Record<string, never>>) {
+export function AuthProvider({ children }: PropsWithChildren<Record<string, unknown>>) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleLoggedIn = () => {
