@@ -1,28 +1,32 @@
 import React, { PropsWithChildren, createContext, useState } from 'react';
 
+import { User } from '@app/types/user';
+
 interface AuthContextProps {
-  isLoggedIn: boolean;
-  toggleLoggedIn: () => void;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  isLoggedIn: false,
-  toggleLoggedIn: () => {},
+  user: null,
+  setUser: () => {},
 });
 
 export function AuthProvider({ children }: PropsWithChildren<Record<string, unknown>>) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
-  const toggleLoggedIn = () => {
-    setIsLoggedIn(prevLoggedIn => !prevLoggedIn);
-  };
-
-  return <AuthContext.Provider value={{ isLoggedIn, toggleLoggedIn }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>;
 }
 
 export function useIsLoggedIn() {
-  const { isLoggedIn } = React.useContext(AuthContext);
-  return isLoggedIn;
+  const { user } = React.useContext(AuthContext);
+  console.log({ user });
+  return !!user;
+}
+
+export function useSetUser() {
+  const { setUser } = React.useContext(AuthContext);
+  return setUser;
 }
 
 export function useAuthContext() {
