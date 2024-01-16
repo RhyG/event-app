@@ -16,7 +16,7 @@ export function WelcomeScreen({ navigation }: NativeStackScreenProps<RootStackPa
         <Text>Login!</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
-        <Text>Signup!</Text>
+        <Text>Create an account!</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('JoinEventScreen')}>
         <Text>Open event!</Text>

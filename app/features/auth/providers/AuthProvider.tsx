@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { PropsWithChildren, createContext, useState } from 'react';
 
 interface AuthContextProps {
   isLoggedIn: boolean;
@@ -10,7 +10,7 @@ export const AuthContext = createContext<AuthContextProps>({
   toggleLoggedIn: () => {},
 });
 
-const AuthProvider: React.FC = ({ children }) => {
+export function AuthProvider({ children }: PropsWithChildren<Record<string, never>>) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleLoggedIn = () => {
@@ -18,7 +18,7 @@ const AuthProvider: React.FC = ({ children }) => {
   };
 
   return <AuthContext.Provider value={{ isLoggedIn, toggleLoggedIn }}>{children}</AuthContext.Provider>;
-};
+}
 
 export function useIsLoggedIn() {
   const { isLoggedIn } = React.useContext(AuthContext);
@@ -29,5 +29,3 @@ export function useAuthContext() {
   const authContext = React.useContext(AuthContext);
   return authContext;
 }
-
-export default AuthProvider;

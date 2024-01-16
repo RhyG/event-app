@@ -1,6 +1,6 @@
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
-import AuthProvider from '@app/features/auth/providers/AuthProvider';
+import { AuthProvider } from '@app/features/auth/providers/AuthProvider';
 
 import { AppNavigator } from './app/navigation/AppNavigator';
 
