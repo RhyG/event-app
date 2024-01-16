@@ -42,6 +42,7 @@ module.exports = {
         '@core': './app/core',
         '@ui': './app/core/ui',
         '@features': './app/features',
+        '@types': './app/types',
       },
     },
   },
