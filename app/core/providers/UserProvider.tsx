@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, createContext, useEffect, useReducer } from 'react';
 import { Text } from 'react-native';
 
-import { supabase } from '@app/core/lib/supabase';
+import { getUser as _getUser } from '@app/features/user/services/UserService';
 import { User } from '@app/types/user';
 
 interface UserContextProps {
@@ -23,10 +23,10 @@ const initialState = {
 type UserContextState = {
   user: User | null;
   loading: boolean;
-  error: string | null;
+  error: unknown | null;
 };
 
-type UserAction = { type: 'GOT_USER'; payload: User } | { type: 'LOADING' } | { type: 'ERROR'; payload: string };
+type UserAction = { type: 'GOT_USER'; payload: User } | { type: 'LOADING' } | { type: 'ERROR'; payload: unknown };
 
 function userReducer(state: UserContextState, action: UserAction): UserContextState {
   switch (action.type) {
@@ -61,14 +61,15 @@ function useUserReducer() {
   useEffect(() => {
     (async function getUser() {
       dispatch({ type: 'LOADING' });
-      const { data, error: _error } = await supabase.auth.getUser();
 
-      if (_error) {
-        dispatch({ type: 'ERROR', payload: _error.message });
-      }
+      try {
+        const data = await _getUser();
 
-      if (data.user) {
-        dispatch({ type: 'GOT_USER', payload: data.user });
+        if (data.user) {
+          dispatch({ type: 'GOT_USER', payload: data.user });
+        }
+      } catch (e) {
+        dispatch({ type: 'ERROR', payload: e });
       }
     })();
   }, []);
@@ -92,7 +93,6 @@ export function UserProvider({ children }: PropsWithChildren<Record<string, unkn
 
 export function useIsLoggedIn() {
   const { user } = React.useContext(UserContext);
-  console.log({ user });
   return !!user;
 }
 
