@@ -2,7 +2,7 @@ import React, { PropsWithChildren, createContext, useEffect, useReducer } from '
 import { Text } from 'react-native';
 
 import { getUser as _getUser } from '@app/features/user/services/UserService';
-import { User } from '@app/types/user';
+import { User } from '@app/features/user/types';
 
 interface UserContextProps {
   user: User | null;
@@ -26,7 +26,7 @@ type UserContextState = {
   error: unknown | null;
 };
 
-type UserAction = { type: 'GOT_USER'; payload: User } | { type: 'LOADING' } | { type: 'ERROR'; payload: unknown };
+type UserAction = { type: 'GOT_USER'; payload: User } | { type: 'LOADING' } | { type: 'ERROR'; payload: unknown } | { type: 'USER_CLEARED' };
 
 function userReducer(state: UserContextState, action: UserAction): UserContextState {
   switch (action.type) {
@@ -48,6 +48,13 @@ function userReducer(state: UserContextState, action: UserAction): UserContextSt
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case 'USER_CLEARED':
+      return {
+        ...state,
+        user: null,
+        loading: false,
+        error: null,
       };
     default:
       return state;
@@ -75,7 +82,11 @@ function useUserReducer() {
   }, []);
 
   function setUser(userToSet: User | null) {
-    if (userToSet) dispatch({ type: 'GOT_USER', payload: userToSet });
+    if (userToSet) {
+      dispatch({ type: 'GOT_USER', payload: userToSet });
+    } else {
+      dispatch({ type: 'USER_CLEARED' });
+    }
   }
 
   return { user, loading, error, setUser };
@@ -84,8 +95,10 @@ function useUserReducer() {
 export function UserProvider({ children }: PropsWithChildren<Record<string, unknown>>) {
   const { user, loading, error, setUser } = useUserReducer();
 
+  // TODO: nice error state (toast maybe)
   if (error) return <Text>ERROR</Text>;
 
+  // TODO: Should continue showing splash
   if (loading) return <Text>LOADING</Text>;
 
   return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;

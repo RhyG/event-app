@@ -1,4 +1,4 @@
-import { useSetUser } from '@core/providers/UserProvider';
+import { useSetUser } from '@app/features/user';
 
 import { logout } from '../services/AuthService';
 

@@ -1,14 +1,13 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useIsLoggedIn } from '@app/core/providers/UserProvider';
-import { RootStackParamList } from '@app/navigation/types';
+import { useIsLoggedIn } from '@app/features/user';
+import { ScreenProp } from '@app/navigation/types';
 
 import { useLogin } from '../../hooks/useLogin';
 import { useLogout } from '../../hooks/useLogout';
 
-export function WelcomeScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'WelcomeScreen'>) {
+export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
   const isLoggedIn = useIsLoggedIn();
   const logout = useLogout();
   const login = useLogin();

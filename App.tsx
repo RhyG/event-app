@@ -1,7 +1,7 @@
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
 import { QueryClientProvider } from '@app/core/providers/QueryClientProvider';
-import { UserProvider } from '@app/core/providers/UserProvider';
+import { UserProvider } from '@app/features/user/providers/UserProvider';
 
 import { AppNavigator } from './app/navigation/AppNavigator';
 
