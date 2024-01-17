@@ -1,14 +1,14 @@
-import { signUp } from '@app/features/auth/lib/signUp';
-import { useSetUser } from '@app/features/auth/providers/AuthProvider';
+import { useSetUser } from '@core/providers/UserProvider';
+
+import { signup } from '../../../services/AuthService';
 
 export function useCreateUser() {
   const setUser = useSetUser();
 
   async function createUser() {
-    const data = await signUp();
+    const data = await signup();
 
     setUser(data.user);
-    // navigation.navigate('TabNavigator');
   }
 
   return createUser;

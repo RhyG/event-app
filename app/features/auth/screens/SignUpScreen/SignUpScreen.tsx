@@ -4,11 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { RootStackParamList } from '@app/navigation/types';
 
-import { signUp } from '../../lib/signUp';
+import { signup } from '../../services/AuthService';
 
 export function SignUpScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>) {
   async function createUser() {
-    const data = await signUp();
+    const data = await signup();
     console.log({ data });
     navigation.navigate('TabNavigator');
   }
