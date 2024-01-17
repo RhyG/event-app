@@ -2,9 +2,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { useIsLoggedIn } from '@app/core/providers/UserProvider';
-import { SignUpScreen, WelcomeScreen } from '@app/features/auth';
-import { JoinEventScreen } from '@app/features/event-joining';
+import { SignUpScreen, WelcomeScreen } from '@feature/auth';
+import { JoinEventScreen } from '@feature/events';
+import { HomeScreen } from '@feature/home/screens/HomeScreen';
+import { useIsLoggedIn } from '@feature/user';
 
 import { RootStackParamList, TabParamList } from './types';
 
@@ -17,7 +18,7 @@ function EmptyComponent() {
 export function TabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="HomeTab" component={EmptyComponent} options={{ title: 'Home' }} />
+      <Tab.Screen name="HomeTab" component={HomeScreen} options={{ title: 'Home' }} />
       <Tab.Screen name="AccountTab" component={EmptyComponent} options={{ title: 'Account' }} />
     </Tab.Navigator>
   );
@@ -43,10 +44,6 @@ export function AppNavigator() {
         )}
 
         <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} />
-
-        {/* Auth screens */}
-        {/* <RootStack.Screen name="SignUpScreen" component={EmptyComponent} options={{ headerShown: true, headerBackTitleVisible: false }} /> */}
-        {/* <RootStack.Screen name="LoginScreen" component={EmptyComponent} options={{ headerShown: true, headerBackTitleVisible: false }} /> */}
       </RootStack.Navigator>
     </NavigationContainer>
   );
