@@ -2,18 +2,16 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Text, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useIsLoggedIn } from '@app/core/providers/UserProvider';
 import { RootStackParamList } from '@app/navigation/types';
 
 import { useLogin } from '../../hooks/useLogin';
 import { useLogout } from '../../hooks/useLogout';
-import { useIsLoggedIn } from '../../providers/AuthProvider';
 
 export function WelcomeScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'WelcomeScreen'>) {
   const isLoggedIn = useIsLoggedIn();
   const logout = useLogout();
   const login = useLogin();
-
-  console.log({ isLoggedIn });
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

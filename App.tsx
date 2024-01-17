@@ -1,7 +1,7 @@
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
 import { QueryClientProvider } from '@app/core/providers/QueryClientProvider';
-import { AuthProvider } from '@app/features/auth/providers/AuthProvider';
+import { UserProvider } from '@app/core/providers/UserProvider';
 
 import { AppNavigator } from './app/navigation/AppNavigator';
 
@@ -9,9 +9,9 @@ export default function App() {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <QueryClientProvider>
-        <AuthProvider>
+        <UserProvider>
           <AppNavigator />
-        </AuthProvider>
+        </UserProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
   );
