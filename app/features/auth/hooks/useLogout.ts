@@ -1,5 +1,6 @@
+import { useSetUser } from '@core/providers/UserProvider';
+
 import { logout } from '../lib/logout';
-import { useSetUser } from '../providers/AuthProvider';
 
 export function useLogout() {
   const setUser = useSetUser();
