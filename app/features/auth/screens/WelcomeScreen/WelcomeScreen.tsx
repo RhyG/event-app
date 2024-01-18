@@ -1,8 +1,9 @@
 import { Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useIsLoggedIn } from '@app/features/user';
 import { ScreenProp } from '@app/navigation/types';
+
+import { BaseScreen } from '@ui/components/layout/BaseScreen';
 
 import { useLogin } from '../../hooks/useLogin';
 import { useLogout } from '../../hooks/useLogout';
@@ -13,7 +14,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
   const login = useLogin();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <BaseScreen>
       <Text>Welcome!</Text>
       {isLoggedIn ? (
         <TouchableOpacity onPress={logout}>
@@ -32,6 +33,6 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
       <TouchableOpacity onPress={() => navigation.navigate('JoinEventScreen')}>
         <Text>Open event!</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </BaseScreen>
   );
 }

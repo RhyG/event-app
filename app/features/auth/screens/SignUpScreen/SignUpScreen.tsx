@@ -1,7 +1,8 @@
 import { Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ScreenProp } from '@app/navigation/types';
+
+import { BaseScreen } from '@ui/components/layout/BaseScreen';
 
 import { signup } from '../../services/AuthService';
 
@@ -13,7 +14,7 @@ export function SignUpScreen({ navigation }: ScreenProp<'SignUpScreen'>) {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <BaseScreen>
       <Text>Sign up!</Text>
       <TouchableOpacity onPress={createUser}>
         <Text>Email and password!</Text>
@@ -24,6 +25,6 @@ export function SignUpScreen({ navigation }: ScreenProp<'SignUpScreen'>) {
       <TouchableOpacity onPress={() => {}}>
         <Text>Google!</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </BaseScreen>
   );
 }

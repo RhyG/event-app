@@ -1,11 +1,12 @@
 import { Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ScreenProp } from '@app/navigation/types';
 
+import { BaseScreen } from '@ui/components/layout/BaseScreen';
+
 export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   return (
-    <SafeAreaView>
+    <BaseScreen>
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('CreateEventScreen')}>
           <Text>Create new event</Text>
@@ -17,6 +18,6 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
       <View>
         <Text>Previous events</Text>
       </View>
-    </SafeAreaView>
+    </BaseScreen>
   );
 }

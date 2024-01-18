@@ -1,12 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native';
 
 import { RootStackParamList } from '@app/navigation/types';
 
+import { BaseScreen } from '@ui/components/layout/BaseScreen';
+
 export function JoinEventScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'JoinEventScreen'>) {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <BaseScreen>
       <Text>Join Event</Text>
       {/* <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
         <Text>Login!</Text>
@@ -17,6 +18,6 @@ export function JoinEventScreen({ navigation }: NativeStackScreenProps<RootStack
       <TouchableOpacity onPress={() => navigation.navigate('TabNavigator')}>
         <Text>Open event!</Text>
       </TouchableOpacity> */}
-    </SafeAreaView>
+    </BaseScreen>
   );
 }
