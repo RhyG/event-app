@@ -7,6 +7,7 @@ import { CreateEventScreen, JoinEventScreen } from '@feature/events';
 import { HomeScreen } from '@feature/home/screens/HomeScreen';
 import { useIsLoggedIn } from '@feature/user';
 
+import { TabIcon } from './TabIcon';
 import { RootStackParamList, TabParamList } from './types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -27,8 +28,8 @@ function HomeTabStack() {
 export function TabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="HomeTab" component={HomeTabStack} options={{ title: 'Home' }} />
-      <Tab.Screen name="AccountTab" component={EmptyComponent} options={{ title: 'Account' }} />
+      <Tab.Screen name="HomeTab" component={HomeTabStack} options={{ title: 'Home', tabBarIcon: props => <TabIcon name="home" {...props} /> }} />
+      <Tab.Screen name="AccountTab" component={EmptyComponent} options={{ title: 'Account', tabBarIcon: props => <TabIcon name="user" {...props} /> }} />
     </Tab.Navigator>
   );
 }
