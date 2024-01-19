@@ -1,32 +1,36 @@
-import colours from './colours';
+import palette from './colours';
 import { layout } from './layout';
 import { spacing } from './spacing';
 import { timing } from './timing';
 import { typography } from './typography';
 
+const colours = {
+  palette,
+  textPrimary: palette.grey['900'],
+  textSecondary: palette.grey['400'],
+  button: {
+    primaryBackground: palette.grey['100'],
+    primaryText: palette.white,
+    secondaryBackground: palette.grey['500'],
+    secondaryText: palette.grey['500'],
+    borderRadius: 4,
+    padding: spacing.medium,
+  },
+  input: {
+    background: palette.white,
+    // borderColor: colours.grey['300'], // TODO these colours when I need this component
+    // textColor: colours.grey['900'],
+    borderRadius: 4,
+    padding: spacing.small,
+  },
+};
+
 export const theme = {
-  palette: colours,
   typography,
   spacing,
   layout,
   timing,
-  colours: {
-    button: {
-      primaryBackground: colours.grey['100'],
-      primaryText: colours.white,
-      secondaryBackground: colours.grey['500'],
-      secondaryText: colours.grey['500'],
-      borderRadius: 4,
-      padding: spacing.medium,
-    },
-    input: {
-      background: colours.white,
-      // borderColor: colours.grey['300'], // TODO these colours when I need this component
-      // textColor: colours.grey['900'],
-      borderRadius: 4,
-      padding: spacing.small,
-    },
-  },
+  colours,
 };
 
 export type Theme = typeof theme;
