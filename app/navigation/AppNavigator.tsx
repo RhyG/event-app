@@ -7,7 +7,8 @@ import { CreateEventScreen, JoinEventScreen } from '@feature/events';
 import { HomeScreen } from '@feature/home/screens/HomeScreen';
 import { useIsLoggedIn } from '@feature/user';
 
-import { TabIcon } from './TabIcon';
+import { TabBarIcon } from './TabBarIcon';
+import { TabBarLabel } from './TabBarLabel';
 import { RootStackParamList, TabParamList } from './types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -28,8 +29,24 @@ function HomeTabStack() {
 export function TabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="HomeTab" component={HomeTabStack} options={{ title: 'Home', tabBarIcon: props => <TabIcon name="home" {...props} /> }} />
-      <Tab.Screen name="AccountTab" component={EmptyComponent} options={{ title: 'Account', tabBarIcon: props => <TabIcon name="user" {...props} /> }} />
+      <Tab.Screen
+        name="HomeTab"
+        component={HomeTabStack}
+        options={{
+          title: 'Home',
+          tabBarIcon: props => <TabBarIcon name="home" {...props} />,
+          tabBarLabel: props => <TabBarLabel label="Home" {...props} />,
+        }}
+      />
+      <Tab.Screen
+        name="AccountTab"
+        component={EmptyComponent}
+        options={{
+          title: 'Account',
+          tabBarIcon: props => <TabBarIcon name="user" {...props} />,
+          tabBarLabel: props => <TabBarLabel label="Account" {...props} />,
+        }}
+      />
     </Tab.Navigator>
   );
 }
@@ -42,6 +59,7 @@ export function AppNavigator() {
       <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerShown: false }}>
         {isLoggedIn ? (
           <>
+            {/* Event creation screens - render above tabs */}
             <RootStack.Group>
               <RootStack.Screen name="CreateEventScreen" component={CreateEventScreen} />
             </RootStack.Group>
