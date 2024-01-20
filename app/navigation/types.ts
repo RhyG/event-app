@@ -19,6 +19,8 @@ export type RootStackParamList = {
   HomeScreen: undefined;
   JoinEventScreen: undefined;
   CreateEventScreen: undefined;
+
+  QRCodeScannerScreen: undefined;
 };
 
 export type ScreenProp<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;

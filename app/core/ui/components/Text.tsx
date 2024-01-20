@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text as RNText, TextProps as RNTextProps, StyleProp, TextStyle } from 'react-native';
 
-import { colours, typography } from '@ui/theme';
+import { theme, typography } from '@ui/theme';
 
 type Sizes = keyof typeof sizeStyles;
 type Weights = keyof typeof typography.weights;
@@ -33,21 +33,26 @@ export type TextProps = {
    */
   size?: Sizes;
   /**
+   * Optional override for the text size.
+   */
+  align?: 'center' | 'left' | 'right' | 'justify' | 'auto';
+  /**
    * Child components - this allows either a string or nested components.
    */
   children?: React.ReactNode;
 } & RNTextProps;
 
 export function Text(props: TextProps) {
-  const { weight, size, text, colour, children, style: styleOverride, ...rest } = props;
+  const { weight, size, text, colour, children, style: styleOverride, align, ...rest } = props;
 
   // Prioritise the `text` prop.
   const content = text || children;
 
   const preset: Presets = props.preset ?? 'default';
-  const color = { color: colour ?? colours.text };
+  const color = { color: colour ?? theme.colours.textPrimary };
+  const textAlign = { textAlign: align ?? 'left' };
   // @ts-expect-error - I want to use `undefined` as an index so that it returns undefined
-  const styles = [presets[preset], fontWeightStyles[weight], sizeStyles[size], color, styleOverride];
+  const styles = [presets[preset], fontWeightStyles[weight], textAlign, sizeStyles[size], color, styleOverride];
 
   return (
     <RNText {...rest} style={styles}>
@@ -71,7 +76,7 @@ const fontWeightStyles = Object.entries(typography.weights).reduce((acc, [typeWe
   return { ...acc, [typeWeight]: { fontWeight: String(weight) } };
 }, {}) as Record<Weights, TextStyle>;
 
-const baseStyle: StyleProp<TextStyle> = [sizeStyles.sm, fontWeightStyles.medium, { color: colours.black }];
+const baseStyle: StyleProp<TextStyle> = [sizeStyles.sm, fontWeightStyles.medium, { color: theme.colours.textPrimary }];
 
 const presets = {
   default: baseStyle,

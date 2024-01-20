@@ -57,12 +57,12 @@ export function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerBackTitleVisible: false }}>
+      <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
         {isLoggedIn ? (
           <>
             {/* Event creation screens - render above tabs */}
             <RootStack.Group>
-              <RootStack.Screen name="CreateEventScreen" component={CreateEventScreen} options={{ title: 'Create Event', headerShadowVisible: false }} />
+              <RootStack.Screen name="CreateEventScreen" component={CreateEventScreen} options={{ title: 'Create Event' }} />
             </RootStack.Group>
 
             <RootStack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />

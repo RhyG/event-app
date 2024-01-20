@@ -8,6 +8,7 @@ const colours = {
   palette,
   textPrimary: palette.grey['900'],
   textSecondary: palette.grey['400'],
+  textSubdued: palette.grey['500'],
 };
 
 export const theme = {
@@ -17,10 +18,17 @@ export const theme = {
   timing,
   colours,
   button: {
-    primaryBackground: palette.grey['100'],
+    primaryBackground: palette.sky['500'],
     primaryText: palette.white,
-    secondaryBackground: palette.grey['500'],
-    secondaryText: palette.grey['500'],
+
+    secondaryBackground: palette.white,
+    secondaryText: colours.textPrimary,
+    secondaryBorderColor: colours.palette.grey['200'],
+
+    disabledBackground: palette.slate['200'],
+    disabledText: colours.textPrimary,
+
+    borderWidth: 1,
     borderRadius: 14,
     padding: spacing.medium,
   },
@@ -28,8 +36,9 @@ export const theme = {
     background: palette.white,
     // borderColor: colours.grey['300'], // TODO these colours when I need this component
     // textColor: colours.grey['900'],
-    borderRadius: 4,
+    borderRadius: 14,
     padding: spacing.small,
+    borderColour: colours.palette.grey['200'],
   },
   card: {
     borderRadius: 14,
