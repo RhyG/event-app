@@ -20,7 +20,7 @@ function EmptyComponent() {
 
 function HomeTabStack() {
   return (
-    <RootStack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerShown: false }}>
+    <RootStack.Navigator initialRouteName="HomeScreen">
       <RootStack.Screen name="HomeScreen" component={HomeScreen} />
     </RootStack.Navigator>
   );
@@ -28,7 +28,7 @@ function HomeTabStack() {
 
 export function TabNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="HomeTab"
         component={HomeTabStack}
@@ -36,6 +36,7 @@ export function TabNavigator() {
           title: 'Home',
           tabBarIcon: props => <TabBarIcon name="home" {...props} />,
           tabBarLabel: props => <TabBarLabel label="Home" {...props} />,
+          headerShadowVisible: false,
         }}
       />
       <Tab.Screen
@@ -56,15 +57,15 @@ export function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerShown: false }}>
+      <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerBackTitleVisible: false }}>
         {isLoggedIn ? (
           <>
             {/* Event creation screens - render above tabs */}
             <RootStack.Group>
-              <RootStack.Screen name="CreateEventScreen" component={CreateEventScreen} />
+              <RootStack.Screen name="CreateEventScreen" component={CreateEventScreen} options={{ title: 'Create Event', headerShadowVisible: false }} />
             </RootStack.Group>
 
-            <RootStack.Screen name="TabNavigator" component={TabNavigator} />
+            <RootStack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
           </>
         ) : (
           <>
@@ -73,7 +74,7 @@ export function AppNavigator() {
           </>
         )}
 
-        <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} />
+        <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} options={{ title: 'Join Event' }} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

@@ -8,12 +8,20 @@ const colours = {
   palette,
   textPrimary: palette.grey['900'],
   textSecondary: palette.grey['400'],
+};
+
+export const theme = {
+  typography,
+  spacing,
+  layout,
+  timing,
+  colours,
   button: {
     primaryBackground: palette.grey['100'],
     primaryText: palette.white,
     secondaryBackground: palette.grey['500'],
     secondaryText: palette.grey['500'],
-    borderRadius: 4,
+    borderRadius: 14,
     padding: spacing.medium,
   },
   input: {
@@ -23,14 +31,9 @@ const colours = {
     borderRadius: 4,
     padding: spacing.small,
   },
-};
-
-export const theme = {
-  typography,
-  spacing,
-  layout,
-  timing,
-  colours,
+  card: {
+    borderRadius: 14,
+  },
 };
 
 export type Theme = typeof theme;

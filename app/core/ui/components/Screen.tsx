@@ -213,7 +213,7 @@ const containerStyle: ViewStyle = {
   flex: 1,
   height: '100%',
   width: '100%',
-  paddingHorizontal: 20,
+  paddingHorizontal: 15,
 };
 
 const keyboardAvoidingViewStyle: ViewStyle = {
