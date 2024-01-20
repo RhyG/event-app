@@ -179,13 +179,23 @@ function ScreenWithScrolling(props: ScreenProps) {
   );
 }
 
+type ScreenPreset = 'fixed' | 'scroll' | 'auto';
+
+function getScreenPreset(preset?: ScreenPreset): ScreenPreset {
+  if (!preset || preset === 'auto') return 'auto';
+
+  return isNonScrolling(preset) ? 'fixed' : 'scroll';
+}
+
 export function Screen(props: ScreenProps) {
   const { backgroundColor = colours.white, keyboardAvoidingViewProps, keyboardOffset = 0, safeAreaEdges, statusBarProps, statusBarStyle = 'dark' } = props;
 
-  const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
+  const containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
+
+  const isFixedScreen = getScreenPreset(props.preset) === 'fixed';
 
   return (
-    <View style={[containerStyle, { backgroundColor }, $containerInsets]}>
+    <View style={[containerStyle, { backgroundColor }, containerInsets]}>
       <StatusBar style={statusBarStyle} {...statusBarProps} />
 
       <KeyboardAvoidingView
@@ -193,7 +203,7 @@ export function Screen(props: ScreenProps) {
         keyboardVerticalOffset={keyboardOffset}
         {...keyboardAvoidingViewProps}
         style={[keyboardAvoidingViewStyle, keyboardAvoidingViewProps?.style]}>
-        {isNonScrolling(props.preset) ? <ScreenWithoutScrolling {...props} /> : <ScreenWithScrolling {...props} />}
+        {isFixedScreen ? <ScreenWithoutScrolling {...props} /> : <ScreenWithScrolling {...props} />}
       </KeyboardAvoidingView>
     </View>
   );

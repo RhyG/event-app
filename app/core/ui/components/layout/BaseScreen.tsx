@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { StyleSheet, ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 
 type BaseScreenProps = PropsWithChildren<{
   padding?: number;
@@ -10,12 +9,13 @@ type BaseScreenProps = PropsWithChildren<{
 export function BaseScreen({ children, padding, style }: BaseScreenProps) {
   const combinedStyles = StyleSheet.flatten([styles.screen, style, padding && { padding }]) as ViewStyle;
 
-  return <SafeAreaView style={combinedStyles}>{children}</SafeAreaView>;
+  return <View style={combinedStyles}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 10, // TODO use theme padding
+    paddingHorizontal: 20, // TODO use theme padding
+    backgroundColor: '#fff',
   },
 });
