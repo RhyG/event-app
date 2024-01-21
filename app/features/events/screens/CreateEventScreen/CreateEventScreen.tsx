@@ -1,4 +1,8 @@
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+
+import { createEvent } from '@feature/events/services/EventCreationService';
+import { useUserContext } from '@feature/user';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -9,6 +13,24 @@ import { Text } from '@ui/components/Text';
 import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
 
+function useEventInputs() {
+  const { user } = useUserContext();
+
+  const [details, setDetails] = useState({
+    name: null,
+    date: null,
+    description: null,
+    password: null,
+    userId: user?.id,
+  });
+
+  function setDetail(key: keyof typeof details, value: string) {
+    setDetails(currentDetails => ({ ...currentDetails, [key]: value }));
+  }
+
+  return { details, setDetail };
+}
+
 export function CreateEventScreen() {
   const { styles, theme } = useThemedStyles(stylesFn);
 
@@ -16,6 +38,8 @@ export function CreateEventScreen() {
     headerTitle: '',
     headerStyle: { backgroundColor: theme.colours.palette.grey['50'] },
   });
+
+  const { details, setDetail } = useEventInputs();
 
   return (
     <Screen backgroundColor={theme.colours.palette.grey['50']} preset="fixed">
@@ -26,15 +50,22 @@ export function CreateEventScreen() {
           </Text>
         </View>
 
-        <InputWithLabel label="Name" placeholder="Enter event name" />
+        <InputWithLabel label="Name" placeholder="Enter event name" onChangeText={value => setDetail('name', value)} />
 
-        <InputWithLabel label="Date" placeholder="Pick a date" />
+        <InputWithLabel label="Date" placeholder="Pick a date" onChangeText={value => setDetail('date', value)} />
 
-        <InputWithLabel label="Description (optional)" placeholder="Pick a date" inputStyle={styles.descriptionInput} multiline maxLength={120} />
+        <InputWithLabel
+          label="Description (optional)"
+          placeholder="Enter event description"
+          onChangeText={value => setDetail('description', value)}
+          inputStyle={styles.descriptionInput}
+          multiline
+          maxLength={120}
+        />
 
-        <InputWithLabel label="Password (optional)" placeholder="Enter event password" />
+        <InputWithLabel label="Password (optional)" placeholder="Enter event password" onChangeText={value => setDetail('password', value)} />
 
-        <Button style={styles.joinEventButton} onPress={() => console.log('')} label="Create Event" />
+        <Button style={styles.joinEventButton} onPress={() => createEvent(details)} label="Create Event" />
       </View>
     </Screen>
   );
@@ -45,7 +76,6 @@ const stylesFn = (theme: Theme) =>
     container: {
       flex: 1,
       justifyContent: 'center',
-      paddingHorizontal: theme.spacing.large,
       paddingBottom: 160,
       gap: theme.spacing.medium,
     },

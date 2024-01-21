@@ -9,6 +9,10 @@ const colours = {
   textPrimary: palette.grey['800'],
   textSecondary: palette.grey['400'],
   textSubdued: palette.grey['500'],
+  background: palette.white,
+  secondaryBackground: palette.grey['50'],
+
+  borderColour: palette.grey['200'],
 };
 
 export const theme = {
