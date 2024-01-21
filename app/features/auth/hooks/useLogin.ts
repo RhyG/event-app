@@ -5,9 +5,9 @@ import { login } from '../services/AuthService';
 export function useLogin() {
   const setUser = useSetUser();
 
-  async function loginUser() {
+  async function loginUser(email: string, password: string) {
     try {
-      const data = await login();
+      const data = await login(email, password);
 
       if (data.user) setUser(data.user);
     } catch (error) {

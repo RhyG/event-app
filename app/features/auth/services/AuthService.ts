@@ -1,9 +1,9 @@
 import { supabase } from '@app/core/lib/supabase';
 
-export async function login() {
+export async function login(email: string, password: string) {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: 'rhysgeary@gmail.com',
-    password: '123456',
+    email,
+    password,
   });
 
   if (error) {

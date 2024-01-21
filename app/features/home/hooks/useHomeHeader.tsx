@@ -5,10 +5,10 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text } from '@ui/components/Text';
 import { useThemedStyles } from '@ui/hooks/useThemedStyles';
-import { Theme, theme } from '@ui/theme';
+import { Theme } from '@ui/theme';
 
 function NotificationIcon() {
-  const { styles } = useThemedStyles(stylesFn);
+  const { styles, theme } = useThemedStyles(stylesFn);
 
   const hasNotifications = false;
 
@@ -29,7 +29,7 @@ export function useHomeHeader() {
     navigation.setOptions({
       headerShown: true,
       headerTitle: '',
-      headerLeft: () => <Text>Event App</Text>, // TODO make this a sexy logo with the eventual app name
+      headerLeft: () => <Text preset="heading">WIP Name</Text>, // TODO make this a sexy logo with the eventual app name
       headerShadowVisible: false,
       headerRight: () => <NotificationIcon />,
     });

@@ -16,6 +16,7 @@ export type ParamsList = {
   WelcomeScreen: { name: string };
   SignUpScreen: undefined;
   LoginScreen: undefined;
+  CreateAccountScreen: undefined;
 
   AccountScreen: undefined;
 
@@ -23,7 +24,7 @@ export type ParamsList = {
   HomeScreen: undefined;
   JoinEventScreen: undefined;
   CreateEventScreen: undefined;
-  EventScreen: { eventId: string };
+  EventScreen: { id: string; name: string };
 
   QRCodeScannerScreen: undefined;
 };
@@ -35,3 +36,10 @@ type ScreenParams = {
 export type RootStackParamList = ScreenParams & ParamsList;
 
 export type ScreenProp<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
