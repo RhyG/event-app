@@ -78,7 +78,7 @@ const stylesFn = (theme: Theme) =>
     heading: {
       marginBottom: theme.spacing.medium,
     },
-    or: { marginHorizontal: 10 },
+    or: { marginHorizontal: 12 },
     enterCodeContainer: {
       marginTop: theme.spacing.small,
       gap: theme.spacing.small,

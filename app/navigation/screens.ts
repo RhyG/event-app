@@ -1,3 +1,4 @@
+// Could this be better? Define screens in their feature folder? Maintaining these and param list type is annoying too.
 export const Screens = {
   WelcomeScreen: 'WelcomeScreen',
   SignUpScreen: 'SignUpScreen',
@@ -9,6 +10,7 @@ export const Screens = {
   EventScreen: 'EventScreen',
   QRCodeScannerScreen: 'QRCodeScannerScreen',
   AccountScreen: 'AccountScreen',
+  AllEventsScreen: 'AllEventsScreen',
 } as const;
 
 export type Screen = keyof typeof Screens;

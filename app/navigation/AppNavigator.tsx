@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { SignUpScreen, WelcomeScreen } from '@feature/auth';
 import { CreateEventScreen, JoinEventScreen } from '@feature/events';
+import { AllEventsScreen } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import { EventScreen } from '@feature/events/screens/EventScreen/EventScreen';
 import { HomeScreen } from '@feature/home/screens/HomeScreen';
 import { AccountScreen, useIsLoggedIn } from '@feature/user';
@@ -81,6 +82,7 @@ export function AppNavigator() {
 
         <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} options={{ title: 'Join Event' }} />
         <RootStack.Screen name="EventScreen" component={EventScreen} />
+        <RootStack.Screen name="AllEventsScreen" component={AllEventsScreen} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

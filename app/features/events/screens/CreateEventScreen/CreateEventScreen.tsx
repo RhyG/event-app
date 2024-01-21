@@ -1,8 +1,4 @@
-import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-
-import { createEvent } from '@feature/events/services/EventCreationService';
-import { useUserContext } from '@feature/user';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -13,23 +9,7 @@ import { Text } from '@ui/components/Text';
 import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
 
-function useEventInputs() {
-  const { user } = useUserContext();
-
-  const [details, setDetails] = useState({
-    name: null,
-    date: null,
-    description: null,
-    password: null,
-    userId: user?.id,
-  });
-
-  function setDetail(key: keyof typeof details, value: string) {
-    setDetails(currentDetails => ({ ...currentDetails, [key]: value }));
-  }
-
-  return { details, setDetail };
-}
+import { useEventCreationForm } from './useEventCreationForm';
 
 export function CreateEventScreen() {
   const { styles, theme } = useThemedStyles(stylesFn);
@@ -39,7 +19,7 @@ export function CreateEventScreen() {
     headerStyle: { backgroundColor: theme.colours.palette.grey['50'] },
   });
 
-  const { details, setDetail } = useEventInputs();
+  const { submitNewEvent, setDetail } = useEventCreationForm();
 
   return (
     <Screen backgroundColor={theme.colours.palette.grey['50']} preset="fixed">
@@ -65,7 +45,7 @@ export function CreateEventScreen() {
 
         <InputWithLabel label="Password (optional)" placeholder="Enter event password" onChangeText={value => setDetail('password', value)} />
 
-        <Button style={styles.joinEventButton} onPress={() => createEvent(details)} label="Create Event" />
+        <Button style={styles.joinEventButton} onPress={submitNewEvent} label="Create Event" />
       </View>
     </Screen>
   );

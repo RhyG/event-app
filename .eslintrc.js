@@ -15,6 +15,7 @@ module.exports = {
     radix: 0,
     'react-native/no-inline-styles': 2,
     'react-native/no-single-element-style-arrays': 2,
+    '@typescript-eslint/no-floating-promises': 'warn',
   },
   env: {
     'react-native/react-native': true,

@@ -63,12 +63,15 @@ function EventCard({ name, date, image, id }: { name: string; date: string; imag
 }
 
 export function PreviousEventsSection() {
+  const navigation = useNavigation();
+
   const { styles } = useThemedStyles(stylesFn);
+
   return (
     <View>
       <View style={styles.heading}>
         <Text>Previous Events</Text>
-        <TouchableOpacity style={styles.seeAllButton}>
+        <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(Screens.AllEventsScreen)}>
           <Text colour={colours.sky['700']} size="xxs">
             SEE ALL
           </Text>
