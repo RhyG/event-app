@@ -6,7 +6,7 @@ import { typography } from './typography';
 
 const colours = {
   palette,
-  textPrimary: palette.grey['900'],
+  textPrimary: palette.grey['800'],
   textSecondary: palette.grey['400'],
   textSubdued: palette.grey['500'],
 };

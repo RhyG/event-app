@@ -1,6 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import { StyleSheet, View } from 'react-native';
 
+import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { Button } from '@ui/components/Button';
@@ -40,8 +41,8 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   return (
     <Screen>
       <View style={styles.actionButtonsContainer}>
-        <JoinEventButton onPress={() => navigation.navigate('JoinEventScreen')} />
-        <CreateEventButton onPress={() => navigation.navigate('CreateEventScreen')} />
+        <JoinEventButton onPress={() => navigation.navigate(Screens.JoinEventScreen)} />
+        <CreateEventButton onPress={() => navigation.navigate(Screens.CreateEventScreen)} />
       </View>
 
       <PreviousEventsSection />

@@ -83,6 +83,6 @@ const presets = {
   bold: [baseStyle, fontWeightStyles.bold] as StyleProp<TextStyle>,
   heading: [baseStyle, sizeStyles.xl, fontWeightStyles.semiBold] as StyleProp<TextStyle>,
   subheading: [baseStyle, sizeStyles.lg, fontWeightStyles.medium] as StyleProp<TextStyle>,
-  formLabel: [baseStyle, fontWeightStyles.medium] as StyleProp<TextStyle>,
+  formLabel: [baseStyle, sizeStyles.xs] as StyleProp<TextStyle>,
   formHelper: [baseStyle, sizeStyles.sm, fontWeightStyles.medium] as StyleProp<TextStyle>,
 };

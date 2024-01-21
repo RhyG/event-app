@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity } from 'react-native';
 
 import { useIsLoggedIn } from '@app/features/user';
+import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { BaseScreen } from '@ui/components/layout/BaseScreen';
@@ -25,12 +26,12 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
           <TouchableOpacity onPress={login}>
             <Text>Login!</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
+          <TouchableOpacity onPress={() => navigation.navigate(Screens.SignUpScreen)}>
             <Text>Create an account!</Text>
           </TouchableOpacity>
         </>
       )}
-      <TouchableOpacity onPress={() => navigation.navigate('JoinEventScreen')}>
+      <TouchableOpacity onPress={() => navigation.navigate(Screens.JoinEventScreen)}>
         <Text>Open event!</Text>
       </TouchableOpacity>
     </BaseScreen>

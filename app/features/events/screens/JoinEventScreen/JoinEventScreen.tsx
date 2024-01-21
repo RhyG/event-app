@@ -1,7 +1,7 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { StyleSheet, TextInput, View } from 'react-native';
 
-import { RootStackParamList } from '@app/navigation/types';
+import { Screens } from '@app/navigation/screens';
+import { ScreenProp } from '@app/navigation/types';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -11,7 +11,7 @@ import { Text } from '@ui/components/Text';
 import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
 
-export function JoinEventScreen({ navigation }: NativeStackScreenProps<RootStackParamList, 'JoinEventScreen'>) {
+export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
   useHeaderOptions({
@@ -27,21 +27,21 @@ export function JoinEventScreen({ navigation }: NativeStackScreenProps<RootStack
             Join an Event
           </Text>
           <Text align="center" colour={theme.colours.textSubdued}>
-            Enter the event code or scan the QR code to join an event.
+            Enter an event code or scan a QR code to join an event.
           </Text>
         </View>
 
-        <View>
+        <View style={styles.enterCodeContainer}>
           <Text size="xs">Event Code</Text>
           <TextInput placeholder="Enter event code" style={styles.input} />
-          <Button style={styles.joinEventButton} onPress={() => navigation.navigate('QRCodeScannerScreen')} label="Join Event" />
+          <Button style={styles.joinEventButton} onPress={() => console.log('')} label="Join Event" />
         </View>
 
         <View style={styles.scanContainer}>
           <Text align="center" colour={theme.colours.textSubdued}>
             Or scan a QR code
           </Text>
-          <Button preset="secondary" onPress={() => navigation.navigate('QRCodeScannerScreen')} style={styles.openCameraButton} label="Open Camera" />
+          <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} style={styles.openCameraButton} label="Open Camera" />
         </View>
       </View>
     </Screen>
@@ -77,5 +77,8 @@ const stylesFn = (theme: Theme) =>
     },
     scanContainer: {
       marginTop: theme.spacing.extraLarge,
+    },
+    enterCodeContainer: {
+      marginTop: theme.spacing.small,
     },
   });

@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SignUpScreen, WelcomeScreen } from '@feature/auth';
 import { CreateEventScreen, JoinEventScreen } from '@feature/events';
 import { HomeScreen } from '@feature/home/screens/HomeScreen';
-import { useIsLoggedIn } from '@feature/user';
+import { AccountScreen, useIsLoggedIn } from '@feature/user';
 
 import { TabBarIcon } from './TabBarIcon';
 import { TabBarLabel } from './TabBarLabel';
@@ -14,14 +14,18 @@ import { RootStackParamList, TabParamList } from './types';
 const Tab = createBottomTabNavigator<TabParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-function EmptyComponent() {
-  return <></>;
-}
-
 function HomeTabStack() {
   return (
     <RootStack.Navigator initialRouteName="HomeScreen">
       <RootStack.Screen name="HomeScreen" component={HomeScreen} />
+    </RootStack.Navigator>
+  );
+}
+
+function AccountTabStack() {
+  return (
+    <RootStack.Navigator initialRouteName="AccountScreen">
+      <RootStack.Screen name="AccountScreen" component={AccountScreen} />
     </RootStack.Navigator>
   );
 }
@@ -41,7 +45,7 @@ export function TabNavigator() {
       />
       <Tab.Screen
         name="AccountTab"
-        component={EmptyComponent}
+        component={AccountTabStack}
         options={{
           title: 'Account',
           tabBarIcon: props => <TabBarIcon name="user" {...props} />,
