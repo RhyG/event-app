@@ -69,11 +69,10 @@ export function useEventCreationForm() {
 
     try {
       const data = await createEvent(newEvent);
-      const createdEvent = data[0];
 
-      if (!createdEvent) throw new Error('Event creation failed');
+      if (!data) throw new Error('Event creation failed');
 
-      navigation.navigate(Screens.EventScreen, { id: createdEvent.id, name: createdEvent.event_name });
+      navigation.navigate(Screens.EventScreen, { id: data.id, name: data.event_name, shouldPreventBack: true });
     } catch (error) {
       console.log(error);
     }
