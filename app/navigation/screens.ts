@@ -2,7 +2,7 @@ import type { RootStackParamList } from './types';
 
 // Avoids string literals for screen navigation, while forcing it to match the type.
 // Could this be better? Define screens in their feature folder? Maintaining these and param list type is annoying too.
-export const Screens: { [K in keyof RootStackParamList]: string } = {
+export const Screens: { [K in keyof RootStackParamList]: K } = {
   TabNavigator: 'TabNavigator',
   CreateEventNavigator: 'CreateEventNavigator',
 
