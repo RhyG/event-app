@@ -1,14 +1,12 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { Screen } from './screens';
-
 export type TabParamList = {
   HomeTab: NavigatorScreenParams<Record<string, never>>;
   AccountTab: NavigatorScreenParams<Record<string, never>>;
 };
 
-export type ParamsList = {
+export type RootStackParamList = {
   TabNavigator: undefined;
   CreateEventNavigator: undefined;
 
@@ -24,16 +22,11 @@ export type ParamsList = {
   HomeScreen: undefined;
   JoinEventScreen: undefined;
   CreateEventScreen: undefined;
-  EventScreen: { id: string; name: string };
+  EventScreen: { id: string; name: string; preventBack?: boolean };
+  AllEventsScreen: undefined;
 
   QRCodeScannerScreen: undefined;
 };
-
-type ScreenParams = {
-  [K in Screen]: Record<string, unknown> | undefined;
-};
-
-export type RootStackParamList = ScreenParams & ParamsList;
 
 export type ScreenProp<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
 
