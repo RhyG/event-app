@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
@@ -6,10 +6,13 @@ import { ScreenProp } from '@app/navigation/types';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Button } from '@ui/components/Button';
+import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
+
+import { useJoinEvent } from './useJoinEvent';
 
 export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
   const { styles, theme } = useThemedStyles(stylesFn);
@@ -18,6 +21,8 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
     headerTitle: '',
     headerStyle: { backgroundColor: theme.colours.palette.grey['50'] },
   });
+
+  const { handleFormChange, submitJoin, eventRequiresPassword } = useJoinEvent();
 
   return (
     <Screen backgroundColor={theme.colours.palette.grey['50']} preset="fixed">
@@ -32,9 +37,11 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
         </View>
 
         <View style={styles.enterCodeContainer}>
-          <Text size="xs">Event Code</Text>
-          <TextInput placeholder="Enter event code" style={styles.input} />
-          <Button style={styles.joinEventButton} onPress={() => console.log('')} label="Join Event" />
+          <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
+          {eventRequiresPassword ? (
+            <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
+          ) : null}
+          <Button style={styles.joinEventButton} onPress={submitJoin} label="Join Event" />
         </View>
 
         <View style={styles.scanContainer}>
