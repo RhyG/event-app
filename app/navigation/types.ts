@@ -22,7 +22,7 @@ export type RootStackParamList = {
   HomeScreen: undefined;
   JoinEventScreen: undefined;
   CreateEventScreen: undefined;
-  EventScreen: { id: string; name: string; preventBack?: boolean };
+  EventScreen: { id: string; name: string; shouldPreventBack?: boolean };
   AllEventsScreen: undefined;
 
   QRCodeScannerScreen: undefined;
