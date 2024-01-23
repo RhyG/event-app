@@ -48,7 +48,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
           <Text align="center" colour={theme.colours.textSubdued}>
             Or scan a QR code
           </Text>
-          <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} style={styles.openCameraButton} label="Open Camera" />
+          <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} label="Open Camera" />
         </View>
       </View>
     </Screen>
@@ -63,27 +63,15 @@ const stylesFn = (theme: Theme) =>
       paddingHorizontal: theme.spacing.large,
       paddingBottom: 120,
     },
-    openCameraButton: {
-      width: '100%',
-      marginTop: 10,
-    },
     joinEventButton: {
-      marginTop: 10,
-    },
-    input: {
-      padding: theme.input.padding,
-      backgroundColor: theme.input.background,
-      width: '100%',
-      borderWidth: 1,
-      borderColor: theme.input.borderColour,
-      borderRadius: theme.input.borderRadius,
-      marginTop: 5,
+      marginTop: theme.spacing.small,
     },
     heading: {
       marginBottom: theme.spacing.medium,
     },
     scanContainer: {
       marginTop: theme.spacing.extraLarge,
+      gap: theme.spacing.small,
     },
     enterCodeContainer: {
       marginTop: theme.spacing.small,
