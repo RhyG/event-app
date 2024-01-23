@@ -22,7 +22,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
     headerStyle: { backgroundColor: theme.colours.palette.grey['50'] },
   });
 
-  const { handleFormChange, submitJoin, eventRequiresPassword } = useJoinEvent();
+  const { handleFormChange, submitJoin, eventRequiresPassword, submitJoinWithPassword } = useJoinEvent();
 
   return (
     <Screen backgroundColor={theme.colours.palette.grey['50']} preset="fixed">
@@ -41,7 +41,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
           {eventRequiresPassword ? (
             <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
           ) : null}
-          <Button style={styles.joinEventButton} onPress={submitJoin} label="Join Event" />
+          <Button style={styles.joinEventButton} onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label="Join Event" />
         </View>
 
         <View style={styles.scanContainer}>

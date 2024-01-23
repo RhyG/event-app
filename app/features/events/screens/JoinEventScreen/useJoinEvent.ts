@@ -20,6 +20,10 @@ export function useJoinEvent() {
     password: '',
   });
 
+  function navigateToEvent(id: string, name: string) {
+    navigation.navigate(Screens.EventScreen, { id, name, shouldPreventBack: true });
+  }
+
   function handleFormChange(key: keyof typeof formValues.current, value: string) {
     formValues.current = { ...formValues.current, [key]: value };
   }
@@ -35,7 +39,7 @@ export function useJoinEvent() {
       return;
     }
 
-    navigation.navigate(Screens.EventScreen, { id: eventData.id, name: eventData.event_name });
+    navigateToEvent(eventData.id, eventData.event_name);
   }
 
   async function submitJoinWithPassword() {
@@ -43,13 +47,14 @@ export function useJoinEvent() {
 
     try {
       const eventData = await EventsAPI.authenticateEventPassword(code, password);
-      navigation.navigate(Screens.EventScreen, { id: eventData.id, name: eventData.event_name });
+      navigateToEvent(eventData.id, eventData.event_name);
     } catch (error) {
-      console.log(error);
-      if (error.status === 401) {
+      if (error === 'Incorrect password') {
         // TODO - Handle incorrect password.
+        console.log('Incorrect password');
         return;
       } else {
+        console.log('Unknown error');
         // TODO - Handle other errors.
         return;
       }
