@@ -3,8 +3,9 @@ import { useRef } from 'react';
 
 import { Screens } from '@app/navigation/screens';
 
-import { createEvent } from '@feature/events/services/EventCreationService';
 import { useUserContext } from '@feature/user';
+
+import EventsAPI from '../../api/EventsAPI';
 
 // Temp for testing purposes
 function getFutureTimestampTz(): string {
@@ -68,7 +69,7 @@ export function useEventCreationForm() {
     };
 
     try {
-      const data = await createEvent(newEvent);
+      const data = await EventsAPI.createEvent(newEvent);
 
       if (!data) throw new Error('Event creation failed');
 

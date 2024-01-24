@@ -2,7 +2,7 @@ import { FunctionsHttpError } from '@supabase/supabase-js';
 
 import { supabase } from '@core/lib/supabase';
 
-import { Event } from '../types';
+import { Event, NewEvent } from '../types';
 
 export const EventsAPI = {
   async getJoinDetails(code: string): Promise<Pick<Event, 'id' | 'is_private' | 'event_name'> | null> {
@@ -37,5 +37,14 @@ export const EventsAPI = {
     }
 
     return data;
+  },
+  async createEvent(event: NewEvent): Promise<Event> {
+    const { data, error } = await supabase.functions.invoke('create-event', {
+      body: { event },
+    });
+
+    if (error) throw error;
+
+    return data as Event;
   },
 };
