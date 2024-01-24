@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, createContext, useEffect, useReducer } from 'react';
 import { Text } from 'react-native';
 
-import { getUser as _getUser } from '@app/features/user/services/UserService';
+import * as UserService from '@app/features/user/services/UserService';
 import { User } from '@app/features/user/types';
 
 interface UserContextProps {
@@ -70,10 +70,9 @@ function useUserReducer() {
       dispatch({ type: 'LOADING' });
 
       try {
-        const data = await _getUser();
-
-        if (data.user) {
-          dispatch({ type: 'GOT_USER', payload: data.user });
+        const user = await UserService.getUser();
+        if (user) {
+          dispatch({ type: 'GOT_USER', payload: user });
         }
       } catch (e) {
         dispatch({ type: 'ERROR', payload: e });

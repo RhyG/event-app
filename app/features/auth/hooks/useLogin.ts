@@ -1,13 +1,13 @@
 import { useSetUser } from '@app/features/user';
 
-import { login } from '../services/AuthService';
+import { AuthAPI } from '../api/AuthAPI';
 
 export function useLogin() {
   const setUser = useSetUser();
 
   async function loginUser(email: string, password: string) {
     try {
-      const data = await login(email, password);
+      const data = await AuthAPI.login(email, password);
 
       if (data.user) setUser(data.user);
     } catch (error) {

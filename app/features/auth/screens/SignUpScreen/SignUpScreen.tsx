@@ -4,11 +4,11 @@ import { ScreenProp } from '@app/navigation/types';
 
 import { BaseScreen } from '@ui/components/layout/BaseScreen';
 
-import { signup } from '../../services/AuthService';
+import { AuthAPI } from '../../api/AuthAPI';
 
-export function SignUpScreen({ navigation }: ScreenProp<'SignUpScreen'>) {
+export function CreateAccountScreen({ navigation }: ScreenProp<'CreateAccountScreen'>) {
   async function createUser() {
-    const data = await signup();
+    const data = await AuthAPI.createAccount();
     console.log({ data });
     navigation.navigate('TabNavigator');
   }

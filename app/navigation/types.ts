@@ -12,7 +12,6 @@ export type RootStackParamList = {
 
   // Auth Screens
   WelcomeScreen: { name: string };
-  SignUpScreen: undefined;
   LoginScreen: undefined;
   CreateAccountScreen: undefined;
 

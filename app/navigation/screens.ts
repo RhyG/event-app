@@ -7,7 +7,6 @@ export const Screens: { [K in keyof RootStackParamList]: K } = {
   CreateEventNavigator: 'CreateEventNavigator',
 
   WelcomeScreen: 'WelcomeScreen',
-  SignUpScreen: 'SignUpScreen',
   LoginScreen: 'LoginScreen',
   CreateAccountScreen: 'CreateAccountScreen',
   HomeScreen: 'HomeScreen',
