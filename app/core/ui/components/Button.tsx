@@ -48,7 +48,8 @@ export function Button(props: ButtonProps) {
     <TouchableOpacity style={buttonStyle} accessibilityRole="button" accessibilityState={{ disabled: !!disabled }} {...rest}>
       {!!LeftAccessory && <LeftAccessory />}
 
-      <Text style={textStyle}>{label ?? children}</Text>
+      {/* Supports buttons that provide a label prop, a string to render or children components. */}
+      {!!children && typeof children !== 'string' ? children : <Text style={textStyle}>{label ?? children}</Text>}
 
       {!!RightAccessory && <RightAccessory />}
     </TouchableOpacity>
