@@ -11,9 +11,10 @@ export type RootStackParamList = {
   CreateEventNavigator: undefined;
 
   // Auth Screens
-  WelcomeScreen: { name: string };
-  LoginScreen: undefined;
-  CreateAccountScreen: undefined;
+  WelcomeNavigator: undefined;
+  WelcomeScreen: undefined;
+  EmailLoginScreen: undefined;
+  EmailSignUpScreen: undefined;
 
   AccountScreen: undefined;
 

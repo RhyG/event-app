@@ -12,6 +12,7 @@ export const spacing = {
   extraLarge: 32,
   huge: 48,
   massive: 64,
+  ginormous: 78,
 } as const;
 
 export type Spacing = keyof typeof spacing;

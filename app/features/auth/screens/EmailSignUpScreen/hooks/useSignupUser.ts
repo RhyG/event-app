@@ -1,12 +1,12 @@
 import { useSetUser } from '@app/features/user/providers/UserProvider';
 
-import { signup } from '../../../services/AuthService';
+import { AuthAPI } from '../../../api/AuthAPI';
 
 export function useSignupUser() {
   const setUser = useSetUser();
 
   async function signupUser() {
-    const data = await signup();
+    const data = await AuthAPI.createAccount();
 
     setUser(data.user);
   }
