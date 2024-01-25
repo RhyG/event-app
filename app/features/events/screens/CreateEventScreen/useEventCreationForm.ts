@@ -5,7 +5,7 @@ import { Screens } from '@app/navigation/screens';
 
 import { useUserContext } from '@feature/user';
 
-import EventsAPI from '../../api/EventsAPI';
+import { EventsAPI } from '../../api/EventsAPI';
 
 // Temp for testing purposes
 function getFutureTimestampTz(): string {

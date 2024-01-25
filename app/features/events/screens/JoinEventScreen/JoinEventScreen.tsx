@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
@@ -10,6 +10,7 @@ import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { Text } from '@ui/components/Text';
+import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
@@ -27,20 +28,18 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
 
   return (
     <WelcomeFlowScreen heading="Join an Event">
-      <View>
-        <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
-        {eventRequiresPassword ? (
-          <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
-        ) : null}
-        <Button style={styles.joinEventButton} onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label="Join Event" />
-      </View>
+      <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
+      {eventRequiresPassword ? (
+        <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
+      ) : null}
+      <Button style={styles.joinEventButton} onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label="Join Event" />
 
-      <View style={styles.scanContainer}>
+      <VBox mt="extraLarge" gap="small">
         <Text align="center" colour={theme.colours.textSubdued}>
           Or scan a QR code
         </Text>
         <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} label="Open Camera" />
-      </View>
+      </VBox>
     </WelcomeFlowScreen>
   );
 }
@@ -49,9 +48,5 @@ const stylesFn = (theme: Theme) =>
   StyleSheet.create({
     joinEventButton: {
       marginTop: theme.spacing.small,
-    },
-    scanContainer: {
-      marginTop: theme.spacing.extraLarge,
-      gap: theme.spacing.small,
     },
   });
