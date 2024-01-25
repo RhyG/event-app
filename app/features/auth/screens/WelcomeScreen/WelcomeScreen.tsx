@@ -12,8 +12,8 @@ import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Button } from '@ui/components/Button';
 import { Text } from '@ui/components/Text';
-import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
+import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
   const { styles, theme } = useThemedStyles(stylesFn);

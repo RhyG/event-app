@@ -7,8 +7,8 @@ import { ScreenProp } from '@app/navigation/types';
 import { Button } from '@ui/components/Button';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
-import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
+import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { useHomeHeader } from '../hooks/useHomeHeader';
 import { PreviousEventsSection } from './components/PreviousEventsSection';

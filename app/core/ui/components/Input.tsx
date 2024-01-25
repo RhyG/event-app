@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput, TextInputProps, ViewStyle } from 'react-native';
 
-import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
+import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 interface InputProps extends TextInputProps {
   inputStyle?: ViewStyle;

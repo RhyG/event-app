@@ -5,8 +5,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Screens } from '@app/navigation/screens';
 
 import { Text } from '@ui/components/Text';
-import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme, colours } from '@ui/theme';
+import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';

@@ -4,8 +4,8 @@ import { useLayoutEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text } from '@ui/components/Text';
-import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
+import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 function NotificationIcon() {
   const { styles, theme } = useThemedStyles(stylesFn);
