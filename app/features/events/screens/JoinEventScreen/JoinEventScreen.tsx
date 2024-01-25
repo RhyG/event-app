@@ -28,10 +28,12 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
 
   return (
     <WelcomeFlowScreen heading="Join an Event">
-      <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
-      {eventRequiresPassword ? (
-        <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
-      ) : null}
+      <VBox gap="small">
+        <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
+        {eventRequiresPassword ? (
+          <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
+        ) : null}
+      </VBox>
       <Button style={styles.joinEventButton} onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label="Join Event" />
 
       <VBox mt="extraLarge" gap="small">

@@ -8,7 +8,6 @@ export function useLogin() {
   async function loginUser(email: string, password: string) {
     try {
       const data = await AuthAPI.login(email, password);
-
       if (data.user) setUser(data.user);
     } catch (error) {
       console.log(error);

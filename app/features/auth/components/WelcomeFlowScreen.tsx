@@ -38,7 +38,7 @@ const stylesFn = (theme: Theme) =>
       flex: 1,
       justifyContent: 'center',
       paddingHorizontal: theme.spacing.large,
-      paddingTop: theme.spacing.ginormous * 1.5,
+      paddingTop: theme.spacing.ginormous * 1.2,
     },
     headerContainer: {
       marginBottom: theme.spacing.large,

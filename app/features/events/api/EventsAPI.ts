@@ -6,18 +6,13 @@ import { Event, NewEvent } from '../types';
 
 export const EventsAPI = {
   async getJoinDetails(code: string): Promise<Pick<Event, 'id' | 'is_private' | 'event_name'> | null> {
-    try {
-      const { data, error } = await supabase.from('Events').select('*').eq('access_code', code).limit(1);
+    const { data, error } = await supabase.from('Events').select('*').eq('access_code', code).limit(1);
 
-      if (error) {
-        throw error;
-      }
-
-      return data[0] ?? null;
-    } catch (err) {
-      console.error('Error fetching event join details:', err);
-      return null;
+    if (error) {
+      throw error;
     }
+
+    return data[0] ?? null;
   },
   async authenticateEventPassword(code: string, password: string) {
     const { data, error } = await supabase.functions.invoke('join-event', {
@@ -46,5 +41,12 @@ export const EventsAPI = {
     if (error) throw error;
 
     return data as Event;
+  },
+  async getUserEvents(userId: string): Promise<Array<Event>> {
+    const { data, error } = await supabase.from('Events').select('*').eq('host_id', userId);
+
+    if (error) throw error;
+
+    return data;
   },
 };
