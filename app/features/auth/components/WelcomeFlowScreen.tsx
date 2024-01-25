@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
-import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
