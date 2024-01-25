@@ -30,7 +30,7 @@ type BoxProps = PropsWithChildren<
     flex?: number;
     justifyContent?: ViewStyle['justifyContent'];
     alignItems?: ViewStyle['alignItems'];
-    gap?: number;
+    gap?: Spacing;
     style?: StyleProp<ViewStyle>;
   } & Margins &
     Paddings
@@ -74,10 +74,12 @@ const getSpacingStyle = (spacingKey: Spacing, property: string) => {
 
 export function HBox({ children, flex, justifyContent, alignItems, gap, style, ...rest }: BoxProps) {
   const spacingStyles = Object.keys(rest).map(key => getSpacingStyle(rest[key as MarginAndPaddingKey], key));
-  return <View style={[{ flexDirection: 'row', flex, justifyContent, alignItems, gap }, spacingStyles, style]}>{children}</View>;
+  const gapValue = gap !== undefined ? spacing[gap] : undefined;
+  return <View style={[{ flexDirection: 'row', flex, justifyContent, alignItems, gap: gapValue }, spacingStyles, style]}>{children}</View>;
 }
 
 export function VBox({ children, flex, justifyContent, alignItems, gap, style, ...rest }: BoxProps) {
   const spacingStyles = Object.keys(rest).map(key => getSpacingStyle(rest[key as MarginAndPaddingKey], key));
-  return <View style={[{ flexDirection: 'column', flex, justifyContent, alignItems, gap }, spacingStyles, style]}>{children}</View>;
+  const gapValue = gap !== undefined ? spacing[gap] : undefined;
+  return <View style={[{ flexDirection: 'column', flex, justifyContent, alignItems, gap: gapValue }, spacingStyles, style]}>{children}</View>;
 }
