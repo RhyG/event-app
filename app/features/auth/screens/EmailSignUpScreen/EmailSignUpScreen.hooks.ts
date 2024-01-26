@@ -13,11 +13,15 @@ export function useEmailSignUp() {
   const { changeDetails, email, password } = useEmailForm();
 
   async function createUser() {
-    const data = await AuthAPI.createAccount(email, password);
+    try {
+      const data = await AuthAPI.createAccount(email, password);
 
-    if (data) {
-      setUser(data.user);
-      navigation.navigate('TabNavigator');
+      if (data) {
+        setUser(data.user);
+        navigation.navigate('TabNavigator');
+      }
+    } catch (error) {
+      // TODO: Something with the error
     }
   }
 

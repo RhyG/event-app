@@ -15,6 +15,7 @@ export type RootStackParamList = {
   WelcomeScreen: undefined;
   EmailLoginScreen: undefined;
   EmailSignUpScreen: undefined;
+  ResetPasswordScreen: undefined;
 
   AccountScreen: undefined;
 

@@ -10,6 +10,7 @@ export const Screens: { [K in keyof RootStackParamList]: K } = {
   WelcomeScreen: 'WelcomeScreen',
   EmailLoginScreen: 'EmailLoginScreen',
   EmailSignUpScreen: 'EmailSignUpScreen',
+  ResetPasswordScreen: 'ResetPasswordScreen',
 
   HomeScreen: 'HomeScreen',
   JoinEventScreen: 'JoinEventScreen',
