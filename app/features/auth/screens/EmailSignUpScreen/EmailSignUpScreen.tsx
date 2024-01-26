@@ -1,7 +1,5 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { ScreenProp } from '@app/navigation/types';
-
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
@@ -11,12 +9,14 @@ import { HBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-import { useEmailSignUp } from './useEmailSignUp';
+import { useEmailSignUp, useSignUpPress } from './EmailSignUpScreen.hooks';
 
-export function EmailSignUpScreen({ navigation }: ScreenProp<'EmailLoginScreen'>) {
+export function EmailSignUpScreen() {
   const { styles } = useThemedStyles(stylesFn);
 
   const { changeDetails, createUser } = useEmailSignUp();
+
+  const onSignInPress = useSignUpPress();
 
   return (
     <WelcomeFlowScreen heading="Sign up">
@@ -26,7 +26,7 @@ export function EmailSignUpScreen({ navigation }: ScreenProp<'EmailLoginScreen'>
 
         <HBox justifyContent="center" mb="medium">
           <Text size="xs">Have an account already? </Text>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={{ borderBottomWidth: 1 }}>
+          <TouchableOpacity onPress={onSignInPress} style={{ borderBottomWidth: 1 }}>
             <Text size="xs">Sign in</Text>
           </TouchableOpacity>
         </HBox>

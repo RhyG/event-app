@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 
 import { AuthAPI } from '@feature/auth/api/AuthAPI';
+import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
 import { useSetUser } from '@feature/user';
 
 import { useEmailForm } from '../../hooks/useEmailForm';
@@ -21,4 +22,17 @@ export function useEmailSignUp() {
   }
 
   return { changeDetails, createUser };
+}
+
+export function useSignUpPress() {
+  const navigation = useNavigation();
+
+  const { toggleFormMode } = useWelcomeFlowContext();
+
+  function onSignInPress() {
+    toggleFormMode();
+    navigation.goBack();
+  }
+
+  return onSignInPress;
 }

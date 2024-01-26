@@ -7,6 +7,7 @@ import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
+import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -19,7 +20,7 @@ import { useThemedStyles } from '@ui/theme/useThemedStyles';
 export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
-  const [formMode, setFormMode] = useState<'LOGIN' | 'SIGNUP'>('LOGIN');
+  const { formMode, toggleFormMode } = useWelcomeFlowContext();
   const showingLogin = formMode === 'LOGIN';
 
   useHeaderOptions({
@@ -54,7 +55,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
 
       <HBox justifyContent="center" mt="medium">
         <Text size="xs">{showingLogin ? 'New here?' : 'Have an account already?'} </Text>
-        <TouchableOpacity onPress={() => setFormMode(currentMode => (currentMode === 'LOGIN' ? 'SIGNUP' : 'LOGIN'))} style={{ borderBottomWidth: 1 }}>
+        <TouchableOpacity onPress={toggleFormMode} style={{ borderBottomWidth: 1 }}>
           <Text size="xs">{showingLogin ? 'Create an account' : 'Sign in'}</Text>
         </TouchableOpacity>
       </HBox>

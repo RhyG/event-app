@@ -1,4 +1,4 @@
-import { useSetUser } from '@app/features/user/providers/UserProvider';
+import { useSetUser } from '@feature/user/context/UserContext';
 
 import { AuthAPI } from '../api/AuthAPI';
 

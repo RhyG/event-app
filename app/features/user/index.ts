@@ -1,4 +1,4 @@
-export * from './providers/UserProvider';
+export * from './context/UserContext';
 
 export * from './services/UserService';
 
