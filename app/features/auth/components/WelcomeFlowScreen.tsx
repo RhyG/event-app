@@ -1,6 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
+
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 import { Theme } from '@ui/theme';
@@ -13,6 +15,11 @@ type Props = PropsWithChildren<{
 
 export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
   const { styles, theme } = useThemedStyles(stylesFn);
+
+  useHeaderOptions({
+    headerTitle: '',
+    headerStyle: { backgroundColor: theme.colours.secondaryBackground },
+  });
 
   return (
     <Screen backgroundColor={theme.colours.secondaryBackground} preset="fixed" style={styles.container}>

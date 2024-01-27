@@ -5,8 +5,6 @@ import { ScreenProp } from '@app/navigation/types';
 
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 
-import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
-
 import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { Text } from '@ui/components/Text';
@@ -18,11 +16,6 @@ import { useJoinEvent } from './useJoinEvent';
 
 export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
   const { styles, theme } = useThemedStyles(stylesFn);
-
-  useHeaderOptions({
-    headerTitle: '',
-    headerStyle: { backgroundColor: theme.colours.secondaryBackground },
-  });
 
   const { handleFormChange, submitJoin, eventRequiresPassword, submitJoinWithPassword } = useJoinEvent();
 

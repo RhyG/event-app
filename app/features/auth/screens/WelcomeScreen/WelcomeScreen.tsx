@@ -1,6 +1,5 @@
 import { AntDesign } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { useState } from 'react';
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
@@ -8,8 +7,6 @@ import { ScreenProp } from '@app/navigation/types';
 
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
-
-import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Button } from '@ui/components/Button';
 import { Text } from '@ui/components/Text';
@@ -22,11 +19,6 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
 
   const { formMode, toggleFormMode } = useWelcomeFlowContext();
   const showingLogin = formMode === 'LOGIN';
-
-  useHeaderOptions({
-    headerTitle: '',
-    headerStyle: { backgroundColor: theme.colours.secondaryBackground },
-  });
 
   function navigateToEmailAuthScreen() {
     if (showingLogin) {

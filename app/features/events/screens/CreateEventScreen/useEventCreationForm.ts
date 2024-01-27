@@ -3,32 +3,14 @@ import { useRef } from 'react';
 
 import { Screens } from '@app/navigation/screens';
 
+import { prepareEventData } from '@feature/events/services/EventService';
 import { useUserContext } from '@feature/user';
 
 import { EventsAPI } from '../../api/EventsAPI';
 
-// Temp for testing purposes
-function getFutureTimestampTz(): string {
-  const now = new Date();
-  const threeDaysLater = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000);
-
-  const year = threeDaysLater.getUTCFullYear();
-  const month = String(threeDaysLater.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(threeDaysLater.getUTCDate()).padStart(2, '0');
-  const hours = String(threeDaysLater.getUTCHours()).padStart(2, '0');
-  const minutes = String(threeDaysLater.getUTCMinutes()).padStart(2, '0');
-  const seconds = String(threeDaysLater.getUTCSeconds()).padStart(2, '0');
-  const timezoneOffset = -threeDaysLater.getTimezoneOffset();
-  const offsetHours = String(Math.floor(Math.abs(timezoneOffset) / 60)).padStart(2, '0');
-  const offsetMinutes = String(Math.abs(timezoneOffset) % 60).padStart(2, '0');
-  const offsetSign = timezoneOffset > 0 ? '+' : '-';
-
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}${offsetSign}${offsetHours}:${offsetMinutes}`;
-}
-
 interface FormFields {
   name: string | null;
-  date: string | null;
+  date: Date | null;
   description: string | null;
   password: string | null;
 }
@@ -45,28 +27,21 @@ export function useEventCreationForm() {
     password: null,
   });
 
-  function setDetail(key: keyof typeof details.current, value: string) {
+  function setDetail(key: keyof typeof details.current, value: string | Date) {
     details.current = { ...details.current, [key]: value };
   }
 
   async function submitNewEvent() {
     const event = details.current;
 
+    const { name, date, ...rest } = event;
+
     // TODO: Properly validate fields
-    if (!event.name || !event.date || !user?.id) {
+    if (!name || !date || !user?.id) {
       return;
     }
 
-    const isPrivateEvent = !!event.password && event.password.length > 0;
-
-    const newEvent = {
-      event_date: getFutureTimestampTz(),
-      event_description: event.description ?? null,
-      event_name: event.name,
-      host_id: user.id,
-      password: event.password ?? null,
-      is_private: isPrivateEvent,
-    };
+    const newEvent = prepareEventData({ name, date, ...rest }, user.id);
 
     try {
       const data = await EventsAPI.createEvent(newEvent);
