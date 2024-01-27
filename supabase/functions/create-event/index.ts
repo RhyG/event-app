@@ -50,11 +50,20 @@ Deno.serve(async req => {
       event.password = pass;
     }
 
-    const { data, error } = await supabaseClient.from('Events').insert([event]).select();
+    const { data, error } = await supabaseClient.from('Events').insert([event]).select('event_date,id,event_description,event_name,host_id,access_code');
 
     if (error) throw error;
 
-    return new Response(JSON.stringify(data), {
+    const newEvent = data[0];
+
+    if (!newEvent) {
+      return new Response(JSON.stringify({ error: 'Error getting new event details' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400,
+      });
+    }
+
+    return new Response(JSON.stringify(newEvent), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200,
     });
