@@ -1,8 +1,10 @@
 import React, { PropsWithChildren, createContext, useEffect, useReducer } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import * as UserService from '@app/features/user/services/UserService';
 import { User } from '@app/features/user/types';
+
+import { AuthAPI } from '@feature/auth/api/AuthAPI';
 
 interface UserContextProps {
   user: User | null;
@@ -71,8 +73,11 @@ function useUserReducer() {
 
       try {
         const user = await UserService.getUser();
+
         if (user) {
           dispatch({ type: 'GOT_USER', payload: user });
+        } else {
+          dispatch({ type: 'USER_CLEARED' });
         }
       } catch (e) {
         dispatch({ type: 'ERROR', payload: e });
@@ -95,10 +100,20 @@ export function UserProvider({ children }: PropsWithChildren<Record<string, unkn
   const { user, loading, error, setUser } = useUserReducer();
 
   // TODO: nice error state (toast maybe)
-  if (error) return <Text>ERROR</Text>;
+  if (error)
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>ERROR</Text>
+      </View>
+    );
 
   // TODO: Should continue showing splash
-  if (loading) return <Text>LOADING</Text>;
+  if (loading)
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>LOADING</Text>
+      </View>
+    );
 
   return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
 }
