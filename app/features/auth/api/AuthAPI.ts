@@ -20,12 +20,21 @@ export const AuthAPI = {
 
     return 'SUCCESS';
   },
-  async createAccount(email = 'rhysgeary@gmail.com', password = '123456') {
+  async createAccount(email: string, password: string) {
     const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
       throw error;
     }
+
+    return data;
+  },
+  async resetPassword(email: string) {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://example.com/update-password', // TODO: Setup universal/deep links so this works
+    });
+
+    if (error) throw error;
 
     return data;
   },
