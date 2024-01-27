@@ -71,8 +71,8 @@ function useUserReducer() {
 
       try {
         const user = await UserService.getUser();
-        dispatch({ type: 'GOT_USER', payload: {} });
         if (user) {
+          dispatch({ type: 'GOT_USER', payload: user });
         }
       } catch (e) {
         dispatch({ type: 'ERROR', payload: e });
