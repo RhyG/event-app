@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
+import { PasswordInput } from '@feature/auth/components/PasswordInput';
 import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 
@@ -21,7 +22,7 @@ export function EmailSignUpScreen() {
     <WelcomeFlowScreen heading="Sign up">
       <View style={styles.container}>
         <InputWithLabel placeholder="Enter email" label="Email" onChangeText={value => changeDetails('email', value)} />
-        <InputWithLabel placeholder="Enter password" label="Password" onChangeText={value => changeDetails('password', value)} />
+        <PasswordInput onChangeText={value => changeDetails('password', value)} />
 
         <TwoPartPressableText texts={['Have an account already?', 'Sign in']} onPress={onSignInPress} />
 

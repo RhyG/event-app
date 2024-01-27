@@ -3,10 +3,11 @@ import { View } from 'react-native';
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
+import { PasswordInput } from '@feature/auth/components/PasswordInput';
 import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 
-import { Button } from '@ui/components/Button';
+import { ButtonWithLoading } from '@ui/components/ButtonWithLoading';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 import { useSafeAreaInsetsStyle } from '@ui/hooks/useSafeAreaInsetsStyle';
@@ -25,8 +26,8 @@ export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>)
   return (
     <WelcomeFlowScreen heading="Sign in">
       <VBox gap="small">
-        <InputWithLabel placeholder="Enter email" label="Email" onChangeText={value => changeDetails('email', value)} />
-        <InputWithLabel placeholder="Enter password" label="Password" onChangeText={value => changeDetails('password', value)} />
+        <InputWithLabel placeholder="Enter email" label="Email" onChangeText={value => changeDetails('email', value)} autoCapitalize="none" />
+        <PasswordInput onChangeText={value => changeDetails('password', value)} />
 
         <TwoPartPressableText texts={['New here?', 'Create an account']} onPress={onCreateAccountPress} />
       </VBox>
@@ -34,7 +35,7 @@ export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>)
         <View style={{ marginTop: 'auto' }}>
           <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(Screens.ResetPasswordScreen)} />
 
-          <Button onPress={login} label="Sign in" />
+          <ButtonWithLoading loading={false} onPress={login} label="Sign in" />
         </View>
       </VBox>
     </WelcomeFlowScreen>

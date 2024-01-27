@@ -1,9 +1,10 @@
-import { TextInputProps, View, ViewStyle } from 'react-native';
+import { ComponentProps } from 'react';
+import { View, ViewStyle } from 'react-native';
 
-import { Input } from './Input';
 import { Text } from './Text';
+import { TextInput } from './TextInput';
 
-interface InputWithLabelProps extends TextInputProps {
+interface InputWithLabelProps extends ComponentProps<typeof TextInput> {
   label: string;
   inputStyle?: ViewStyle;
 }
@@ -14,7 +15,7 @@ export function InputWithLabel({ label, placeholder, inputStyle, ...rest }: Inpu
       <Text preset="formLabel" style={marginBottom}>
         {label}
       </Text>
-      <Input placeholder={placeholder} inputStyle={inputStyle} {...rest} />
+      <TextInput placeholder={placeholder} inputStyle={inputStyle} {...rest} />
     </View>
   );
 }
