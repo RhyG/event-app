@@ -94,7 +94,7 @@ const presets = StyleSheet.create({
   },
   disabled: {
     ...baseStyles,
-    backgroundColour: theme.button.disabledBackground,
+    backgroundColor: theme.button.disabledBackground,
   },
 });
 
