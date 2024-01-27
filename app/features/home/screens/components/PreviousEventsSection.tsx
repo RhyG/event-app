@@ -4,6 +4,9 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
 
+import { useUserEventsQuery } from '@feature/events/api/useUserEventsQuery';
+import { Event } from '@feature/events/types';
+
 import { Text } from '@ui/components/Text';
 import { Theme, colours } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
@@ -67,16 +70,27 @@ export function PreviousEventsSection() {
 
   const { styles } = useThemedStyles(stylesFn);
 
+  const { data: events } = useUserEventsQuery();
+
+  if (!events || events.length === 0) {
+    return <Text>Create an event!</Text>;
+  }
+
   return (
     <View>
       <View style={styles.heading}>
-        <Text>Previous Events</Text>
+        <Text>Previous Events ({events?.length ?? 0})</Text>
         <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(Screens.AllEventsScreen)}>
           <Text colour={colours.sky['700']} size="xxs">
             SEE ALL
           </Text>
         </TouchableOpacity>
       </View>
+      {(events ?? []).map((event: Event) => (
+        <TouchableOpacity key={event.id} onPress={() => navigation.navigate(Screens.EventScreen, { id: event.id, name: event.event_name })}>
+          <Text>{event.event_name}</Text>
+        </TouchableOpacity>
+      ))}
       {placeholders.map(placeholder => (
         <EventCard key={placeholder.name} {...placeholder} />
       ))}

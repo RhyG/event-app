@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider as _QueryClientProvider } from '@tanst
 import { PropsWithChildren } from 'react';
 
 // Create a client
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 export function QueryClientProvider({ children }: PropsWithChildren<Record<string, unknown>>) {
   return <_QueryClientProvider client={queryClient}>{children}</_QueryClientProvider>;

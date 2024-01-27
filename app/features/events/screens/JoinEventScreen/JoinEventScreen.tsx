@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
+import { PasswordInput } from '@feature/auth/components/PasswordInput';
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
@@ -23,9 +24,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
     <WelcomeFlowScreen heading="Join an Event">
       <VBox gap="small">
         <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
-        {eventRequiresPassword ? (
-          <InputWithLabel label="Event Password" placeholder="Enter event password" onChangeText={val => handleFormChange('password', val)} />
-        ) : null}
+        {eventRequiresPassword ? <PasswordInput onChangeText={val => handleFormChange('password', val)} /> : null}
       </VBox>
       <Button style={styles.joinEventButton} onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label="Join Event" />
 

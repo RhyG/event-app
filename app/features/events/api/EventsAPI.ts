@@ -4,6 +4,8 @@ import { supabase } from '@core/lib/supabase';
 
 import { Event, NewEvent } from '../types';
 
+type EventById = Pick<Event, 'event_date' | 'id' | 'event_description' | 'event_name' | 'host_id' | 'access_code'>;
+
 export const EventsAPI = {
   async getJoinDetails(code: string): Promise<Pick<Event, 'id' | 'is_private' | 'event_name'> | null> {
     const { data, error } = await supabase.from('Events').select('*').eq('access_code', code).limit(1);
@@ -43,10 +45,17 @@ export const EventsAPI = {
     return data as Event;
   },
   async getUserEvents(userId: string): Promise<Array<Event>> {
-    const { data, error } = await supabase.from('Events').select('*').eq('host_id', userId);
+    const { data, error } = await supabase.from('Events').select('id,event_name,event_date').eq('host_id', userId);
 
     if (error) throw error;
 
-    return data;
+    return data as Array<Event>;
+  },
+  async getEventById(eventId: string): Promise<EventById> {
+    const { data, error } = await supabase.from('Events').select('event_date,id,event_description,event_name,host_id,access_code').eq('id', eventId).limit(1);
+
+    if (error) throw error;
+
+    return data[0] as EventById;
   },
 };

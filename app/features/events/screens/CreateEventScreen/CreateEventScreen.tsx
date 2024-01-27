@@ -28,7 +28,7 @@ export function CreateEventScreen() {
           maxLength={120}
         />
 
-        <PasswordInput onChangeText={value => setDetail('password', value)} />
+        <PasswordInput onChangeText={value => setDetail('password', value)} optional />
 
         <Button onPress={submitNewEvent} label="Create Event" />
       </VBox>

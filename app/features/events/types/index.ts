@@ -1,6 +1,7 @@
 export interface Event {
   created_at: string;
   event_date: string | null;
+  access_code: string;
   event_description: string | null;
   event_name: string;
   host_id: string;

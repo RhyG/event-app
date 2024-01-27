@@ -8,9 +8,10 @@ import { InputWithLabel } from '@ui/components/InputWithLabel';
 
 interface Props {
   onChangeText: ComponentProps<typeof InputWithLabel>['onChangeText'];
+  optional?: boolean;
 }
 
-export function PasswordInput({ onChangeText, ...props }: Props) {
+export function PasswordInput({ onChangeText, optional, ...props }: Props) {
   const [hidden, toggleHidden] = useToggle(true);
 
   return (
@@ -18,7 +19,7 @@ export function PasswordInput({ onChangeText, ...props }: Props) {
       {...props}
       onChangeText={onChangeText}
       placeholder="Enter password"
-      label="Password"
+      label={`Password${optional ? ' (optional)' : ''}`}
       secureTextEntry={hidden}
       autoCapitalize="none"
       RightAccessory={() => (

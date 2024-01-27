@@ -6,6 +6,8 @@ import { Screens } from '@app/navigation/screens';
 import { prepareEventData } from '@feature/events/services/EventService';
 import { useUserContext } from '@feature/user';
 
+import { queryClient } from '@core/providers/QueryClientProvider';
+
 import { EventsAPI } from '../../api/EventsAPI';
 
 interface FormFields {
@@ -45,7 +47,10 @@ export function useEventCreationForm() {
 
     try {
       const data = await EventsAPI.createEvent(newEvent);
+
       if (!data) throw new Error('Event creation failed');
+
+      queryClient.refetchQueries({ queryKey: ['events'], type: 'active', exact: true });
 
       navigation.navigate(Screens.EventScreen, { id: data.id, name: data.event_name, shouldPreventBack: true });
     } catch (error) {
