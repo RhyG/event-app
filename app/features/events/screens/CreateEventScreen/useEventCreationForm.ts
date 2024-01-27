@@ -45,7 +45,6 @@ export function useEventCreationForm() {
 
     try {
       const data = await EventsAPI.createEvent(newEvent);
-
       if (!data) throw new Error('Event creation failed');
 
       navigation.navigate(Screens.EventScreen, { id: data.id, name: data.event_name, shouldPreventBack: true });
