@@ -72,9 +72,9 @@ export function PreviousEventsSection() {
 
   const { data: events } = useUserEventsQuery();
 
-  if (!events || events.length === 0) {
-    return <Text>Create an event!</Text>;
-  }
+  // if (!events || events.length === 0) {
+  //   return <Text>Create an event!</Text>;
+  // }
 
   return (
     <View>

@@ -14,7 +14,7 @@ export function TextInput({ placeholder, inputStyle, RightAccessory, ...rest }: 
   const { styles } = useThemedStyles(stylesFn);
 
   return (
-    <HBox p="small" style={styles.container}>
+    <HBox p="small" alignItems="center" style={styles.container}>
       <RNTextInput placeholder={placeholder} style={[styles.input, inputStyle, { paddingRight: !!RightAccessory ? 10 : 0 }]} {...rest} />
       {!!RightAccessory && <RightAccessory />}
     </HBox>

@@ -31,6 +31,14 @@
         "projectId": "a49209f6-043c-4844-a0f6-3803770d4cba"
       }
     },
-    "plugins": ["expo-localization"]
+    "plugins": [
+      "expo-localization",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "APP NAME needs access to your photos to let you add them to events."
+        }
+      ]
+    ]
   }
 }
