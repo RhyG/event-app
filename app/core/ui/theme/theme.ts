@@ -47,6 +47,9 @@ export const theme = {
   card: {
     borderRadius: 14,
   },
+  icon: {
+    primaryColour: palette.grey['800'],
+  },
 };
 
 export type Theme = typeof theme;
