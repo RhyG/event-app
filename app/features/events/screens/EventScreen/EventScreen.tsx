@@ -9,11 +9,14 @@ import { ScreenProp } from '@app/navigation/types';
 import { useEventQuery } from '@feature/events/api/useEventQuery';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
+import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
 import { cloudinary } from '@core/lib/cloudinary';
+import { useModalStore } from '@core/stores/modal';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
+import { EventSettingsSheet } from './EventSettingsSheet';
 import { Gallery } from './Gallery';
 
 export default function ImagePickerExample() {
@@ -71,22 +74,19 @@ export default function ImagePickerExample() {
   );
 }
 
-function ShareEventButton() {
-  return (
-    <TouchableOpacity>
-      <Feather name="share" size={24} color="black" />
-    </TouchableOpacity>
-  );
+export function EventScreen(props: ScreenProp<'EventScreen'>) {
+  const shouldRender = useRenderAfterInteractions();
+
+  return shouldRender ? <_EventScreen {...props} /> : null;
 }
 
-export function EventScreen({ route }: ScreenProp<'EventScreen'>) {
+export function _EventScreen({ route }: ScreenProp<'EventScreen'>) {
   const { name, shouldPreventBack, id } = route.params;
 
   // When coming straight from creating an event the user should not be able to go back.
   useHeaderOptions({
     title: name,
     ...(shouldPreventBack ? { headerBackVisible: false, gestureEnabled: false } : {}),
-    headerRight: () => <ShareEventButton />,
   });
 
   const { data: event, isLoading, isError, error } = useEventQuery(id);
@@ -102,10 +102,13 @@ export function EventScreen({ route }: ScreenProp<'EventScreen'>) {
   if (!event) return null;
 
   return (
-    <Screen>
-      <Text>{event.event_description}</Text>
-      {/* <Text>{event.event_date}</Text> */}
-      <Gallery />
-    </Screen>
+    <>
+      <Screen>
+        <Text>{event.event_description}</Text>
+        {/* <Text>{event.event_date}</Text> */}
+        <Gallery />
+      </Screen>
+      <EventSettingsSheet />
+    </>
   );
 }

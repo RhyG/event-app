@@ -1,6 +1,9 @@
 import { MasonryFlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 
+const blurhash =
+  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+
 function ImagePreview({ uri }: { uri: string }) {
   return (
     <Image
@@ -8,6 +11,8 @@ function ImagePreview({ uri }: { uri: string }) {
       source={{
         uri,
       }}
+      transition={1000}
+      placeholder={blurhash}
     />
   );
 }
