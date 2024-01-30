@@ -1,8 +1,7 @@
-import { Feather } from '@expo/vector-icons';
 import { upload } from 'cloudinary-react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
-import { Button, Image, TouchableOpacity, View } from 'react-native';
+import { Button, Image, View } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
@@ -11,7 +10,6 @@ import { useEventQuery } from '@feature/events/api/useEventQuery';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
 import { cloudinary } from '@core/lib/cloudinary';
-import { useModalStore } from '@core/stores/modal';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
@@ -108,7 +106,7 @@ export function _EventScreen({ route }: ScreenProp<'EventScreen'>) {
         {/* <Text>{event.event_date}</Text> */}
         <Gallery />
       </Screen>
-      <EventSettingsSheet />
+      <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} />
     </>
   );
 }

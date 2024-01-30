@@ -1,6 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { ReactNode, useCallback, useMemo, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 
@@ -22,7 +23,7 @@ function SettingsRow({ label, onPress, icon }: { label: string; onPress: () => v
   );
 }
 
-export function EventSettingsSheet() {
+export function EventSettingsSheet({ accessCode, eventName }: { accessCode: string; eventName: string }) {
   const { theme } = useThemedStyles(stylesFn);
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -57,11 +58,20 @@ export function EventSettingsSheet() {
     [],
   );
 
+  function copyAccessCode() {
+    Clipboard.setString(accessCode);
+  }
+
+  function copyInvite() {
+    const invite = `Share your photos from ${eventName} on CrowdLens by following this link: https://crowdlens.app/event/${accessCode}`;
+    Clipboard.setString(invite);
+  }
+
   return (
     <BottomSheetModal ref={bottomSheetRef} index={1} snapPoints={snapPoints} enablePanDownToClose={true} backdropComponent={renderBackdrop}>
       <VBox>
-        <SettingsRow label="Share event invite" onPress={() => {}} icon={<Feather name="share" size={20} color={theme.icon.primaryColour} />} />
-        <SettingsRow label="Copy event access code" onPress={() => {}} icon={<Feather name="copy" size={20} color={theme.icon.primaryColour} />} />
+        <SettingsRow label="Share event invite" onPress={copyInvite} icon={<Feather name="share" size={20} color={theme.icon.primaryColour} />} />
+        <SettingsRow label="Copy event access code" onPress={copyAccessCode} icon={<Feather name="copy" size={20} color={theme.icon.primaryColour} />} />
         <SettingsRow label="Generate shareable QR code" onPress={() => {}} icon={<AntDesign name="qrcode" size={20} color={theme.icon.primaryColour} />} />
         <SettingsRow label="Edit event" onPress={() => {}} icon={<Feather name="edit-2" size={20} color={theme.icon.primaryColour} />} />
       </VBox>
