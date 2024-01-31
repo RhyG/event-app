@@ -41,7 +41,7 @@ export function DateInput({ onChangeDate }: { onChangeDate: (date: Date) => void
         <Text colour={date ? theme.colours.textPrimary : '#c8c8c8'} style={{ fontSize: 13 }}>
           {date ? formatDate(date) : 'Select a date'}
         </Text>
-        <Feather name="calendar" size={20} color="#c8c8c8" style={{ marginLeft: 'auto' }} />
+        <Feather name="calendar" size={20} color={theme.icon.primaryColour} style={{ marginLeft: 'auto' }} />
       </TouchableOpacity>
       <DateTimePickerModal isVisible={isDatePickerVisible} mode="date" onConfirm={handleConfirm} onCancel={hideDatePicker} display="inline" />
     </VBox>
