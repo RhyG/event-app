@@ -1,9 +1,13 @@
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
-import Clipboard from '@react-native-clipboard/clipboard';
-import { ReactNode, useCallback, useMemo, useRef } from 'react';
-import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ReactNode, useCallback, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+
+import { Screens } from '@app/navigation/screens';
+
+import { copyEventAccessCode, copyEventInvite } from '@feature/events/services/EventService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -11,6 +15,8 @@ import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
+
+const SNAP_POINTS = ['25%', '60%'];
 
 function SettingsRow({ label, onPress, icon }: { label: string; onPress: () => void; icon: ReactNode }) {
   const { styles } = useThemedStyles(stylesFn);
@@ -23,7 +29,8 @@ function SettingsRow({ label, onPress, icon }: { label: string; onPress: () => v
   );
 }
 
-export function EventSettingsSheet({ accessCode, eventName }: { accessCode: string; eventName: string }) {
+export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessCode: string; eventName: string; eventId: string }) {
+  const navigation = useNavigation();
   const { theme } = useThemedStyles(stylesFn);
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -35,8 +42,6 @@ export function EventSettingsSheet({ accessCode, eventName }: { accessCode: stri
       </TouchableOpacity>
     ),
   });
-
-  const snapPoints = useMemo(() => ['25%', '60%'], []);
 
   function closeSheet() {
     bottomSheetRef.current?.close();
@@ -58,22 +63,27 @@ export function EventSettingsSheet({ accessCode, eventName }: { accessCode: stri
     [],
   );
 
-  function copyAccessCode() {
-    Clipboard.setString(accessCode);
-  }
-
-  function copyInvite() {
-    const invite = `Share your photos from ${eventName} on CrowdLens by following this link: https://crowdlens.app/event/${accessCode}`;
-    Clipboard.setString(invite);
+  function navigateToEditEventScreen() {
+    closeSheet();
+    navigation.navigate(Screens.EditEventScreen, { id: eventId });
   }
 
   return (
-    <BottomSheetModal ref={bottomSheetRef} index={1} snapPoints={snapPoints} enablePanDownToClose={true} backdropComponent={renderBackdrop}>
+    <BottomSheetModal ref={bottomSheetRef} index={1} snapPoints={SNAP_POINTS} enablePanDownToClose={true} backdropComponent={renderBackdrop}>
       <VBox>
-        <SettingsRow label="Share event invite" onPress={copyInvite} icon={<Feather name="share" size={20} color={theme.icon.primaryColour} />} />
-        <SettingsRow label="Copy event access code" onPress={copyAccessCode} icon={<Feather name="copy" size={20} color={theme.icon.primaryColour} />} />
+        <SettingsRow
+          label="Share event invite"
+          onPress={() => copyEventInvite(eventName, accessCode)}
+          icon={<Feather name="share" size={20} color={theme.icon.primaryColour} />}
+        />
+        <SettingsRow
+          label="Copy event access code"
+          onPress={() => copyEventAccessCode(accessCode)}
+          icon={<Feather name="copy" size={20} color={theme.icon.primaryColour} />}
+        />
+        {/* TODO: Link to printable PDF hosted somewhere that shows the QR code and a nice message */}
         <SettingsRow label="Generate shareable QR code" onPress={() => {}} icon={<AntDesign name="qrcode" size={20} color={theme.icon.primaryColour} />} />
-        <SettingsRow label="Edit event" onPress={() => {}} icon={<Feather name="edit-2" size={20} color={theme.icon.primaryColour} />} />
+        <SettingsRow label="Edit event" onPress={navigateToEditEventScreen} icon={<Feather name="edit-2" size={20} color={theme.icon.primaryColour} />} />
       </VBox>
     </BottomSheetModal>
   );

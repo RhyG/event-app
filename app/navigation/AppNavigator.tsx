@@ -6,6 +6,7 @@ import { WelcomeNavigator } from '@feature/auth/navigation/WelcomeNavigator';
 import { CreateEventScreen, JoinEventScreen } from '@feature/events';
 import { AllEventsScreen } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import { ConfirmPhotosScreen } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
+import { EditEventScreen } from '@feature/events/screens/EditEventScreen/EditEventScreen';
 import { EventScreen } from '@feature/events/screens/EventScreen/EventScreen';
 import { HomeScreen } from '@feature/home/screens/HomeScreen';
 import { AccountScreen, useIsLoggedIn } from '@feature/user';
@@ -25,6 +26,7 @@ function HomeTabStack() {
       <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} options={{ title: 'Join Event' }} />
       <RootStack.Screen name="EventScreen" component={EventScreen} />
       <RootStack.Screen name="ConfirmPhotosScreen" component={ConfirmPhotosScreen} />
+      <RootStack.Screen name="EditEventScreen" component={EditEventScreen} />
     </RootStack.Navigator>
   );
 }

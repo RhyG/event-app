@@ -10,8 +10,8 @@ import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
 import { Gallery } from '../../components/Gallery';
-import { AddPhotosFAB } from './AddPhotosFAB/AddPhotosFAB';
-import { EventSettingsSheet } from './EventSettingsSheet';
+import { AddPhotosFAB } from './components/AddPhotosFAB';
+import { EventSettingsSheet } from './components/EventSettingsSheet';
 import { useImagePicker } from './useImagePicker';
 
 export function EventScreen(props: ScreenProp<'EventScreen'>) {
@@ -53,7 +53,8 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
         <Text>{event.event_description}</Text>
         <Gallery photos={dummy_images} />
       </Screen>
-      <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} />
+
+      <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} eventId={event.id} />
       <AddPhotosFAB onPress={pickImages} buttonVisible={true} />
     </>
   );

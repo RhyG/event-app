@@ -1,3 +1,5 @@
+import Clipboard from '@react-native-clipboard/clipboard';
+
 interface EventDetails {
   name: string;
   date: Date;
@@ -18,4 +20,13 @@ export function prepareEventData(event: EventDetails, userId: string) {
   };
 
   return newEvent;
+}
+
+export function copyEventInvite(eventName: string, eventAccessCode: string) {
+  const invite = `Share your photos from ${eventName} on CrowdLens by following this link: https://crowdlens.app/event/${eventAccessCode}`;
+  Clipboard.setString(invite);
+}
+
+export function copyEventAccessCode(eventAccessCode: string) {
+  Clipboard.setString(eventAccessCode);
 }

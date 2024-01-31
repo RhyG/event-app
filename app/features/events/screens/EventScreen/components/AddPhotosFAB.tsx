@@ -34,7 +34,7 @@ export function AddPhotosFAB({ onPress, buttonVisible }: Props) {
 
   return (
     <Animated.View entering={BounceInDown} style={[styles.animatedView, style]}>
-      <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={onPress} accessibilityRole="button" accessibilityLabel="Add photos">
         <Icon name="plus" color="#fff" size={25} />
       </TouchableOpacity>
     </Animated.View>
