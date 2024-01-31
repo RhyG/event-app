@@ -19,6 +19,8 @@ export const Screens: { [K in keyof RootStackParamList]: K } = {
   QRCodeScannerScreen: 'QRCodeScannerScreen',
   AccountScreen: 'AccountScreen',
   AllEventsScreen: 'AllEventsScreen',
+  ConfirmPhotosScreen: 'ConfirmPhotosScreen',
+  EditEventScreen: 'EditEventScreen',
 } as const;
 
 export type Screen = keyof typeof Screens;

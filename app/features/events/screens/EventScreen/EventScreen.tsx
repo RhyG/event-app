@@ -1,76 +1,18 @@
-import { upload } from 'cloudinary-react-native';
-import * as ImagePicker from 'expo-image-picker';
-import { useState } from 'react';
-import { Button, Image, View } from 'react-native';
-
+import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { useEventQuery } from '@feature/events/api/useEventQuery';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
-import { cloudinary } from '@core/lib/cloudinary';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
+import { Gallery } from '../../components/Gallery';
+import { AddPhotosFAB } from './AddPhotosFAB/AddPhotosFAB';
 import { EventSettingsSheet } from './EventSettingsSheet';
-import { Gallery } from './Gallery';
-
-export default function ImagePickerExample() {
-  const [image, setImage] = useState<string | null>(null);
-  const [images, setImages] = useState<Array<string>>([]);
-
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: false,
-      allowsMultipleSelection: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.canceled) {
-      setImage(result.assets[0]!.uri);
-
-      setImages(result.assets.map(asset => asset.uri));
-    }
-  };
-
-  async function uploadImage() {
-    if (image) {
-      async function safeUpload(imgUri: string) {
-        try {
-          const response = await upload(cloudinary, {
-            file: imgUri,
-            options: {
-              upload_preset: 'bad_quality',
-            },
-          });
-          return { success: true, data: response };
-        } catch (error) {
-          console.error('Upload failed for:', imgUri, error);
-          return { success: false, error };
-        }
-      }
-      const results = await Promise.allSettled(images.map(safeUpload));
-      console.log(results);
-    }
-  }
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {images.map(image => (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      ))}
-      {image && <Button title="Upload" onPress={uploadImage} />}
-    </View>
-  );
-}
+import { useImagePicker } from './useImagePicker';
 
 export function EventScreen(props: ScreenProp<'EventScreen'>) {
   const shouldRender = useRenderAfterInteractions();
@@ -78,7 +20,7 @@ export function EventScreen(props: ScreenProp<'EventScreen'>) {
   return shouldRender ? <_EventScreen {...props} /> : null;
 }
 
-export function _EventScreen({ route }: ScreenProp<'EventScreen'>) {
+export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
   const { name, shouldPreventBack, id } = route.params;
 
   // When coming straight from creating an event the user should not be able to go back.
@@ -87,7 +29,11 @@ export function _EventScreen({ route }: ScreenProp<'EventScreen'>) {
     ...(shouldPreventBack ? { headerBackVisible: false, gestureEnabled: false } : {}),
   });
 
-  const { data: event, isLoading, isError, error } = useEventQuery(id);
+  const { pickImages } = useImagePicker({
+    onSuccess: (photos: Array<string>) => navigation.navigate(Screens.ConfirmPhotosScreen, { photos }),
+  });
+
+  const { data: event, isLoading, isError } = useEventQuery(id);
 
   if (isLoading) {
     return <Text>Loading</Text>;
@@ -103,10 +49,33 @@ export function _EventScreen({ route }: ScreenProp<'EventScreen'>) {
     <>
       <Screen>
         <Text>{event.event_description}</Text>
-        {/* <Text>{event.event_date}</Text> */}
-        <Gallery />
+        <Gallery photos={dummy_images} />
       </Screen>
       <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} />
+      <AddPhotosFAB onPress={pickImages} buttonVisible={true} />
     </>
   );
 }
+
+const dummy_images = [
+  'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1687826541778-3f2bf4c03bc3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1668376545856-ad0314a8479e?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1523301343968-6a6ebf63c672?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1591243315780-978fd00ff9db?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1586105449897-20b5efeb3233?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1684629279389-8fc4beb3236f?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1687826541778-3f2bf4c03bc3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1668376545856-ad0314a8479e?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1523301343968-6a6ebf63c672?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1591243315780-978fd00ff9db?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1586105449897-20b5efeb3233?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1684629279389-8fc4beb3236f?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+];

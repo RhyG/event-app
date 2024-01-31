@@ -16,9 +16,3 @@ export const spacing = {
 } as const;
 
 export type Spacing = keyof typeof spacing;
-
-export const elements = {
-  screen: {
-    padding: 20,
-  },
-};

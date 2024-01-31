@@ -15,7 +15,7 @@ import {
 
 import { ExtendedEdge, useSafeAreaInsetsStyle } from '@ui/hooks/useSafeAreaInsetsStyle';
 
-import { colours } from '../theme';
+import { colours, theme } from '../theme';
 
 interface BaseScreenProps {
   /**
@@ -213,7 +213,7 @@ const containerStyle: ViewStyle = {
   flex: 1,
   height: '100%',
   width: '100%',
-  paddingHorizontal: 15,
+  paddingHorizontal: theme.spacing.small,
 };
 
 const keyboardAvoidingViewStyle: ViewStyle = {
