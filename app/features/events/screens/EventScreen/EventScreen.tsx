@@ -15,13 +15,7 @@ import { EventSettingsSheet } from './EventSettingsSheet';
 import { useImagePicker } from './useImagePicker';
 
 export function EventScreen(props: ScreenProp<'EventScreen'>) {
-  const shouldRender = useRenderAfterInteractions();
-
-  return shouldRender ? <_EventScreen {...props} /> : null;
-}
-
-export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
-  const { name, shouldPreventBack, id } = route.params;
+  const { name, shouldPreventBack } = props.route.params;
 
   // When coming straight from creating an event the user should not be able to go back.
   useHeaderOptions({
@@ -29,8 +23,16 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
     ...(shouldPreventBack ? { headerBackVisible: false, gestureEnabled: false } : {}),
   });
 
+  const shouldRender = useRenderAfterInteractions();
+
+  return shouldRender ? <_EventScreen {...props} /> : null;
+}
+
+export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
+  const { id } = route.params;
+
   const { pickImages } = useImagePicker({
-    onSuccess: (photos: Array<string>) => navigation.navigate(Screens.ConfirmPhotosScreen, { photos }),
+    onSuccess: photos => navigation.navigate(Screens.ConfirmPhotosScreen, { photos }),
   });
 
   const { data: event, isLoading, isError } = useEventQuery(id);
