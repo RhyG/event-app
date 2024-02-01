@@ -1,5 +1,5 @@
-import * as bcrypt from 'https://deno.land/x/bcrypt@v0.4.1/mod.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from '@supabase/supabase-js';
+import * as bcrypt from 'bcrypt';
 
 export const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -63,12 +63,19 @@ Deno.serve(async req => {
       });
     }
 
+    console.log('Creating bucket', newEvent.id);
+
+    const { data: bucketData, error: bucketError } = await supabaseClient.storage.createBucket(newEvent.id, { public: false });
+
+    if (bucketError) console.log('Bucket error:', bucketError);
+
+    console.log('Bucket data:', bucketData);
+
     return new Response(JSON.stringify(newEvent), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200,
     });
   } catch (error) {
-    // @ts-expect-error
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 400,
