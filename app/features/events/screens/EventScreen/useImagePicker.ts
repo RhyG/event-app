@@ -1,23 +1,27 @@
 import * as ImagePicker from 'expo-image-picker';
-import { useState } from 'react';
 
-export function useImagePicker({ onSuccess }: { onSuccess: (photos: Array<string>) => void }) {
-  const [images, setImages] = useState<Array<string>>([]);
-
+// TODO: Refactor away from being a hook now that it isn't stateful.
+export function useImagePicker({ onSuccess }: { onSuccess: (photos: Array<{ uri: string; base64: string }>) => void }) {
   const pickImages = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: false,
       allowsMultipleSelection: true,
-      aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
     if (!result.canceled) {
-      setImages(result.assets.map(asset => asset.uri));
-      onSuccess(result.assets.map(asset => asset.uri));
+      const images = result.assets;
+
+      if (images.length === 0) {
+        console.log('No photos selected');
+        onSuccess([]);
+      }
+
+      onSuccess(images.map(image => ({ uri: image.uri!, base64: image.base64! })));
     }
   };
 
-  return { images, pickImages };
+  return { pickImages };
 }

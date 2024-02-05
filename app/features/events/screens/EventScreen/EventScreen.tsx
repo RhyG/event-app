@@ -32,7 +32,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
   const { id } = route.params;
 
   const { pickImages } = useImagePicker({
-    onSuccess: photos => navigation.navigate(Screens.ConfirmPhotosScreen, { photos }),
+    onSuccess: photos => navigation.navigate(Screens.ConfirmPhotosScreen, { photos, eventId: id }),
   });
 
   const { data: event, isLoading, isError } = useEventQuery(id);

@@ -16,7 +16,7 @@ import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-const SNAP_POINTS = ['25%', '60%'];
+const SNAP_POINTS = ['25%', '35%'];
 
 function SettingsRow({ label, onPress, icon }: { label: string; onPress: () => void; icon: ReactNode }) {
   const { styles } = useThemedStyles(stylesFn);

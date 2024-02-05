@@ -25,7 +25,7 @@ export type RootStackParamList = {
   CreateEventScreen: undefined;
   EventScreen: { id: string; name: string; shouldPreventBack?: boolean };
   AllEventsScreen: undefined;
-  ConfirmPhotosScreen: { photos: Array<string> };
+  ConfirmPhotosScreen: { photos: Array<{ uri: string; base64: string }>; eventId: string };
   EditEventScreen: { id: string };
 
   QRCodeScannerScreen: undefined;
