@@ -1,6 +1,7 @@
 import { Feather } from '@expo/vector-icons';
-import { useMemo } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { useMemo, useState } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { ScreenProp } from '@app/navigation/types';
 
@@ -9,18 +10,30 @@ import { uploadPhotos } from '@feature/photo-management/services/PhotoService';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Screen } from '@ui/components/Screen';
+import { Text } from '@ui/components/Text';
 
 import { Gallery } from '../../components/Gallery';
 
-export function ConfirmPhotosScreen({ route }: ScreenProp<'ConfirmPhotosScreen'>) {
+export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPhotosScreen'>) {
   const { photos, eventId } = route.params;
+  const numberOfPhotos = photos.length;
+
+  useHeaderOptions({
+    headerTitle: `Uploading ${numberOfPhotos} photo${numberOfPhotos > 1 ? 's' : ''}`,
+  });
+
+  const [uploading, setUploading] = useState(false);
 
   const photosToDisplay = useMemo(() => photos.map(photo => photo.uri), [photos]);
 
-  function onPress() {
+  async function onPress() {
+    setUploading(true);
+    await new Promise(res => setTimeout(res, 2000));
     // Can't get to this point without at least one photo.
     const photosToUpload = photos.map(photo => photo.base64) as [string, ...string[]]; // This feels like business logic and shouldn't live here.
-    uploadPhotos(eventId, photosToUpload);
+    await uploadPhotos(eventId, photosToUpload);
+
+    navigation.goBack();
   }
 
   useHeaderOptions({
@@ -32,8 +45,21 @@ export function ConfirmPhotosScreen({ route }: ScreenProp<'ConfirmPhotosScreen'>
   });
 
   return (
-    <Screen>
-      <Gallery photos={photosToDisplay} />
-    </Screen>
+    <>
+      <Screen>
+        <Gallery photos={photosToDisplay} />
+      </Screen>
+      {uploading ? <LoadingCover /> : null}
+    </>
+  );
+}
+
+function LoadingCover() {
+  return (
+    <Animated.View
+      entering={FadeInDown}
+      style={[StyleSheet.absoluteFill, { backgroundColor: 'white', opacity: 0.8, flex: 1, alignItems: 'center', justifyContent: 'center' }]}>
+      <Text>LOADING</Text>
+    </Animated.View>
   );
 }
