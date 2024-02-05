@@ -16,9 +16,7 @@ export function base64ToArrayBuffer(base64: string) {
 export function encodeToBase64() {}
 
 export function decodeFromBase64(base64Image: string) {
-  // console.log(base64Image.includes('base64,'));
-  const base64Str = base64Image.includes('base64,') ? base64Image.substring(base64Image.indexOf('base64,') + 'base64,'.length) : base64Image;
-  return decode(base64Str);
+  return decode(base64Image);
 }
 
 export async function fetchImageFromUri(uri: string) {
@@ -39,7 +37,7 @@ export async function uploadPhoto(eventId: string, file: string) {
     const toSave = decodeFromBase64(file);
 
     if (!(toSave.byteLength > 0)) {
-      console.error('[uploadToSupabase] ArrayBuffer is null');
+      console.error('ArrayBuffer is null');
       return;
     }
 
