@@ -5,9 +5,11 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { ScreenProp } from '@app/navigation/types';
 
+import { eventDetailsQueryKey } from '@feature/events/api/useEventQuery';
 import { uploadPhotos } from '@feature/photo-management/services/PhotoService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
+import { queryClient } from '@core/providers/QueryClientProvider';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
@@ -33,6 +35,7 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPh
     const photosToUpload = photos.map(photo => photo.base64) as [string, ...string[]]; // This feels like business logic and shouldn't live here.
     await uploadPhotos(eventId, photosToUpload);
 
+    queryClient.invalidateQueries({ queryKey: eventDetailsQueryKey(eventId) });
     navigation.goBack();
   }
 

@@ -30,4 +30,27 @@ export const PhotoAPI = {
 
     return data[0];
   },
+  async getPhotosForEvent(eventId: string) {
+    const { data, error } = await supabase.from('Photos').select('id,storage_url').eq('event_id', eventId);
+
+    if (error) throw error;
+
+    return data as { id: string; storage_url: string }[];
+  },
+  async downloadPhoto(path: string) {
+    const { data, error } = await supabase.storage.from('photos').download(path);
+
+    if (error) throw error;
+
+    return data;
+  },
+  async getURLsForEventPhotos(paths: Array<string>) {
+    const { data, error } = await supabase.storage.from('photos').createSignedUrls(paths, 60);
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
 };

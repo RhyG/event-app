@@ -53,3 +53,28 @@ export async function uploadPhotos(eventId: string, files: string[]) {
   await Promise.allSettled(files.map(file => uploadPhoto(eventId, file)));
   console.log('Finished!');
 }
+
+/**
+ * Generates photo paths for a folder in storage.
+ * @param eventId used for the folder name within the bucket.
+ * @param photoIDs an array of photo IDs to generate paths for.
+ * @returns an array of photo paths e.g. ['123/456.jpg'].
+ */
+function generatePhotoPathsForEvent(eventId: string, photoIDs: Array<string>) {
+  return photoIDs.map(photoId => `${eventId}/${photoId}.jpg`);
+}
+
+/**
+ * Gets photos for an event from storage.
+ * @param eventId ID of the event to get photos for.
+ * @returns an array or signed URLs for all photos for the event.
+ */
+export async function getEventPhotos(eventId: string) {
+  const eventPhotos = await PhotoAPI.getPhotosForEvent(eventId);
+
+  const photoIDs = eventPhotos.map(photo => photo.id);
+
+  const photoPaths = generatePhotoPathsForEvent(eventId, photoIDs);
+  const urls = await PhotoAPI.getURLsForEventPhotos(photoPaths);
+  return urls.map(url => url.signedUrl);
+}

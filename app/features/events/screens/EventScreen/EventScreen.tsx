@@ -1,7 +1,7 @@
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
-import { useEventQuery } from '@feature/events/api/useEventQuery';
+import { useEventDetailsQuery, useEventImagesQuery } from '@feature/events/api/useEventQuery';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
@@ -35,7 +35,8 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
     onSuccess: photos => navigation.navigate(Screens.ConfirmPhotosScreen, { photos, eventId: id }),
   });
 
-  const { data: event, isLoading, isError } = useEventQuery(id);
+  const { data: event, isLoading, isError } = useEventDetailsQuery(id);
+  const { data: photos = [] } = useEventImagesQuery(id);
 
   if (isLoading) {
     return <Text>Loading</Text>;
@@ -51,7 +52,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
     <>
       <Screen>
         <Text>{event.event_description}</Text>
-        <Gallery photos={dummy_images} />
+        <Gallery photos={[...photos, ...dummy_images]} />
       </Screen>
 
       <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} eventId={event.id} />
@@ -61,7 +62,6 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
 }
 
 const dummy_images = [
-  'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://plus.unsplash.com/premium_photo-1687826541778-3f2bf4c03bc3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://images.unsplash.com/photo-1541532713592-79a0317b6b77?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
