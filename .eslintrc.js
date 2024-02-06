@@ -5,9 +5,16 @@ module.exports = {
     },
   },
   root: true,
-  extends: ['eslint:recommended', 'plugin:import/warnings', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/jsx-runtime'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/warnings',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
+  ],
   parser: '@typescript-eslint/parser',
-  plugins: ['react', 'react-native', '@typescript-eslint', 'import', 'react-hooks'],
+  plugins: ['react', 'react-native', '@typescript-eslint', 'import', 'react-hooks', '@tanstack/query'],
   rules: {
     'no-catch-shadow': 0,
     'react-hooks/rules-of-hooks': 'error',
