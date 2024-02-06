@@ -1,16 +1,17 @@
 import { AntDesign } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
+import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
 
 import { Button } from '@ui/components/Button';
 import { Text } from '@ui/components/Text';
-import { HBox } from '@ui/components/layout/Box';
+import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
@@ -45,12 +46,12 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
         </Button>
       </HBox>
 
-      <HBox justifyContent="center" mt="medium">
-        <Text size="xs">{showingLogin ? 'New here?' : 'Have an account already?'} </Text>
-        <TouchableOpacity onPress={toggleFormMode} style={{ borderBottomWidth: 1 }}>
-          <Text size="xs">{showingLogin ? 'Create an account' : 'Sign in'}</Text>
-        </TouchableOpacity>
-      </HBox>
+      <VBox mt="small">
+        <TwoPartPressableText
+          texts={[showingLogin ? 'New here?' : 'Have an account already?', showingLogin ? 'Create an account' : 'Sign in']}
+          onPress={toggleFormMode}
+        />
+      </VBox>
 
       <HBox alignItems="center" justifyContent="center" mv="large">
         <View style={styles.divider} />
