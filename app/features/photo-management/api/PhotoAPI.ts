@@ -56,7 +56,7 @@ export const PhotoAPI = {
 
     return data;
   },
-  async getSignedUrlsForEventPhotos(path: string, transform?: { height?: number; width?: number }) {
+  async getSignedUrlForEventPhoto(path: string, transform?: { height?: number; width?: number }) {
     const { data, error } = await supabase.storage.from('photos').createSignedUrl(path, 86400, { transform });
 
     if (error) {

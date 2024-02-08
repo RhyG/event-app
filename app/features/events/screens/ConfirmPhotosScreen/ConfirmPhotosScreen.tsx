@@ -5,16 +5,13 @@ import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from '
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { eventImagesQueryKey } from '@feature/events/api/useEventQuery';
-import { uploadPhotos } from '@feature/photo-management/services/PhotoService';
-
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
-import { queryClient } from '@core/providers/QueryClientProvider';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
 import { Gallery } from '../../components/Gallery';
+import { useUploadPhotos } from './useUploadPhotos';
 
 export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPhotosScreen'>) {
   const { photos, eventId } = route.params;
@@ -28,13 +25,11 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPh
 
   const photosToDisplay = useMemo(() => photos.map(photo => photo.uri), [photos]);
 
+  const uploadPhotos = useUploadPhotos(eventId, photos);
+
   async function onPress() {
     setUploading(true);
-    // Can't get to this point without at least one photo.
-    const photosToUpload = photos.map(photo => photo.base64) as [string, ...string[]]; // This feels like business logic and shouldn't live here.
-    await uploadPhotos(eventId, photosToUpload);
-
-    queryClient.invalidateQueries({ queryKey: eventImagesQueryKey(eventId) });
+    await uploadPhotos();
     setUploading(false);
     navigation.goBack();
   }
