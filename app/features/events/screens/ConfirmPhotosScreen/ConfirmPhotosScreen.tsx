@@ -1,11 +1,11 @@
 import { Feather } from '@expo/vector-icons';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { eventDetailsQueryKey } from '@feature/events/api/useEventQuery';
+import { eventImagesQueryKey } from '@feature/events/api/useEventQuery';
 import { uploadPhotos } from '@feature/photo-management/services/PhotoService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
@@ -34,7 +34,7 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPh
     const photosToUpload = photos.map(photo => photo.base64) as [string, ...string[]]; // This feels like business logic and shouldn't live here.
     await uploadPhotos(eventId, photosToUpload);
 
-    queryClient.invalidateQueries({ queryKey: eventDetailsQueryKey(eventId) });
+    queryClient.invalidateQueries({ queryKey: eventImagesQueryKey(eventId) });
     setUploading(false);
     navigation.goBack();
   }
@@ -58,10 +58,23 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPh
 }
 
 function LoadingCover() {
+  const opacity = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    };
+  });
+
+  useEffect(function fadeInComponent() {
+    opacity.value = withTiming(1, {
+      duration: 500,
+      easing: Easing.out(Easing.quad),
+    });
+  }, []);
+
   return (
-    <Animated.View
-      entering={FadeInDown}
-      style={[StyleSheet.absoluteFill, { backgroundColor: 'white', opacity: 0.8, flex: 1, alignItems: 'center', justifyContent: 'center' }]}>
+    <Animated.View style={[StyleSheet.absoluteFill, animatedStyle, { backgroundColor: 'white', flex: 1, alignItems: 'center', justifyContent: 'center' }]}>
       <Text>LOADING</Text>
     </Animated.View>
   );
