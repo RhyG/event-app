@@ -52,7 +52,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
     <>
       <Screen>
         <Text>{event.event_description}</Text>
-        <Gallery photos={[...photos, ...dummy_images]} />
+        <Gallery photos={photos} />
       </Screen>
 
       <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} eventId={event.id} />

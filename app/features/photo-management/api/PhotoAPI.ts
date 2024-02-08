@@ -7,7 +7,7 @@ export const PhotoAPI = {
     const response = await PhotosModule.uploadPhoto({ eventId, photoId, file });
 
     if (response.error) {
-      console.log(response.error);
+      console.log('Error in PhotoAPI upload:', response.error);
       throw new Error('Upload failed');
     }
 
@@ -19,7 +19,10 @@ export const PhotoAPI = {
       .insert([{ event_id: eventId }])
       .select('id');
 
-    if (error) throw error;
+    if (error) {
+      console.log('Error saving photo details:', error);
+      throw error;
+    }
 
     return data[0];
   },
@@ -45,7 +48,16 @@ export const PhotoAPI = {
     return data;
   },
   async getURLsForEventPhotos(paths: Array<string>) {
-    const { data, error } = await supabase.storage.from('photos').createSignedUrls(paths, 60);
+    const { data, error } = await supabase.storage.from('photos').createSignedUrls(paths, 86400);
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
+  async getSignedUrlsForEventPhotos(path: string, transform?: { height?: number; width?: number }) {
+    const { data, error } = await supabase.storage.from('photos').createSignedUrl(path, 86400, { transform });
 
     if (error) {
       throw error;

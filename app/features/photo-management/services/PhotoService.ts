@@ -26,6 +26,7 @@ export async function fetchImageFromUri(uri: string) {
 }
 
 export async function uploadPhoto(eventId: string, file: string) {
+  const start = performance.now();
   try {
     const savedPhoto = await PhotoAPI.savePhotoDetails(eventId);
 
@@ -44,6 +45,8 @@ export async function uploadPhoto(eventId: string, file: string) {
     const response = await PhotoAPI.uploadPhoto({ eventId, photoId: savedPhoto.id, file: toSave });
 
     void PhotoAPI.savePhotoStorageURL(response.data.path, savedPhoto.id);
+    const end = performance.now();
+    console.log('Uploaded photo in', `${end - start}ms`);
   } catch (error) {
     console.log('Error uploading photo:', error);
   }
@@ -55,16 +58,6 @@ export async function uploadPhotos(eventId: string, files: string[]) {
 }
 
 /**
- * Generates photo paths for a folder in storage.
- * @param eventId used for the folder name within the bucket.
- * @param photoIDs an array of photo IDs to generate paths for.
- * @returns an array of photo paths e.g. ['123/456.jpg'].
- */
-function generatePhotoPathsForEvent(eventId: string, photoIDs: Array<string>) {
-  return photoIDs.map(photoId => `${eventId}/${photoId}.jpg`);
-}
-
-/**
  * Gets photos for an event from storage.
  * @param eventId ID of the event to get photos for.
  * @returns an array or signed URLs for all photos for the event.
@@ -72,9 +65,10 @@ function generatePhotoPathsForEvent(eventId: string, photoIDs: Array<string>) {
 export async function getEventPhotos(eventId: string) {
   const eventPhotos = await PhotoAPI.getPhotosForEvent(eventId);
 
-  const photoIDs = eventPhotos.map(photo => photo.id);
+  const promises = eventPhotos.map(photo => PhotoAPI.getSignedUrlsForEventPhotos(photo.storage_url, { height: 200 }));
 
-  const photoPaths = generatePhotoPathsForEvent(eventId, photoIDs);
-  const urls = await PhotoAPI.getURLsForEventPhotos(photoPaths);
-  return urls.map(url => url.signedUrl);
+  const photos = (await Promise.allSettled(promises)).filter(photo => photo.status === 'fulfilled');
+
+  // @ts-expect-error this works fine but TS thinks value isn't a valid property.
+  return photos.map(photo => photo.value.signedUrl);
 }

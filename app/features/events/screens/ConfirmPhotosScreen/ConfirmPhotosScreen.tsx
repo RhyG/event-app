@@ -30,12 +30,12 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPh
 
   async function onPress() {
     setUploading(true);
-    await new Promise(res => setTimeout(res, 2000));
     // Can't get to this point without at least one photo.
     const photosToUpload = photos.map(photo => photo.base64) as [string, ...string[]]; // This feels like business logic and shouldn't live here.
     await uploadPhotos(eventId, photosToUpload);
 
     queryClient.invalidateQueries({ queryKey: eventDetailsQueryKey(eventId) });
+    setUploading(false);
     navigation.goBack();
   }
 
