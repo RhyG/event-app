@@ -7,6 +7,8 @@ import { Screens } from '@app/navigation/screens';
 import { usePreviousEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { Event } from '@feature/events/types';
 
+import { formatTimestamp } from '@core/lib/date';
+
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme, colours } from '@ui/theme';
@@ -41,18 +43,6 @@ const placeholders = [
 
 const defaultImage =
   'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-
-function formatTimestamp(timestamp: string) {
-  const date = new Date(timestamp);
-
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  const day = date.getUTCDate().toString().padStart(2, '0');
-  const month = months[date.getUTCMonth()];
-  const year = date.getUTCFullYear();
-
-  return `${day} ${month} ${year}`;
-}
 
 function EventCard({ event_name, event_date, image = defaultImage, id }: Event & { image?: string }) {
   const navigation = useNavigation();
