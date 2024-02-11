@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
@@ -12,6 +12,7 @@ import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { useHomeHeader } from '../hooks/useHomeHeader';
 import { PreviousEventsSection } from './components/PreviousEventsSection';
+import { UpcomingEventsSection } from './components/UpcomingEventsSection';
 
 function JoinEventButton({ onPress }: { onPress: () => void }) {
   const { styles } = useThemedStyles(stylesFn);
@@ -43,6 +44,7 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
         <CreateEventButton onPress={() => navigation.navigate(Screens.CreateEventScreen)} />
       </HBox>
 
+      <UpcomingEventsSection />
       <PreviousEventsSection />
     </Screen>
   );
