@@ -21,6 +21,7 @@ export const Screens: { [K in keyof RootStackParamList]: K } = {
   AllEventsScreen: 'AllEventsScreen',
   ConfirmPhotosScreen: 'ConfirmPhotosScreen',
   EditEventScreen: 'EditEventScreen',
+  EventFeedScreen: 'EventFeedScreen',
 } as const;
 
 export type Screen = keyof typeof Screens;

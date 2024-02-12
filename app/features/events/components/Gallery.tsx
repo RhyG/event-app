@@ -1,6 +1,7 @@
-import { MasonryFlashList } from '@shopify/flash-list';
+import { ListRenderItem, MasonryFlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
-import { useWindowDimensions } from 'react-native';
+import { useCallback } from 'react';
+import { TouchableOpacity, useWindowDimensions } from 'react-native';
 
 // TODO: Move to generating hash and saving with image in DB.
 const blurhash =
@@ -23,27 +24,33 @@ function calculateImageSize(viewportWidth: number): ImageSize {
   return { width, height };
 }
 
-function ImagePreview({ uri }: { uri: string }) {
+function ImagePreview({ uri, onImagePress }: { uri: string; onImagePress: () => void }) {
   const { width: windowWidth } = useWindowDimensions();
   const { height, width } = calculateImageSize(windowWidth);
 
   return (
-    <Image
-      style={{ width, height, marginBottom: 6, borderRadius: 8 }}
-      source={{
-        uri,
-      }}
-      transition={1000}
-      placeholder={blurhash}
-    />
+    <TouchableOpacity onPress={onImagePress}>
+      <Image
+        style={{ width, height, marginBottom: 6, borderRadius: 8 }}
+        source={{
+          uri,
+        }}
+        transition={1000}
+        placeholder={blurhash}
+      />
+    </TouchableOpacity>
   );
 }
 
-function renderItem({ item }: { item: string }) {
-  return <ImagePreview uri={item} />;
+function overrideItemLayout() {
+  return { height: 115, width: 115 };
 }
 
-export function Gallery({ photos }: { photos: Array<string> }) {
+export function Gallery({ photos, onImagePress }: { photos: Array<string>; onImagePress: () => void }) {
+  const renderItem: ListRenderItem<string> = useCallback(({ item }) => {
+    return <ImagePreview uri={item} onImagePress={onImagePress} />;
+  }, []);
+
   return (
     <MasonryFlashList
       data={photos ?? dummy_images}
@@ -51,7 +58,7 @@ export function Gallery({ photos }: { photos: Array<string> }) {
       renderItem={renderItem}
       estimatedItemSize={110}
       optimizeItemArrangement
-      overrideItemLayout={() => ({ height: 115, width: 115 })}
+      overrideItemLayout={overrideItemLayout}
     />
   );
 }

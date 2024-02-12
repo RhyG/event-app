@@ -50,9 +50,9 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
 
   return (
     <>
-      <Screen>
+      <Screen scrollViewProps={{ contentContainerStyle: { flex: 1 } }}>
         <Text>{event.event_description}</Text>
-        <Gallery photos={photos} />
+        <Gallery photos={photos} onImagePress={() => navigation.navigate(Screens.EventFeedScreen, { id })} />
       </Screen>
 
       <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} eventId={event.id} />

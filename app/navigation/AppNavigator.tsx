@@ -7,12 +7,14 @@ import { CreateEventScreen, JoinEventScreen } from '@feature/events';
 import { AllEventsScreen } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import { ConfirmPhotosScreen } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { EditEventScreen } from '@feature/events/screens/EditEventScreen/EditEventScreen';
+import { EventFeedScreen } from '@feature/events/screens/EventFeedScreen/EventFeedScreen';
 import { EventScreen } from '@feature/events/screens/EventScreen/EventScreen';
 import { HomeScreen } from '@feature/home/screens/HomeScreen';
 import { AccountScreen, useIsLoggedIn } from '@feature/user';
 
 import { TabBarIcon } from './TabBarIcon';
 import { TabBarLabel } from './TabBarLabel';
+import { Screens } from './screens';
 import { RootStackParamList, TabParamList } from './types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -20,21 +22,22 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 function HomeTabStack() {
   return (
-    <RootStack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
-      <RootStack.Screen name="HomeScreen" component={HomeScreen} />
-      <RootStack.Screen name="AllEventsScreen" component={AllEventsScreen} />
-      <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} options={{ title: 'Join Event' }} />
-      <RootStack.Screen name="EventScreen" component={EventScreen} />
-      <RootStack.Screen name="ConfirmPhotosScreen" component={ConfirmPhotosScreen} />
-      <RootStack.Screen name="EditEventScreen" component={EditEventScreen} />
+    <RootStack.Navigator initialRouteName={Screens.HomeScreen} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
+      <RootStack.Screen name={Screens.HomeScreen} component={HomeScreen} />
+      <RootStack.Screen name={Screens.AllEventsScreen} component={AllEventsScreen} />
+      <RootStack.Screen name={Screens.JoinEventScreen} component={JoinEventScreen} options={{ title: 'Join Event' }} />
+      <RootStack.Screen name={Screens.EventScreen} component={EventScreen} />
+      <RootStack.Screen name={Screens.EventFeedScreen} component={EventFeedScreen} />
+      <RootStack.Screen name={Screens.ConfirmPhotosScreen} component={ConfirmPhotosScreen} />
+      <RootStack.Screen name={Screens.EditEventScreen} component={EditEventScreen} />
     </RootStack.Navigator>
   );
 }
 
 function AccountTabStack() {
   return (
-    <RootStack.Navigator initialRouteName="AccountScreen">
-      <RootStack.Screen name="AccountScreen" component={AccountScreen} />
+    <RootStack.Navigator initialRouteName={Screens.AccountScreen}>
+      <RootStack.Screen name={Screens.AccountScreen} component={AccountScreen} />
     </RootStack.Navigator>
   );
 }
@@ -70,23 +73,24 @@ export function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
+      <RootStack.Navigator id="RootStack" initialRouteName={Screens.TabNavigator} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
         {isLoggedIn ? (
           <>
             {/* Event creation screens - render above tabs */}
             <RootStack.Group>
-              <RootStack.Screen name="CreateEventScreen" component={CreateEventScreen} options={{ title: 'Create Event' }} />
+              <RootStack.Screen name={Screens.CreateEventScreen} component={CreateEventScreen} options={{ title: 'Create Event' }} />
             </RootStack.Group>
 
-            <RootStack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
+            <RootStack.Screen name={Screens.TabNavigator} component={TabNavigator} options={{ headerShown: false }} />
           </>
         ) : (
           <>
-            <RootStack.Screen name="WelcomeNavigator" component={WelcomeNavigator} options={{ headerShown: false }} />
+            <RootStack.Screen name={Screens.WelcomeNavigator} component={WelcomeNavigator} options={{ headerShown: false }} />
 
             {/* Users should be able to join and view events without being authenticated. */}
-            <RootStack.Screen name="JoinEventScreen" component={JoinEventScreen} options={{ title: 'Join Event' }} />
-            <RootStack.Screen name="EventScreen" component={EventScreen} />
+            <RootStack.Screen name={Screens.JoinEventScreen} component={JoinEventScreen} options={{ title: 'Join Event' }} />
+            <RootStack.Screen name={Screens.EventScreen} component={EventScreen} />
+            <RootStack.Screen name={Screens.EventFeedScreen} component={EventFeedScreen} />
           </>
         )}
       </RootStack.Navigator>

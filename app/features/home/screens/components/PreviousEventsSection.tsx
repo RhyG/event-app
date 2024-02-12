@@ -82,7 +82,7 @@ export function PreviousEventsSection() {
 
   return (
     <VBox>
-      <HBox justifyContent="space-between" alignItems="center" mb="medium">
+      <HBox justifyContent="space-between" alignItems="center" mb="small">
         <Text preset="subheading">Previous Events ({mergedData?.length ?? 0})</Text>
         <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(Screens.AllEventsScreen)}>
           <Text colour={colours.sky['700']} size="xxs">

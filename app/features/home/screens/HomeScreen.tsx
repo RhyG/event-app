@@ -1,5 +1,5 @@
 import { Feather } from '@expo/vector-icons';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
