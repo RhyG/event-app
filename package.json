@@ -13,7 +13,7 @@
     "lint-fix": "eslint . --fix",
     "build:dev:ios": "npx eas build --profile development-simulator --platform ios",
     "build:prod:ios": "npx eas build --profile production-simulator --platform ios",
-    "build:dev:android": "",
+    "build:dev:android": "eas build --profile development --platform android",
     "build:prod:android": "eas build --profile production --platform android"
   },
   "dependencies": {
