@@ -12,16 +12,16 @@ const selectors = {
   selectUpcomingEvents: (events: Event[]) => events.filter(event => new Date(event.event_date) >= new Date()),
 };
 
-export function useUserEventsQuery(selector?: (events: Event[]) => Event[]) {
+export function useAllEventsQuery(selector?: (events: Event[]) => Event[]) {
   const { user } = useUserContext();
 
   return useQuery({ queryKey: userEventsQueryKey, queryFn: () => EventsAPI.getUserEvents(user?.id ?? ''), select: selector });
 }
 
 export function usePreviousEventsQuery() {
-  return useUserEventsQuery(selectors.selectPreviousEvents);
+  return useAllEventsQuery(selectors.selectPreviousEvents);
 }
 
 export function useUpcomingEventsQuery() {
-  return useUserEventsQuery(selectors.selectUpcomingEvents);
+  return useAllEventsQuery(selectors.selectUpcomingEvents);
 }

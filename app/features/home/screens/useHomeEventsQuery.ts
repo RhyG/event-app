@@ -1,7 +1,7 @@
-import { useUserEventsQuery } from '@feature/events/api/useUserEventsQuery';
+import { useAllEventsQuery } from '@feature/events/api/useUserEventsQuery';
 
 export function useHomeEventsQuery() {
-  const data = useUserEventsQuery();
+  const data = useAllEventsQuery();
 
   return { ...data, data: data.data?.slice(0, 5) };
 }
