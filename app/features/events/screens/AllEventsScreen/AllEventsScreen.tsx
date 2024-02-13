@@ -3,14 +3,14 @@ import { TouchableOpacity } from 'react-native';
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
-import { useUserEventsQuery } from '@feature/events/api/useUserEventsQuery';
+import { useAllEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { Event } from '@feature/events/types';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
 export function AllEventsScreen({ navigation }: ScreenProp<'AllEventsScreen'>) {
-  const { data: events, isLoading, isError } = useUserEventsQuery();
+  const { data: events, isLoading, isError } = useAllEventsQuery();
 
   if (isLoading) {
     return <Text>Loading</Text>;

@@ -26,7 +26,6 @@ const renderItem: ListRenderItem<string> = ({ item }) => {
 };
 
 export function EventFeedScreen({ route }: ScreenProp<'EventFeedScreen'>) {
-  console.log(route.params);
   const { id } = route.params;
   const { data: photos = [] } = useEventPhotosQuery(id);
 

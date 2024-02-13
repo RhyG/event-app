@@ -1,10 +1,12 @@
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
+import { eventPhotosPathsQueryKey } from '@feature/events/api/query-keys';
 import { useEventDetailsQuery, useEventPhotosQuery } from '@feature/events/api/useEventQuery';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
+import { queryClient } from '@core/providers/QueryClientProvider';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
@@ -13,6 +15,7 @@ import { Gallery } from '../../components/Gallery';
 import { AddPhotosFAB } from './components/AddPhotosFAB';
 import { EventSettingsSheet } from './components/EventSettingsSheet';
 import { useImagePicker } from './useImagePicker';
+import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
 
 export function EventScreen(props: ScreenProp<'EventScreen'>) {
   const { name, shouldPreventBack } = props.route.params;
@@ -31,12 +34,18 @@ export function EventScreen(props: ScreenProp<'EventScreen'>) {
 export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
   const { id } = route.params;
 
+  usePopulatePhotoURLs(id);
+
   const { pickImages } = useImagePicker({
     onSuccess: photos => navigation.navigate(Screens.ConfirmPhotosScreen, { photos, eventId: id }),
   });
 
   const { data: event, isLoading, isError } = useEventDetailsQuery(id);
   const { data: photos = [] } = useEventPhotosQuery(id);
+
+  function onImagePress(index: number) {
+    navigation.navigate(Screens.PhotoCarouselScreen, { initialIndex: index });
+  }
 
   if (isLoading) {
     return <Text>Loading</Text>;
@@ -52,7 +61,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
     <>
       <Screen scrollViewProps={{ contentContainerStyle: { flex: 1 } }}>
         <Text>{event.event_description}</Text>
-        <Gallery photos={photos} onImagePress={() => navigation.navigate(Screens.EventFeedScreen, { id })} />
+        <Gallery photos={photos} onImagePress={onImagePress} />
       </Screen>
 
       <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} eventId={event.id} />

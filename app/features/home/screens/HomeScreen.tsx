@@ -38,7 +38,7 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   useHomeHeader();
 
   return (
-    <Screen>
+    <Screen style={{ flex: 1 }}>
       <HBox mv="base" gap="small">
         <JoinEventButton onPress={() => navigation.navigate(Screens.JoinEventScreen)} />
         <CreateEventButton onPress={() => navigation.navigate(Screens.CreateEventScreen)} />

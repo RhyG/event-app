@@ -24,12 +24,12 @@ function calculateImageSize(viewportWidth: number): ImageSize {
   return { width, height };
 }
 
-function ImagePreview({ uri, onImagePress }: { uri: string; onImagePress: () => void }) {
+function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress: (index: number) => void; index: number }) {
   const { width: windowWidth } = useWindowDimensions();
   const { height, width } = calculateImageSize(windowWidth);
 
   return (
-    <TouchableOpacity onPress={onImagePress}>
+    <TouchableOpacity onPress={() => onImagePress(index)}>
       <Image
         style={{ width, height, marginBottom: 6, borderRadius: 8 }}
         source={{
@@ -46,9 +46,9 @@ function overrideItemLayout() {
   return { height: 115, width: 115 };
 }
 
-export function Gallery({ photos, onImagePress }: { photos: Array<string>; onImagePress: () => void }) {
-  const renderItem: ListRenderItem<string> = useCallback(({ item }) => {
-    return <ImagePreview uri={item} onImagePress={onImagePress} />;
+export function Gallery({ photos, onImagePress }: { photos: Array<string>; onImagePress: (index: number) => void }) {
+  const renderItem: ListRenderItem<string> = useCallback(({ item, index }) => {
+    return <ImagePreview uri={item} index={index} onImagePress={onImagePress} />;
   }, []);
 
   return (
