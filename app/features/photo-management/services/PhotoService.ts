@@ -7,12 +7,12 @@ export function decodeFromBase64(base64Image: string) {
   return decode(base64Image);
 }
 
-export async function fetchImageFromUri(uri: string) {
-  const response = await fetch(uri);
-  const buffer = await response.arrayBuffer();
-  return buffer;
-}
-
+/**
+ * Takes a Base64 string and uploads it to the event.
+ * @param eventId ID of the event to upload the photo to.
+ * @param file a Base64 string for the photo to upload.
+ * @returns a signed URL for the image.
+ */
 export async function uploadPhoto(eventId: string, file: string) {
   const start = performance.now();
   console.log('Uploading');
@@ -49,12 +49,33 @@ export async function uploadPhoto(eventId: string, file: string) {
   }
 }
 
+/**
+ * Iterates over an array of photo files and uploads them to the event.
+ * @param eventId ID of the event to upload photos to.
+ * @param files an array of URI & Base64 strings for the photos to upload.
+ * @returns an array of signed URLs to the uploaded photos.
+ */
 export async function uploadPhotos(eventId: string, files: PhotoFile[]) {
   const uploaded = await Promise.allSettled(files.map(file => uploadPhoto(eventId, file.base64)));
 
   return uploaded
     .filter((response): response is PromiseFulfilledResult<{ signedUrl: string }> => response.status === 'fulfilled')
     .map(response => response.value.signedUrl);
+}
+
+/**
+ * Gets a single photo with a path.
+ * @param url the URL of the photo to get.
+ * @returns signed URL for the photo.
+ */
+export async function getPhoto(url: string) {
+  try {
+    const data = await PhotoAPI.getSignedUrlForEventPhoto(url);
+    return data.signedUrl;
+  } catch (error) {
+    console.log('Error getting photo:', error);
+    return;
+  }
 }
 
 /**
