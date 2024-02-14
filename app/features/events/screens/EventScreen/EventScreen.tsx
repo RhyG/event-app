@@ -1,12 +1,10 @@
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
-import { eventPhotosPathsQueryKey } from '@feature/events/api/query-keys';
 import { useEventDetailsQuery, useEventPhotosQuery } from '@feature/events/api/useEventQuery';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
-import { queryClient } from '@core/providers/QueryClientProvider';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
@@ -44,7 +42,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
   const { data: photos = [] } = useEventPhotosQuery(id);
 
   function onImagePress(index: number) {
-    navigation.navigate(Screens.PhotoCarouselScreen, { initialIndex: index });
+    navigation.navigate(Screens.PhotoCarouselScreen, { initialIndex: index, eventId: id });
   }
 
   if (isLoading) {

@@ -29,7 +29,7 @@ function HomeTabStack() {
       <RootStack.Screen name={Screens.EventScreen} component={EventScreen} />
       <RootStack.Screen name={Screens.ConfirmPhotosScreen} component={ConfirmPhotosScreen} />
       <RootStack.Screen name={Screens.EditEventScreen} component={EditEventScreen} />
-      <RootStack.Group screenOptions={{ presentation: 'transparentModal' }}>
+      <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade' }}>
         <RootStack.Screen name={Screens.PhotoCarouselScreen} component={PhotoCarouselScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
@@ -92,7 +92,7 @@ export function AppNavigator() {
             {/* Users should be able to join and view events without being authenticated. */}
             <RootStack.Screen name={Screens.JoinEventScreen} component={JoinEventScreen} options={{ title: 'Join Event' }} />
             <RootStack.Screen name={Screens.EventScreen} component={EventScreen} />
-            <RootStack.Group screenOptions={{ presentation: 'transparentModal' }}>
+            <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade' }}>
               <RootStack.Screen name={Screens.PhotoCarouselScreen} component={PhotoCarouselScreen} />
             </RootStack.Group>
           </>

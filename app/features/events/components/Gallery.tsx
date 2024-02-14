@@ -35,7 +35,7 @@ function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress:
         source={{
           uri,
         }}
-        transition={1000}
+        transition={200}
         placeholder={blurhash}
       />
     </TouchableOpacity>

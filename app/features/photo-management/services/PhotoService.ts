@@ -73,7 +73,7 @@ export async function getPhoto(url: string) {
     const data = await PhotoAPI.getSignedUrlForEventPhoto(url);
     return data.signedUrl;
   } catch (error) {
-    console.log('Error getting photo:', error);
+    console.log(`Error getting photo for ${url}:`, error);
     return;
   }
 }

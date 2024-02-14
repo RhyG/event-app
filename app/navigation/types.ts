@@ -29,7 +29,7 @@ export type RootStackParamList = {
   AllEventsScreen: undefined;
   ConfirmPhotosScreen: { photos: Array<PhotoFile>; eventId: string };
   EditEventScreen: { id: string };
-  PhotoCarouselScreen: { initialIndex: number };
+  PhotoCarouselScreen: { initialIndex: number; eventId: string };
 
   QRCodeScannerScreen: undefined;
 };
