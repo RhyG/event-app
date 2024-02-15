@@ -42,8 +42,6 @@ export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
 const stylesFn = (theme: Theme) =>
   StyleSheet.create({
     container: {
-      flex: 1,
-      justifyContent: 'center',
       paddingHorizontal: theme.spacing.large,
       paddingTop: theme.spacing.ginormous * 1.2,
     },
