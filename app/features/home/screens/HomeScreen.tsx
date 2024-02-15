@@ -1,4 +1,5 @@
 import { Feather } from '@expo/vector-icons';
+import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
@@ -19,7 +20,7 @@ function JoinEventButton({ onPress }: { onPress: () => void }) {
 
   return (
     <Button onPress={onPress} preset="secondary" style={styles.eventActionButton} LeftAccessory={() => <Feather name="user-plus" size={18} />}>
-      <Text>Join event</Text>
+      <Text>{I18n.t('homeScreen.joinEvent')}</Text>
     </Button>
   );
 }
@@ -29,7 +30,7 @@ function CreateEventButton({ onPress }: { onPress: () => void }) {
 
   return (
     <Button onPress={onPress} style={styles.eventActionButton} LeftAccessory={() => <Feather name="plus" size={18} color="white" />}>
-      <Text colour={theme.colours.palette.white}>Create event</Text>
+      <Text colour={theme.colours.palette.white}>{I18n.t('homeScreen.createEvent')}</Text>
     </Button>
   );
 }

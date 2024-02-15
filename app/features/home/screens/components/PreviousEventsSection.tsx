@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
+import I18n from 'i18n-js';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
@@ -83,10 +84,12 @@ export function PreviousEventsSection() {
   return (
     <VBox>
       <HBox justifyContent="space-between" alignItems="center" mb="small">
-        <Text preset="subheading">Previous Events ({mergedData?.length ?? 0})</Text>
+        <Text preset="subheading">
+          {I18n.t('homeScreen.previousEvents')} ({mergedData?.length ?? 0})
+        </Text>
         <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(Screens.AllEventsScreen)}>
           <Text colour={colours.sky['700']} size="xxs">
-            SEE ALL
+            {I18n.t('homeScreen.seeAll').toUpperCase()}
           </Text>
         </TouchableOpacity>
       </HBox>

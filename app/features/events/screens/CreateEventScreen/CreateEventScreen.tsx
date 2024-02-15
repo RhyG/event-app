@@ -1,3 +1,4 @@
+import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
 import { PasswordInput } from '@feature/auth/components/PasswordInput';
@@ -14,14 +15,18 @@ export function CreateEventScreen() {
   const { submitNewEvent, setDetail } = useEventCreationForm();
 
   return (
-    <WelcomeFlowScreen heading="Create an Event">
+    <WelcomeFlowScreen heading={I18n.t('createEventScreen.heading')}>
       <VBox gap="small">
-        <InputWithLabel label="Name" placeholder="Enter event name" onChangeText={value => setDetail('name', value)} />
+        <InputWithLabel
+          label={I18n.t('createEventScreen.nameInputLabel')}
+          placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
+          onChangeText={value => setDetail('name', value)}
+        />
 
         <DateInput onChangeDate={value => setDetail('date', value)} />
         <InputWithLabel
-          label="Description (optional)"
-          placeholder="Enter event description"
+          label={I18n.t('createEventScreen.descriptionInputLabel')}
+          placeholder={I18n.t('createEventScreen.descriptionInputPlaceholder')}
           onChangeText={value => setDetail('description', value)}
           inputStyle={styles.descriptionInput}
           multiline
@@ -30,7 +35,7 @@ export function CreateEventScreen() {
 
         <PasswordInput onChangeText={value => setDetail('password', value)} optional />
 
-        <Button onPress={submitNewEvent} label="Create Event" />
+        <Button onPress={submitNewEvent} label={I18n.t('createEventScreen.createEvent')} />
       </VBox>
     </WelcomeFlowScreen>
   );

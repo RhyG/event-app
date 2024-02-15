@@ -2,6 +2,7 @@ import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
+import I18n from 'i18n-js';
 import { ReactNode, useCallback, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
@@ -72,18 +73,26 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
     <BottomSheetModal ref={bottomSheetRef} index={1} snapPoints={SNAP_POINTS} enablePanDownToClose={true} backdropComponent={renderBackdrop}>
       <VBox>
         <SettingsRow
-          label="Share event invite"
+          label={I18n.t('eventScreen.shareEventInvite')}
           onPress={() => copyEventInvite(eventName, accessCode)}
           icon={<Feather name="share" size={20} color={theme.icon.primaryColour} />}
         />
         <SettingsRow
-          label="Copy event access code"
+          label={I18n.t('eventScreen.copyEventAccessCode')}
           onPress={() => copyEventAccessCode(accessCode)}
           icon={<Feather name="copy" size={20} color={theme.icon.primaryColour} />}
         />
         {/* TODO: Link to printable PDF hosted somewhere that shows the QR code and a nice message */}
-        <SettingsRow label="Generate shareable QR code" onPress={() => {}} icon={<AntDesign name="qrcode" size={20} color={theme.icon.primaryColour} />} />
-        <SettingsRow label="Edit event" onPress={navigateToEditEventScreen} icon={<Feather name="edit-2" size={20} color={theme.icon.primaryColour} />} />
+        <SettingsRow
+          label={I18n.t('eventScreen.generateQRCode')}
+          onPress={() => {}}
+          icon={<AntDesign name="qrcode" size={20} color={theme.icon.primaryColour} />}
+        />
+        <SettingsRow
+          label={I18n.t('eventScreen.editEvent')}
+          onPress={navigateToEditEventScreen}
+          icon={<Feather name="edit-2" size={20} color={theme.icon.primaryColour} />}
+        />
       </VBox>
     </BottomSheetModal>
   );

@@ -1,9 +1,15 @@
+import { en as authEn } from '@feature/auth/i18n/en';
+import { en as eventEn } from '@feature/events/i18n/en';
+import { en as homeEn } from '@feature/home/i18n/en';
+
 export const en = {
-  homeScreen: {
-    upcomingEvents: 'Upcoming Events',
-    previousEvents: 'Previous Events',
-    createNewEvent: 'Create new event',
+  common: {
+    joinEvent: 'Join event',
+    createEvent: 'Create event',
   },
+  ...homeEn,
+  ...eventEn,
+  ...authEn,
   auth: {
     login: 'Login',
     logout: 'Logout',

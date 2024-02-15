@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import I18n from 'i18n-js';
 
 import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
@@ -24,19 +24,23 @@ export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>)
   const paddingBottom = ((insets?.paddingBottom as number) ?? 0) * 1.8;
 
   return (
-    <WelcomeFlowScreen heading="Sign in">
-      <VBox gap="small">
-        <InputWithLabel placeholder="Enter email" label="Email" onChangeText={value => changeDetails('email', value)} autoCapitalize="none" />
+    <WelcomeFlowScreen heading={I18n.t('emailLoginScreen.heading')}>
+      <VBox gap="small" style={{ marginBottom: 'auto' }}>
+        <InputWithLabel
+          placeholder={I18n.t('emailLoginScreen.emailInputPlaceholder')}
+          label={I18n.t('emailLoginScreen.emailInputLabel')}
+          onChangeText={value => changeDetails('email', value)}
+          autoCapitalize="none"
+        />
         <PasswordInput onChangeText={value => changeDetails('password', value)} />
 
         <TwoPartPressableText texts={['New here?', 'Create an account']} onPress={onCreateAccountPress} />
       </VBox>
-      <VBox flex={1} style={{ paddingBottom }}>
-        <View style={{ marginTop: 'auto' }}>
-          <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(Screens.ResetPasswordScreen)} />
+      {/* TODO: Work out why marginTop: auto isn't working here */}
+      <VBox style={{ marginTop: 300 }}>
+        <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(Screens.ResetPasswordScreen)} />
 
-          <ButtonWithLoading loading={false} onPress={login} label="Sign in" />
-        </View>
+        <ButtonWithLoading loading={false} onPress={login} label={I18n.t('emailLoginScreen.signIn')} />
       </VBox>
     </WelcomeFlowScreen>
   );

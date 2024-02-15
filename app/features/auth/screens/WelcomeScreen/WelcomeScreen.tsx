@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import { Image } from 'expo-image';
+import I18n from 'i18n-js';
 import { Platform, StyleSheet, View } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
@@ -30,7 +31,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
   }
 
   return (
-    <WelcomeFlowScreen heading="Welcome" subheading="Sign in to create an event, or join one that already exists.">
+    <WelcomeFlowScreen heading={I18n.t('welcomeScreen.heading')} subheading={I18n.t('welcomeScreen.subheading')}>
       <Button preset="secondary" onPress={navigateToEmailAuthScreen} label={`Sign ${showingLogin ? 'in' : 'up'} with email`} />
       <HBox gap="small" mt="small">
         {Platform.OS === 'ios' && (
@@ -61,7 +62,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
         <View style={styles.divider} />
       </HBox>
 
-      <Button onPress={() => navigation.navigate(Screens.JoinEventScreen)} label="Join event" />
+      <Button onPress={() => navigation.navigate(Screens.JoinEventScreen)} label={I18n.t('common.joinEvent')} />
     </WelcomeFlowScreen>
   );
 }

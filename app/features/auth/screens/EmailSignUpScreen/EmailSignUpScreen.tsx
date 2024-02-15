@@ -1,3 +1,4 @@
+import I18n from 'i18n-js';
 import { StyleSheet, View } from 'react-native';
 
 import { PasswordInput } from '@feature/auth/components/PasswordInput';
@@ -19,14 +20,18 @@ export function EmailSignUpScreen() {
   const onSignInPress = useSignUpPress();
 
   return (
-    <WelcomeFlowScreen heading="Sign up">
+    <WelcomeFlowScreen heading={I18n.t('emailSignUpScreen.heading')}>
       <View style={styles.container}>
-        <InputWithLabel placeholder="Enter email" label="Email" onChangeText={value => changeDetails('email', value)} />
+        <InputWithLabel
+          placeholder={I18n.t('emailSignUpScreen.emailInputPlaceholder')}
+          label={I18n.t('emailSignUpScreen.emailInputLabel')}
+          onChangeText={value => changeDetails('email', value)}
+        />
         <PasswordInput onChangeText={value => changeDetails('password', value)} />
 
         <TwoPartPressableText texts={['Have an account already?', 'Sign in']} onPress={onSignInPress} />
 
-        <Button onPress={createUser} label="Create account" />
+        <Button onPress={createUser} label={I18n.t('emailSignUpScreen.createAccount')} />
       </View>
     </WelcomeFlowScreen>
   );

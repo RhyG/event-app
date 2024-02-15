@@ -1,3 +1,4 @@
+import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
 import { Screens } from '@app/navigation/screens';
@@ -21,18 +22,26 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
   const { handleFormChange, submitJoin, eventRequiresPassword, submitJoinWithPassword } = useJoinEvent();
 
   return (
-    <WelcomeFlowScreen heading="Join an Event">
+    <WelcomeFlowScreen heading={I18n.t('joinEventScreen.heading')}>
       <VBox gap="small">
-        <InputWithLabel label="Event Code" placeholder="Enter event code" onChangeText={val => handleFormChange('code', val)} />
+        <InputWithLabel
+          label={I18n.t('joinEventScreen.eventCodeInputLabel')}
+          placeholder={I18n.t('joinEventScreen.eventCodeInputPlaceholder')}
+          onChangeText={val => handleFormChange('code', val)}
+        />
         {eventRequiresPassword ? <PasswordInput onChangeText={val => handleFormChange('password', val)} /> : null}
       </VBox>
-      <Button style={styles.joinEventButton} onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label="Join Event" />
+      <Button
+        style={styles.joinEventButton}
+        onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin}
+        label={I18n.t('joinEventScreen.joinEvent')}
+      />
 
       <VBox mt="extraLarge" gap="small">
         <Text align="center" colour={theme.colours.textSubdued}>
-          Or scan a QR code
+          {I18n.t('joinEventScreen.scanQrCode')}
         </Text>
-        <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} label="Open Camera" />
+        <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} label={I18n.t('joinEventScreen.openCamera')} />
       </VBox>
     </WelcomeFlowScreen>
   );
