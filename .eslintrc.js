@@ -46,12 +46,13 @@ module.exports = {
   settings: {
     'import/resolver': {
       'babel-module': {
-        '@app': './app',
         '@core': './app/core',
         '@ui': './app/core/ui',
         '@features': './app/features',
         '@feature': './app/features',
         '@types': './app/types',
+        '@tests': './app/tests',
+        '@app': './app',
       },
     },
   },

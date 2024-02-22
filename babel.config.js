@@ -12,6 +12,7 @@ module.exports = function (api) {
             '@ui': './app/core/ui',
             '@core': './app/core',
             '@feature': './app/features',
+            '@tests': './app/tests',
           },
         },
       ],
