@@ -45,7 +45,7 @@
       "@ui/*": ["./app/core/ui/*"],
       "@types/*": ["./app/types/*"],
       "@core/*": ["./app/core/*"],
-      "@tests": ["./app/tests"],
+      "@tests": ["./app/tests/*"],
       "@app/*": ["./app/*"],
       "@features/*": ["./app/features/*"]
     } /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */,

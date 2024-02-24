@@ -15,7 +15,7 @@ export function InputWithLabel({ label, placeholder, inputStyle, ...rest }: Inpu
       <Text preset="formLabel" style={marginBottom}>
         {label}
       </Text>
-      <TextInput placeholder={placeholder} inputStyle={inputStyle} {...rest} />
+      <TextInput placeholder={placeholder} inputStyle={inputStyle} accessibilityLabel={label} {...rest} />
     </View>
   );
 }
