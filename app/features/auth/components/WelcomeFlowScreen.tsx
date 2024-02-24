@@ -30,7 +30,7 @@ export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
         </Text>
         {!!subheading && (
           <Text align="center" colour={theme.colours.textSubdued}>
-            Sign in to create an event, or join one that already exists.
+            {subheading}
           </Text>
         )}
       </View>
