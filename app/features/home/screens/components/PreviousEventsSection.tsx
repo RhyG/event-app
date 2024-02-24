@@ -39,9 +39,11 @@ const placeholders = [
 export function PreviousEventsSection() {
   const navigation = useNavigation();
 
-  const data = usePreviousEventsQuery();
+  const { data } = usePreviousEventsQuery();
 
-  const mergedData = [...(data.data ?? []), ...placeholders];
+  const mergedData = [...(data ?? []), ...placeholders];
+
+  if (!data) return null;
 
   return (
     <VBox>
@@ -57,7 +59,7 @@ export function PreviousEventsSection() {
         </TouchableOpacity>
       </HBox>
 
-      {mergedData.map(event => (
+      {data.map(event => (
         <EventCard key={event.id} {...event} />
       ))}
     </VBox>
