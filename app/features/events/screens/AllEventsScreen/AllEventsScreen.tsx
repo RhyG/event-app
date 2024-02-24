@@ -1,15 +1,17 @@
-import { TouchableOpacity } from 'react-native';
-
-import { Screens } from '@app/navigation/screens';
-import { ScreenProp } from '@app/navigation/types';
-
 import { useAllEventsQuery } from '@feature/events/api/useUserEventsQuery';
+import { EventCard } from '@feature/events/components/EventCard';
 import { Event } from '@feature/events/types';
+
+import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
-export function AllEventsScreen({ navigation }: ScreenProp<'AllEventsScreen'>) {
+export function AllEventsScreen() {
+  useHeaderOptions({
+    title: 'All Previous Events',
+  });
+
   const { data: events, isLoading, isError } = useAllEventsQuery();
 
   if (isLoading) {
@@ -25,9 +27,7 @@ export function AllEventsScreen({ navigation }: ScreenProp<'AllEventsScreen'>) {
   return (
     <Screen>
       {events.map((event: Event) => (
-        <TouchableOpacity key={event.id} onPress={() => navigation.navigate(Screens.EventScreen, { id: event.id, name: event.event_name })}>
-          <Text>{event.event_name}</Text>
-        </TouchableOpacity>
+        <EventCard {...event} />
       ))}
     </Screen>
   );
