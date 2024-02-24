@@ -13,7 +13,7 @@ const colours = {
   secondaryBackground: palette.grey['50'],
 
   borderColour: palette.grey['200'],
-};
+} as const;
 
 export const theme = {
   typography,
@@ -43,13 +43,13 @@ export const theme = {
     borderRadius: 14,
     padding: spacing.small,
     borderColour: colours.palette.grey['200'],
-  },
+  } as const,
   card: {
     borderRadius: 14,
   },
   icon: {
     primaryColour: palette.grey['800'],
   },
-};
+} as const;
 
 export type Theme = typeof theme;
