@@ -37,9 +37,3 @@ export const Screens: { [K in keyof RootStackParamList]: K } = {
 } as const;
 
 export type Screen = keyof typeof Screens;
-
-export const _Screens = {
-  WelcomeScreen: WelcomeScreen.screenName,
-};
-
-export type _Screens = keyof typeof _Screens;
