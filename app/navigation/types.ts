@@ -1,7 +1,10 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { PhotoFile } from '@feature/photo-management/types';
+import type { ConfirmPhotosScreenParams } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
+import type { EditEventScreenParams } from '@feature/events/screens/EditEventScreen/EditEventScreen';
+import type { EventScreenParams } from '@feature/events/screens/EventScreen/EventScreen';
+import type { PhotoCarouselScreenParams } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
 
 export type TabParamList = {
   HomeTab: NavigatorScreenParams<Record<string, never>>;
@@ -25,11 +28,11 @@ export type RootStackParamList = {
   HomeScreen: undefined;
   JoinEventScreen: undefined;
   CreateEventScreen: undefined;
-  EventScreen: { id: string; name: string; shouldPreventBack?: boolean };
+  EventScreen: EventScreenParams;
   AllEventsScreen: undefined;
-  ConfirmPhotosScreen: { photos: Array<PhotoFile>; eventId: string };
-  EditEventScreen: { id: string };
-  PhotoCarouselScreen: { initialIndex: number; eventId: string };
+  ConfirmPhotosScreen: ConfirmPhotosScreenParams;
+  EditEventScreen: EditEventScreenParams;
+  PhotoCarouselScreen: PhotoCarouselScreenParams;
 
   QRCodeScannerScreen: undefined;
 };

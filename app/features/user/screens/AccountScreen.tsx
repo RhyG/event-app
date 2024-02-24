@@ -12,3 +12,5 @@ export function AccountScreen() {
     </Screen>
   );
 }
+
+AccountScreen.screenName = 'AccountScreen' as const;

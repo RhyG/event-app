@@ -60,7 +60,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
         />
       </VBox>
 
-      <HBox alignItems="center" justifyContent="center" mv="large">
+      <HBox alignItems="center" justifyContent="center" mt="medium" mb="large">
         <View style={styles.divider} />
         <Text colour={theme.colours.textSubdued} style={styles.or}>
           Or
@@ -84,3 +84,5 @@ const stylesFn = (theme: Theme) =>
       borderColor: theme.colours.borderColour,
     },
   });
+
+WelcomeScreen.screenName = 'WelcomeScreen' as const;

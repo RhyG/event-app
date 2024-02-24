@@ -16,3 +16,5 @@ export function ResetPasswordScreen({ navigation }: ScreenProp<'ResetPasswordScr
     </WelcomeFlowScreen>
   );
 }
+
+ResetPasswordScreen.screenName = 'ResetPasswordScreen' as const;

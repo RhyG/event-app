@@ -7,3 +7,6 @@ export function EditEventScreen() {
     </Screen>
   );
 }
+
+EditEventScreen.screenName = 'EditEventScreen' as const;
+export type EditEventScreenParams = { id: string; name: string; shouldPreventBack?: boolean };

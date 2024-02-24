@@ -67,3 +67,6 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
     </>
   );
 }
+
+EventScreen.screenName = 'EventScreen' as const;
+export type EventScreenParams = { id: string; name: string; shouldPreventBack?: boolean };

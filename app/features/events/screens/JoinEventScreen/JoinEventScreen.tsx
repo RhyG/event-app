@@ -53,3 +53,5 @@ const stylesFn = (theme: Theme) =>
       marginTop: theme.spacing.small,
     },
   });
+
+JoinEventScreen.screenName = 'JoinEventScreen' as const;

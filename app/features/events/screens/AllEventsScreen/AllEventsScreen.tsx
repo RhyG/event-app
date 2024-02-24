@@ -32,3 +32,5 @@ export function AllEventsScreen({ navigation }: ScreenProp<'AllEventsScreen'>) {
     </Screen>
   );
 }
+
+AllEventsScreen.screenName = 'AllEventsScreen' as const;

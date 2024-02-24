@@ -46,3 +46,5 @@ const styles = StyleSheet.create({
     minHeight: 80,
   },
 });
+
+CreateEventScreen.screenName = 'CreateEventScreen' as const;

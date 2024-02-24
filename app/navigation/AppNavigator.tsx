@@ -20,6 +20,8 @@ import { RootStackParamList, TabParamList } from './types';
 const Tab = createBottomTabNavigator<TabParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
+console.log(Screens);
+
 function HomeTabStack() {
   return (
     <RootStack.Navigator initialRouteName={Screens.HomeScreen} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>

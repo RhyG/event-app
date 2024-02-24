@@ -1,7 +1,6 @@
 import { Feather } from '@expo/vector-icons';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Image } from 'expo-image';
-import { useLayoutEffect } from 'react';
 import { ActivityIndicator, Dimensions, FlatList, ListRenderItem, TouchableOpacity, View } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
@@ -120,3 +119,6 @@ export function PhotoCarouselScreen({ route, navigation }: ScreenProp<'PhotoCaro
     </>
   );
 }
+
+PhotoCarouselScreen.screenName = 'PhotoCarouselScreen' as const;
+export type PhotoCarouselScreenParams = { initialIndex: number; eventId: string };

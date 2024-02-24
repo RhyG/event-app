@@ -45,3 +45,5 @@ export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>)
     </WelcomeFlowScreen>
   );
 }
+
+EmailLoginScreen.screenName = 'EmailLoginScreen' as const;

@@ -43,3 +43,5 @@ const stylesFn = (theme: Theme) =>
       gap: theme.spacing.small,
     },
   });
+
+EmailSignUpScreen.screenName = 'EmailSignUpScreen' as const;

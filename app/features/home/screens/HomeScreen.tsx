@@ -58,3 +58,5 @@ function stylesFn() {
     },
   });
 }
+
+HomeScreen.screenName = 'HomeScreen' as const;
