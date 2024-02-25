@@ -39,7 +39,7 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
   useHeaderOptions({
     headerRight: () => (
       <TouchableOpacity onPress={openSheet} hitSlop={{ left: 30, top: 40, right: 40, bottom: 40 }}>
-        <Feather name="menu" size={24} color="black" />
+        <Feather name="menu" size={26} color={theme.colours.white} />
       </TouchableOpacity>
     ),
   });

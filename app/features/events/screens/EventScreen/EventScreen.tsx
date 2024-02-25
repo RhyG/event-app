@@ -1,28 +1,43 @@
+import { Feather } from '@expo/vector-icons';
+import { HeaderBackButton } from '@react-navigation/elements';
+import { BlurView } from 'expo-blur';
+import { ScrollView, StyleSheet } from 'react-native';
+
 import { ScreenProp } from '@app/navigation/types';
 
+import { useEventPreviewImageQuery } from '@feature/events/api/useEventPreviewQuery';
 import { useEventDetailsQuery, useEventPhotosQuery } from '@feature/events/api/useEventQuery';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
+import { formatTimestamp } from '@core/lib/date';
 
-import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
+import { HBox, VBox } from '@ui/components/layout/Box';
+import { theme } from '@ui/theme/theme';
 
 import { Gallery } from '../../components/Gallery';
 import { ConfirmPhotosScreenName } from '../ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { PhotoCarouselScreenName } from '../PhotoCarouselScreen/PhotoCarouselScreen';
 import { AddPhotosFAB } from './components/AddPhotosFAB';
+import { EventScreenHeader } from './components/EventScreenHeader';
 import { EventSettingsSheet } from './components/EventSettingsSheet';
 import { useImagePicker } from './useImagePicker';
 import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
 
 export function EventScreen(props: ScreenProp<typeof EventScreenName>) {
-  const { name, shouldPreventBack } = props.route.params;
+  const { shouldPreventBack } = props.route.params;
 
   // When coming straight from creating an event the user should not be able to go back.
   useHeaderOptions({
-    title: name,
+    title: '',
     ...(shouldPreventBack ? { headerBackVisible: false, gestureEnabled: false } : {}),
+    headerTransparent: true,
+    headerBackground: () => <BlurView tint="dark" intensity={10} style={[StyleSheet.absoluteFill]} />,
+    headerTitleStyle: {
+      color: 'white',
+    },
+    headerLeft: () => <HeaderBackButton tintColor="white" accessibilityLabel="back button" labelVisible={false} onPress={() => props.navigation.goBack()} />,
   });
 
   const shouldRender = useRenderAfterInteractions();
@@ -42,6 +57,11 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
   const { data: event, isLoading, isError } = useEventDetailsQuery(id);
   const { data: photos = [] } = useEventPhotosQuery(id);
 
+  const { data: previewImage } = useEventPreviewImageQuery({
+    photoURL: event?.preview_url ?? '',
+    enabled: !!event,
+  });
+
   function onImagePress(index: number) {
     navigation.navigate(PhotoCarouselScreenName, { initialIndex: index, eventId: id });
   }
@@ -58,10 +78,23 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
 
   return (
     <>
-      <Screen scrollViewProps={{ contentContainerStyle: { flex: 1 } }}>
-        <Text>{event.event_description}</Text>
-        <Gallery photos={photos} onImagePress={onImagePress} />
-      </Screen>
+      <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
+        <EventScreenHeader previewImage={previewImage?.signedUrl ?? ''} photoCount={photos.length} />
+
+        <VBox ph="small" mt="base">
+          <HBox justifyContent="space-between" alignItems="center" mb="base">
+            <VBox>
+              <Text preset="heading">{event.event_name}</Text>
+              <Text colour={theme.colours.textSubdued}>{formatTimestamp(event.event_date)}</Text>
+              {!!event.event_description ? <Text>{event.event_description}</Text> : null}
+            </VBox>
+
+            <Feather name="share-2" size={24} color={theme.icon.primaryColour} />
+          </HBox>
+
+          <Gallery photos={photos} onImagePress={onImagePress} />
+        </VBox>
+      </ScrollView>
 
       <EventSettingsSheet accessCode={event.access_code} eventName={event.event_name} eventId={event.id} />
       <AddPhotosFAB onPress={pickImages} buttonVisible={true} />

@@ -1,9 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
-import { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-
-import { PhotoAPI } from '@feature/photo-management/api/PhotoAPI';
 
 import { formatTimestamp } from '@core/lib/date';
 
@@ -12,6 +9,7 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
+import { useEventPreviewImageQuery } from '../api/useEventPreviewQuery';
 import { EventScreenName } from '../screens/EventScreen/EventScreen';
 import { Event } from '../types';
 
@@ -21,35 +19,17 @@ const blurhash =
 const defaultImage =
   'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
-function useEventPreviewImage(photoURL: string | null) {
-  const [previewImage, setPreviewImage] = useState<string | undefined>();
-
-  useEffect(() => {
-    (async function () {
-      if (photoURL) {
-        const data = await PhotoAPI.getSignedUrlForEventPhoto(photoURL);
-
-        if (data) {
-          setPreviewImage(data.signedUrl);
-        }
-      }
-    })();
-  }, []);
-
-  return previewImage;
-}
-
 export function EventCard({ event_name, event_date, preview_url, id }: Event) {
   const navigation = useNavigation();
 
   const { styles, theme } = useThemedStyles(stylesFn);
 
-  const previewImage = useEventPreviewImage(preview_url);
+  const { data: previewImage } = useEventPreviewImageQuery({ photoURL: preview_url!, enabled: !!preview_url });
 
   return (
     <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(EventScreenName, { id, name: event_name })}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={previewImage ?? defaultImage} contentFit="cover" transition={1000} placeholder={blurhash} />
+        <Image style={styles.image} source={previewImage?.signedUrl ?? defaultImage} contentFit="cover" transition={1000} placeholder={blurhash} />
       </View>
 
       <VBox p="extraSmall">
