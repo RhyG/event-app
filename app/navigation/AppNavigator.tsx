@@ -86,7 +86,7 @@ export function AppNavigator() {
           </>
         ) : (
           <>
-            <RootStack.Screen name={WelcomeNavigatorName} component={WelcomeNavigator} options={{ headerShown: false }} />
+            <RootStack.Screen name="WelcomeNavigator" component={WelcomeNavigator} options={{ headerShown: false }} />
 
             {/* Users should be able to join and view events without being authenticated. */}
             <RootStack.Screen name={JoinEventScreenName} component={JoinEventScreen} options={{ title: 'Join Event' }} />
