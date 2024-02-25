@@ -14,10 +14,10 @@ function formatDate(date: Date): string {
 
 // Date input styled to look like the regular text input component (almost bang on but can't be stuffed at the moment)
 // TODO: Be stuffed to get it ridgy didge
-export function DateInput({ onChangeDate }: { onChangeDate: (date: Date) => void }) {
+export function DateInput({ defaultDate, onChangeDate }: { defaultDate: string; onChangeDate: (date: Date) => void }) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
-  const [date, setDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date | undefined>(() => (defaultDate ? new Date(defaultDate) : undefined));
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const showDatePicker = () => {
@@ -34,12 +34,14 @@ export function DateInput({ onChangeDate }: { onChangeDate: (date: Date) => void
     hideDatePicker();
   };
 
+  const value = date ? formatDate(date) : undefined;
+
   return (
     <VBox gap="tiny">
       <Text preset="formLabel">Date</Text>
       <TouchableOpacity onPress={showDatePicker} style={styles.dateInput}>
         <Text colour={date ? theme.colours.textPrimary : '#c8c8c8'} style={{ fontSize: 13 }}>
-          {date ? formatDate(date) : 'Select a date'}
+          {value ?? 'Select a date'}
         </Text>
         <Feather name="calendar" size={20} color={theme.icon.primaryColour} style={{ marginLeft: 'auto' }} />
       </TouchableOpacity>

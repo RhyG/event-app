@@ -21,4 +21,7 @@ export const en = {
     scanQrCode: 'Or scan a QR code',
     openCamera: 'Open Camera',
   },
+  editEventScreen: {
+    heading: 'Edit Event',
+  },
 } as const;
