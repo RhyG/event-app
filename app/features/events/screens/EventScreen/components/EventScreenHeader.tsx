@@ -26,6 +26,7 @@ function PhotoCountView({ count }: { count: number }) {
 }
 
 // TODO: Add a nice little blur on the bottom of the header
+// TODO: Show a nice illustration saying to add photos if no photos or preview photo.
 export function EventScreenHeader({ previewImage, photoCount }: { previewImage: string; photoCount: number }) {
   const { styles } = useThemedStyles(stylesFn);
 

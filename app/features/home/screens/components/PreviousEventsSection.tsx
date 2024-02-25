@@ -61,6 +61,7 @@ export function PreviousEventsSection() {
       {data.map(event => (
         <EventCard key={event.id} {...event} />
       ))}
+      {/* Add a footer here with an illustration saying "That's all for now" or something like that. */}
     </VBox>
   );
 }

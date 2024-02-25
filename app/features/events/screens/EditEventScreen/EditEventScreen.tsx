@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { useEventDetailsQuery } from '@feature/events/api/useEventQuery';
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
@@ -13,12 +12,12 @@ import { VBox } from '@ui/components/layout/Box';
 
 import { DateInput } from '../CreateEventScreen/DateInput';
 import { useEventCreationForm } from '../CreateEventScreen/useEventCreationForm';
-import { usePromptBeforeBack } from './usePromptBeforeBack';
+import { useEditEventDetails } from './useEditEventDetails';
 
 export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName>) {
   const { id } = route.params;
 
-  const { data } = useEventDetailsQuery(id);
+  const { data } = useEditEventDetails(id);
 
   const { submitNewEvent, setDetail } = useEventCreationForm();
 
@@ -27,6 +26,8 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
     return null;
   }
 
+  const { event_name, event_description, event_date, eventIsInPast } = data;
+
   return (
     <WelcomeFlowScreen heading={I18n.t('editEventScreen.heading')}>
       <VBox gap="small">
@@ -34,10 +35,10 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
           label={I18n.t('createEventScreen.nameInputLabel')}
           placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
           onChangeText={value => setDetail('name', value)}
-          defaultValue={data.event_name}
+          defaultValue={event_name}
         />
 
-        <DateInput onChangeDate={value => setDetail('date', value)} defaultDate={data.event_date} />
+        {!eventIsInPast ? <DateInput onChangeDate={value => setDetail('date', value)} defaultDate={event_date} /> : null}
         <InputWithLabel
           label={I18n.t('createEventScreen.descriptionInputLabel')}
           placeholder={I18n.t('createEventScreen.descriptionInputPlaceholder')}
@@ -45,7 +46,7 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
           inputStyle={styles.descriptionInput}
           multiline
           maxLength={120}
-          defaultValue={data.event_description ?? ''}
+          defaultValue={event_description ?? ''}
         />
 
         <PasswordInput onChangeText={value => setDetail('password', value)} optional />

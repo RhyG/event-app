@@ -27,7 +27,7 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
   const { data: previewImage } = useEventPreviewImageQuery({ photoURL: preview_url!, enabled: !!preview_url });
 
   return (
-    <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(EventScreenName, { id, name: event_name })}>
+    <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(EventScreenName, { id, name: event_name })} key={id}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={previewImage?.signedUrl ?? defaultImage} contentFit="cover" transition={1000} placeholder={blurhash} />
       </View>
