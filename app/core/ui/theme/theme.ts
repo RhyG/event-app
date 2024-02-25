@@ -13,6 +13,9 @@ const colours = {
   secondaryBackground: palette.grey['50'],
 
   borderColour: palette.grey['200'],
+
+  black: palette.black,
+  white: palette.white,
 } as const;
 
 export const theme = {
