@@ -3,8 +3,6 @@ import { Image } from 'expo-image';
 import { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
-
 import { PhotoAPI } from '@feature/photo-management/api/PhotoAPI';
 
 import { formatTimestamp } from '@core/lib/date';
@@ -14,6 +12,7 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
+import { EventScreenName } from '../screens/EventScreen/EventScreen';
 import { Event } from '../types';
 
 const blurhash =
@@ -48,7 +47,7 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
   const previewImage = useEventPreviewImage(preview_url);
 
   return (
-    <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(Screens.EventScreen, { id, name: event_name })}>
+    <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(EventScreenName, { id, name: event_name })}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={previewImage ?? defaultImage} contentFit="cover" transition={1000} placeholder={blurhash} />
       </View>

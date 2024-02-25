@@ -4,12 +4,12 @@ import { Image } from 'expo-image';
 import I18n from 'i18n-js';
 import { Platform, StyleSheet, View } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
 import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
+import { JoinEventScreenName } from '@feature/events';
 
 import { Button } from '@ui/components/Button';
 import { Text } from '@ui/components/Text';
@@ -17,7 +17,10 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
+import { EmailLoginScreenName } from '../EmailLoginScreen/EmailLoginScreen';
+import { EmailSignUpScreenName } from '../EmailSignUpScreen/EmailSignUpScreen';
+
+export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenName>) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
   const { formMode, toggleFormMode } = useWelcomeFlowContext();
@@ -25,9 +28,9 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
 
   function navigateToEmailAuthScreen() {
     if (showingLogin) {
-      navigation.navigate(Screens.EmailLoginScreen);
+      navigation.navigate(EmailLoginScreenName);
     } else {
-      navigation.navigate(Screens.EmailSignUpScreen);
+      navigation.navigate(EmailSignUpScreenName);
     }
   }
 
@@ -68,7 +71,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<'WelcomeScreen'>) {
         <View style={styles.divider} />
       </HBox>
 
-      <Button onPress={() => navigation.navigate(Screens.JoinEventScreen)} label={I18n.t('common.joinEvent')} />
+      <Button onPress={() => navigation.navigate(JoinEventScreenName)} label={I18n.t('common.joinEvent')} />
     </WelcomeFlowScreen>
   );
 }
@@ -85,4 +88,4 @@ const stylesFn = (theme: Theme) =>
     },
   });
 
-WelcomeScreen.screenName = 'WelcomeScreen' as const;
+export const WelcomeScreenName = 'WelcomeScreen' as const;

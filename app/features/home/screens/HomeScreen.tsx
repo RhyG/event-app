@@ -2,8 +2,9 @@ import { Feather } from '@expo/vector-icons';
 import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
+
+import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
 
 import { Button } from '@ui/components/Button';
 import { Screen } from '@ui/components/Screen';
@@ -41,8 +42,8 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   return (
     <Screen style={{ flex: 1 }}>
       <HBox mv="base" gap="small">
-        <JoinEventButton onPress={() => navigation.navigate(Screens.JoinEventScreen)} />
-        <CreateEventButton onPress={() => navigation.navigate(Screens.CreateEventScreen)} />
+        <JoinEventButton onPress={() => navigation.navigate(JoinEventScreenName)} />
+        <CreateEventButton onPress={() => navigation.navigate(CreateEventScreenName)} />
       </HBox>
 
       <UpcomingEventsSection />
@@ -59,4 +60,4 @@ function stylesFn() {
   });
 }
 
-HomeScreen.screenName = 'HomeScreen' as const;
+export const HomeScreenName = 'HomeScreen' as const;

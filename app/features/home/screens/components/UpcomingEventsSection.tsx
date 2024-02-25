@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, ListRenderItem, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
-
 import { useUpcomingEventsQuery } from '@feature/events/api/useUserEventsQuery';
+import { EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
 import { Event } from '@feature/events/types';
 
 import { formatTimestamp } from '@core/lib/date';
@@ -26,7 +25,7 @@ function ListItem({ eventName, eventDate, eventId }: { eventName: string; eventD
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.listItem} onPress={() => navigation.navigate(Screens.EventScreen, { name: eventName, id: eventId })}>
+    <TouchableOpacity style={styles.listItem} onPress={() => navigation.navigate(EventScreenName, { name: eventName, id: eventId })}>
       <Text>{eventName}</Text>
       <Text size="xs" colour={theme.colours.textSecondary}>
         {formatTimestamp(eventDate)}

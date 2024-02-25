@@ -2,10 +2,9 @@ import { useNavigation } from '@react-navigation/native';
 import I18n from 'i18n-js';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
-
 import { usePreviousEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { EventCard } from '@feature/events/components/EventCard';
+import { AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import { Event } from '@feature/events/types';
 
 import { Text } from '@ui/components/Text';
@@ -52,7 +51,7 @@ export function PreviousEventsSection() {
           {I18n.t('homeScreen.previousEvents')} ({mergedData?.length ?? 0})
         </Text>
 
-        <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(Screens.AllEventsScreen)}>
+        <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(AllEventsScreenName)}>
           <Text colour={colours.sky['700']} size="xxs">
             {I18n.t('homeScreen.seeAll').toUpperCase()}
           </Text>

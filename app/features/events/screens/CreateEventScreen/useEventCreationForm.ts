@@ -1,14 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import { useRef } from 'react';
 
-import { Screens } from '@app/navigation/screens';
-
 import { prepareEventData } from '@feature/events/services/EventService';
 import { useUserContext } from '@feature/user';
 
 import { queryClient } from '@core/providers/QueryClientProvider';
 
 import { EventsAPI } from '../../api/EventsAPI';
+import { EventScreenName } from '../EventScreen/EventScreen';
 
 interface FormFields {
   name: string | null;
@@ -52,7 +51,7 @@ export function useEventCreationForm() {
 
       queryClient.refetchQueries({ queryKey: ['events'], type: 'active', exact: true });
 
-      navigation.navigate(Screens.EventScreen, { id: data.id, name: data.event_name, shouldPreventBack: true });
+      navigation.navigate(EventScreenName, { id: data.id, name: data.event_name, shouldPreventBack: true });
     } catch (error) {
       console.log(error);
     }

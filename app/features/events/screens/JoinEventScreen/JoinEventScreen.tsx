@@ -1,7 +1,6 @@
 import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { PasswordInput } from '@feature/auth/components/PasswordInput';
@@ -41,7 +40,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
         <Text align="center" colour={theme.colours.textSubdued}>
           {I18n.t('joinEventScreen.scanQrCode')}
         </Text>
-        <Button preset="secondary" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} label={I18n.t('joinEventScreen.openCamera')} />
+        <Button preset="secondary" onPress={() => navigation.navigate('QRCodeScannerScreen')} label={I18n.t('joinEventScreen.openCamera')} />
       </VBox>
     </WelcomeFlowScreen>
   );
@@ -54,4 +53,4 @@ const stylesFn = (theme: Theme) =>
     },
   });
 
-JoinEventScreen.screenName = 'JoinEventScreen' as const;
+export const JoinEventScreenName = 'JoinEventScreen' as const;

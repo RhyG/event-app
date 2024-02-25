@@ -33,4 +33,4 @@ export function AllEventsScreen() {
   );
 }
 
-AllEventsScreen.screenName = 'AllEventsScreen' as const;
+export const AllEventsScreenName = 'AllEventsScreen' as const;

@@ -13,4 +13,4 @@ export function AccountScreen() {
   );
 }
 
-AccountScreen.screenName = 'AccountScreen' as const;
+export const AccountScreenName = 'AccountScreen' as const;

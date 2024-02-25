@@ -1,10 +1,18 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import type { ConfirmPhotosScreenParams } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
-import type { EditEventScreenParams } from '@feature/events/screens/EditEventScreen/EditEventScreen';
-import type { EventScreenParams } from '@feature/events/screens/EventScreen/EventScreen';
-import type { PhotoCarouselScreenParams } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
+import { EmailSignUpScreenName, WelcomeScreenName } from '@feature/auth';
+import { EmailLoginScreenName } from '@feature/auth/screens/EmailLoginScreen/EmailLoginScreen';
+import { ResetPasswordScreenName } from '@feature/auth/screens/ResetPasswordScreen/ResetPasswordScreen';
+import { CreateEventScreenName } from '@feature/events';
+import { AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
+import type { ConfirmPhotosScreenName, ConfirmPhotosScreenParams } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
+import type { EditEventScreenName, EditEventScreenParams } from '@feature/events/screens/EditEventScreen/EditEventScreen';
+import type { EventScreenName, EventScreenParams } from '@feature/events/screens/EventScreen/EventScreen';
+import { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/JoinEventScreen';
+import type { PhotoCarouselScreenName, PhotoCarouselScreenParams } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
+import { HomeScreenName } from '@feature/home/screens/HomeScreen';
+import { AccountScreenName } from '@feature/user';
 
 export type TabParamList = {
   HomeTab: NavigatorScreenParams<Record<string, never>>;
@@ -17,22 +25,22 @@ export type RootStackParamList = {
 
   // Auth Screens
   WelcomeNavigator: undefined;
-  WelcomeScreen: undefined;
-  EmailLoginScreen: undefined;
-  EmailSignUpScreen: undefined;
-  ResetPasswordScreen: undefined;
+  [WelcomeScreenName]: undefined;
+  [EmailLoginScreenName]: undefined;
+  [EmailSignUpScreenName]: undefined;
+  [ResetPasswordScreenName]: undefined;
 
-  AccountScreen: undefined;
+  [AccountScreenName]: undefined;
 
   // App Screens
-  HomeScreen: undefined;
-  JoinEventScreen: undefined;
-  CreateEventScreen: undefined;
-  EventScreen: EventScreenParams;
-  AllEventsScreen: undefined;
-  ConfirmPhotosScreen: ConfirmPhotosScreenParams;
-  EditEventScreen: EditEventScreenParams;
-  PhotoCarouselScreen: PhotoCarouselScreenParams;
+  [HomeScreenName]: undefined;
+  [JoinEventScreenName]: undefined;
+  [CreateEventScreenName]: undefined;
+  [EventScreenName]: EventScreenParams;
+  [AllEventsScreenName]: undefined;
+  [ConfirmPhotosScreenName]: ConfirmPhotosScreenParams;
+  [EditEventScreenName]: EditEventScreenParams;
+  [PhotoCarouselScreenName]: PhotoCarouselScreenParams;
 
   QRCodeScannerScreen: undefined;
 };

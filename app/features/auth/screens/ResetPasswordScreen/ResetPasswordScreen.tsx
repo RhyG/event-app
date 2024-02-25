@@ -6,7 +6,7 @@ import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 
-export function ResetPasswordScreen({ navigation }: ScreenProp<'ResetPasswordScreen'>) {
+export function ResetPasswordScreen({ navigation }: ScreenProp<typeof ResetPasswordScreenName>) {
   return (
     <WelcomeFlowScreen heading="Reset Password">
       <VBox gap="small">
@@ -17,4 +17,4 @@ export function ResetPasswordScreen({ navigation }: ScreenProp<'ResetPasswordScr
   );
 }
 
-ResetPasswordScreen.screenName = 'ResetPasswordScreen' as const;
+export const ResetPasswordScreenName = 'ResetPasswordScreen' as const;

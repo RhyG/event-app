@@ -3,18 +3,17 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { WelcomeNavigator } from '@feature/auth/navigation/WelcomeNavigator';
-import { CreateEventScreen, JoinEventScreen } from '@feature/events';
-import { AllEventsScreen } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
-import { ConfirmPhotosScreen } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
-import { EditEventScreen } from '@feature/events/screens/EditEventScreen/EditEventScreen';
-import { EventScreen } from '@feature/events/screens/EventScreen/EventScreen';
-import { PhotoCarouselScreen } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
-import { HomeScreen } from '@feature/home/screens/HomeScreen';
-import { AccountScreen, useIsLoggedIn } from '@feature/user';
+import { CreateEventScreen, CreateEventScreenName, JoinEventScreen, JoinEventScreenName } from '@feature/events';
+import { AllEventsScreen, AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
+import { ConfirmPhotosScreen, ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
+import { EditEventScreen, EditEventScreenName } from '@feature/events/screens/EditEventScreen/EditEventScreen';
+import { EventScreen, EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
+import { PhotoCarouselScreen, PhotoCarouselScreenName } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
+import { HomeScreen, HomeScreenName } from '@feature/home/screens/HomeScreen';
+import { AccountScreen, AccountScreenName, useIsLoggedIn } from '@feature/user';
 
 import { TabBarIcon } from './TabBarIcon';
 import { TabBarLabel } from './TabBarLabel';
-import { Screens } from './screens';
 import { RootStackParamList, TabParamList } from './types';
 
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -22,15 +21,15 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 function HomeTabStack() {
   return (
-    <RootStack.Navigator initialRouteName={Screens.HomeScreen} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
-      <RootStack.Screen name={Screens.HomeScreen} component={HomeScreen} />
-      <RootStack.Screen name={Screens.AllEventsScreen} component={AllEventsScreen} />
-      <RootStack.Screen name={Screens.JoinEventScreen} component={JoinEventScreen} options={{ title: 'Join Event' }} />
-      <RootStack.Screen name={Screens.EventScreen} component={EventScreen} />
-      <RootStack.Screen name={Screens.ConfirmPhotosScreen} component={ConfirmPhotosScreen} />
-      <RootStack.Screen name={Screens.EditEventScreen} component={EditEventScreen} />
+    <RootStack.Navigator initialRouteName={HomeScreenName} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
+      <RootStack.Screen name={HomeScreenName} component={HomeScreen} />
+      <RootStack.Screen name={AllEventsScreenName} component={AllEventsScreen} />
+      <RootStack.Screen name={JoinEventScreenName} component={JoinEventScreen} options={{ title: 'Join Event' }} />
+      <RootStack.Screen name={EventScreenName} component={EventScreen} />
+      <RootStack.Screen name={ConfirmPhotosScreenName} component={ConfirmPhotosScreen} />
+      <RootStack.Screen name={EditEventScreenName} component={EditEventScreen} />
       <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}>
-        <RootStack.Screen name={Screens.PhotoCarouselScreen} component={PhotoCarouselScreen} />
+        <RootStack.Screen name={PhotoCarouselScreenName} component={PhotoCarouselScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
   );
@@ -38,8 +37,8 @@ function HomeTabStack() {
 
 function AccountTabStack() {
   return (
-    <RootStack.Navigator initialRouteName={Screens.AccountScreen}>
-      <RootStack.Screen name={Screens.AccountScreen} component={AccountScreen} />
+    <RootStack.Navigator initialRouteName={AccountScreenName}>
+      <RootStack.Screen name={AccountScreenName} component={AccountScreen} />
     </RootStack.Navigator>
   );
 }
@@ -75,25 +74,25 @@ export function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator id="RootStack" initialRouteName={Screens.TabNavigator} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
+      <RootStack.Navigator id="RootStack" initialRouteName="TabNavigator" screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
         {isLoggedIn ? (
           <>
             {/* Event creation screens - render above tabs */}
             <RootStack.Group>
-              <RootStack.Screen name={Screens.CreateEventScreen} component={CreateEventScreen} options={{ title: 'Create Event' }} />
+              <RootStack.Screen name={CreateEventScreenName} component={CreateEventScreen} options={{ title: 'Create Event' }} />
             </RootStack.Group>
 
-            <RootStack.Screen name={Screens.TabNavigator} component={TabNavigator} options={{ headerShown: false }} />
+            <RootStack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
           </>
         ) : (
           <>
-            <RootStack.Screen name={Screens.WelcomeNavigator} component={WelcomeNavigator} options={{ headerShown: false }} />
+            <RootStack.Screen name={WelcomeNavigatorName} component={WelcomeNavigator} options={{ headerShown: false }} />
 
             {/* Users should be able to join and view events without being authenticated. */}
-            <RootStack.Screen name={Screens.JoinEventScreen} component={JoinEventScreen} options={{ title: 'Join Event' }} />
-            <RootStack.Screen name={Screens.EventScreen} component={EventScreen} />
+            <RootStack.Screen name={JoinEventScreenName} component={JoinEventScreen} options={{ title: 'Join Event' }} />
+            <RootStack.Screen name={EventScreenName} component={EventScreen} />
             <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}>
-              <RootStack.Screen name={Screens.PhotoCarouselScreen} component={PhotoCarouselScreen} />
+              <RootStack.Screen name={PhotoCarouselScreenName} component={PhotoCarouselScreen} />
             </RootStack.Group>
           </>
         )}

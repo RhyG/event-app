@@ -8,5 +8,5 @@ export function EditEventScreen() {
   );
 }
 
-EditEventScreen.screenName = 'EditEventScreen' as const;
+export const EditEventScreenName = 'EditEventScreen' as const;
 export type EditEventScreenParams = { id: string; name: string; shouldPreventBack?: boolean };

@@ -44,4 +44,4 @@ const stylesFn = (theme: Theme) =>
     },
   });
 
-EmailSignUpScreen.screenName = 'EmailSignUpScreen' as const;
+export const EmailSignUpScreenName = 'EmailSignUpScreen' as const;

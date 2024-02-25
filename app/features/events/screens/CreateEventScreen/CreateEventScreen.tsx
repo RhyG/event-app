@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-CreateEventScreen.screenName = 'CreateEventScreen' as const;
+export const CreateEventScreenName = 'CreateEventScreen' as const;

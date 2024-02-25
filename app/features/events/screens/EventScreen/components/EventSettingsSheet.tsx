@@ -6,8 +6,6 @@ import I18n from 'i18n-js';
 import { ReactNode, useCallback, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
-import { Screens } from '@app/navigation/screens';
-
 import { copyEventAccessCode, copyEventInvite } from '@feature/events/services/EventService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
@@ -16,6 +14,8 @@ import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
+
+import { EditEventScreenName } from '../../EditEventScreen/EditEventScreen';
 
 const SNAP_POINTS = ['25%', '35%'];
 
@@ -66,7 +66,7 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
 
   function navigateToEditEventScreen() {
     closeSheet();
-    navigation.navigate(Screens.EditEventScreen, { id: eventId });
+    navigation.navigate(EditEventScreenName, { id: eventId });
   }
 
   return (

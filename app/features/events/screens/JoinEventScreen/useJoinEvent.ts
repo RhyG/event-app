@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { useRef, useState } from 'react';
 
-import { Screens } from '@app/navigation/screens';
-
 import { EventsAPI } from '@feature/events/api/EventsAPI';
+
+import { EventScreenName } from '../EventScreen/EventScreen';
 
 interface FormValues {
   code: string;
@@ -21,7 +21,7 @@ export function useJoinEvent() {
   });
 
   function navigateToEvent(id: string, name: string) {
-    navigation.navigate(Screens.EventScreen, { id, name, shouldPreventBack: true });
+    navigation.navigate(EventScreenName, { id, name, shouldPreventBack: true });
   }
 
   function handleFormChange(key: keyof typeof formValues.current, value: string) {

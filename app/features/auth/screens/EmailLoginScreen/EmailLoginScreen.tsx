@@ -1,6 +1,5 @@
 import I18n from 'i18n-js';
 
-import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { PasswordInput } from '@feature/auth/components/PasswordInput';
@@ -12,9 +11,10 @@ import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 import { useSafeAreaInsetsStyle } from '@ui/hooks/useSafeAreaInsetsStyle';
 
+import { ResetPasswordScreenName } from '../ResetPasswordScreen/ResetPasswordScreen';
 import { useCreateAccountPress, useEmailLogin } from './EmailLoginScreen.hooks';
 
-export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>) {
+export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScreenName>) {
   const { changeDetails, login } = useEmailLogin();
 
   const onCreateAccountPress = useCreateAccountPress();
@@ -38,7 +38,7 @@ export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>)
       </VBox>
       {/* TODO: Work out why marginTop: auto isn't working here */}
       <VBox style={{ marginTop: 300 }}>
-        <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(Screens.ResetPasswordScreen)} />
+        <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(ResetPasswordScreenName)} />
 
         <ButtonWithLoading loading={false} onPress={login} label={I18n.t('emailLoginScreen.signIn')} />
       </VBox>
@@ -46,4 +46,4 @@ export function EmailLoginScreen({ navigation }: ScreenProp<'EmailLoginScreen'>)
   );
 }
 
-EmailLoginScreen.screenName = 'EmailLoginScreen' as const;
+export const EmailLoginScreenName = 'EmailLoginScreen' as const;

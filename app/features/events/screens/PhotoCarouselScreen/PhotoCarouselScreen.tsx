@@ -78,7 +78,7 @@ const renderItem: ListRenderItem<string> = ({ item }) => {
   return <Photo path={item} />;
 };
 
-export function PhotoCarouselScreen({ route, navigation }: ScreenProp<'PhotoCarouselScreen'>) {
+export function PhotoCarouselScreen({ route, navigation }: ScreenProp<typeof PhotoCarouselScreenName>) {
   const { initialIndex, eventId } = route.params;
 
   const shouldRender = useRenderAfterInteractions();
@@ -120,5 +120,5 @@ export function PhotoCarouselScreen({ route, navigation }: ScreenProp<'PhotoCaro
   );
 }
 
-PhotoCarouselScreen.screenName = 'PhotoCarouselScreen' as const;
+export const PhotoCarouselScreenName = 'PhotoCarouselScreen' as const;
 export type PhotoCarouselScreenParams = { initialIndex: number; eventId: string };

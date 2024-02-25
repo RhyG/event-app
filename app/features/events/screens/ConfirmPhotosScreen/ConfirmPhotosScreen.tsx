@@ -15,7 +15,7 @@ import { Text } from '@ui/components/Text';
 import { Gallery } from '../../components/Gallery';
 import { useUploadPhotos } from './useUploadPhotos';
 
-export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<'ConfirmPhotosScreen'>) {
+export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof ConfirmPhotosScreenName>) {
   const { photos, eventId } = route.params;
   const numberOfPhotos = photos.length;
 
@@ -77,5 +77,5 @@ function LoadingCover() {
   );
 }
 
-ConfirmPhotosScreen.screenName = 'ConfirmPhotosScreen' as const;
+export const ConfirmPhotosScreenName = 'ConfirmPhotosScreen' as const;
 export type ConfirmPhotosScreenParams = { photos: Array<PhotoFile>; eventId: string };

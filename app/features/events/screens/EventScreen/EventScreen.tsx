@@ -1,4 +1,3 @@
-import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
 import { useEventDetailsQuery, useEventPhotosQuery } from '@feature/events/api/useEventQuery';
@@ -10,12 +9,14 @@ import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
 import { Gallery } from '../../components/Gallery';
+import { ConfirmPhotosScreenName } from '../ConfirmPhotosScreen/ConfirmPhotosScreen';
+import { PhotoCarouselScreenName } from '../PhotoCarouselScreen/PhotoCarouselScreen';
 import { AddPhotosFAB } from './components/AddPhotosFAB';
 import { EventSettingsSheet } from './components/EventSettingsSheet';
 import { useImagePicker } from './useImagePicker';
 import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
 
-export function EventScreen(props: ScreenProp<'EventScreen'>) {
+export function EventScreen(props: ScreenProp<typeof EventScreenName>) {
   const { name, shouldPreventBack } = props.route.params;
 
   // When coming straight from creating an event the user should not be able to go back.
@@ -29,20 +30,20 @@ export function EventScreen(props: ScreenProp<'EventScreen'>) {
   return shouldRender ? <_EventScreen {...props} /> : null;
 }
 
-export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
+export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScreenName>) {
   const { id } = route.params;
 
   usePopulatePhotoURLs(id);
 
   const { pickImages } = useImagePicker({
-    onSuccess: photos => navigation.navigate(Screens.ConfirmPhotosScreen, { photos, eventId: id }),
+    onSuccess: photos => navigation.navigate(ConfirmPhotosScreenName, { photos, eventId: id }),
   });
 
   const { data: event, isLoading, isError } = useEventDetailsQuery(id);
   const { data: photos = [] } = useEventPhotosQuery(id);
 
   function onImagePress(index: number) {
-    navigation.navigate(Screens.PhotoCarouselScreen, { initialIndex: index, eventId: id });
+    navigation.navigate(PhotoCarouselScreenName, { initialIndex: index, eventId: id });
   }
 
   if (isLoading) {
@@ -68,5 +69,5 @@ export function _EventScreen({ route, navigation }: ScreenProp<'EventScreen'>) {
   );
 }
 
-EventScreen.screenName = 'EventScreen' as const;
+export const EventScreenName = 'EventScreen' as const;
 export type EventScreenParams = { id: string; name: string; shouldPreventBack?: boolean };
