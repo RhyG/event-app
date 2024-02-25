@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { PasswordInput } from '@feature/auth/components/PasswordInput';
-import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
+import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
+import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';

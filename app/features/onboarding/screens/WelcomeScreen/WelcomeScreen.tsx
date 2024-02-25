@@ -6,10 +6,10 @@ import { Platform, StyleSheet, View } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
-import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
-import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
 import { JoinEventScreenName } from '@feature/events';
+import { TwoPartPressableText } from '@feature/onboarding/components/TwoPartPressableText';
+import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
+import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 
 import { Button } from '@ui/components/Button';
 import { Text } from '@ui/components/Text';

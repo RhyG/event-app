@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { WelcomeNavigator } from '@feature/auth/navigation/WelcomeNavigator';
 import { CreateEventScreen, CreateEventScreenName, JoinEventScreen, JoinEventScreenName } from '@feature/events';
 import { AllEventsScreen, AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import { ConfirmPhotosScreen, ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
@@ -10,6 +9,7 @@ import { EditEventScreen, EditEventScreenName } from '@feature/events/screens/Ed
 import { EventScreen, EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
 import { PhotoCarouselScreen, PhotoCarouselScreenName } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
 import { HomeScreen, HomeScreenName } from '@feature/home/screens/HomeScreen';
+import { WelcomeNavigator } from '@feature/onboarding/navigation/WelcomeNavigator';
 import { AccountScreen, AccountScreenName, useIsLoggedIn } from '@feature/user';
 
 import { TabBarIcon } from './TabBarIcon';

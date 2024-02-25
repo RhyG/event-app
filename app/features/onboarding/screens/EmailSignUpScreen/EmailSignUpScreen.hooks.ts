@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 
 import { AuthAPI } from '@feature/auth/api/AuthAPI';
-import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
+import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 import { useSetUser } from '@feature/user';
 
 import { useEmailForm } from '../../hooks/useEmailForm';

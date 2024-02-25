@@ -1,9 +1,9 @@
 import I18n from 'i18n-js';
 import { StyleSheet, View } from 'react-native';
 
-import { PasswordInput } from '@feature/auth/components/PasswordInput';
-import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
-import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
+import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
+import { TwoPartPressableText } from '@feature/onboarding/components/TwoPartPressableText';
+import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';

@@ -1,2 +1,2 @@
-export * from './screens/WelcomeScreen/WelcomeScreen';
-export * from './screens/EmailSignUpScreen/EmailSignUpScreen';
+export * from '../onboarding/screens/WelcomeScreen/WelcomeScreen';
+export * from '../onboarding/screens/EmailSignUpScreen/EmailSignUpScreen';

@@ -1,8 +1,8 @@
 import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
-import { PasswordInput } from '@feature/auth/components/PasswordInput';
-import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
+import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
+import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';

@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 
-import { useWelcomeFlowContext } from '@feature/auth/context/WelcomeFlowContext';
-import { useEmailForm } from '@feature/auth/hooks/useEmailForm';
+import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
+import { useEmailForm } from '@feature/onboarding/hooks/useEmailForm';
 
-import { useLogin } from '../../hooks/useLogin';
+import { useLogin } from '../../../auth/hooks/useLogin';
 
 export function useCreateAccountPress() {
   const navigation = useNavigation();

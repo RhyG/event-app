@@ -1,7 +1,7 @@
 import { ScreenProp } from '@app/navigation/types';
 
-import { TwoPartPressableText } from '@feature/auth/components/TwoPartPressableText';
-import { WelcomeFlowScreen } from '@feature/auth/components/WelcomeFlowScreen';
+import { TwoPartPressableText } from '@feature/onboarding/components/TwoPartPressableText';
+import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
