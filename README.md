@@ -120,7 +120,7 @@ Right now, there isn't any. All state is async and managed by Tanstack Query. Zu
 
 Like any app this uses `react-navigation`, I considered Expo Router but new things are scary and I dunno if I love file based routing all that much, plus I have no plans for web support.
 
-Managing app navigation in a clean and scalable way is hard, and navigation types are a cunnavathing to get right. I've tried some new things to try and get it as clean and easy to reason about as possible, they are:
+Managing app navigation in a clean and scalable way is hard, and navigation types are a cunnavathing to get right. I've tried some new things to attempt to get it as clean and easy to reason about as possible, they are:
 
 - Letting screen files own all information about a screen, including name and param types. In all other RN projects I've worked on, the screen names are string literals (not awful with intellisense but I've had to refactor them enough to want to avoid them), the param types then live in a separate navigation types file, and then the screen is implemented into the navigator. To avoid this I've done the following:
   - Declared the screen, screen name and param types in the screen file itself. A screen file will export the screen, a const asserted screen name e.g. `const EventDetailsScreenName = "EventDetailsScreen" as const;` and the param types e.g. `type EventDetailsScreenParams = { eventId: string };`. This means that the screen file is the single source of truth for all this information.
@@ -187,8 +187,8 @@ There's also a few re-usable components, but the main ones worth mentioning are:
 ```tsx
 function Component() {
   return (
-    <VBox gap="base">
-      <HBox padding="sm" justifyContent="center" alignItems="center" gap="small">
+    <VBox gap="base" pv="medium">
+      <HBox p="sm" justifyContent="center" alignItems="center" gap="small">
         <Text>Some text</Text>
         <Text>Some more text</Text>
       </HBox>
@@ -209,10 +209,11 @@ No tests are written yet, but the approach will be:
 - Integration test screens. The goal is to avoid redundant test, and test as a user would use the app. This means:
   - Not testing components, hooks etc used only by a screen as these are covered by the screen test.
   - Only testing components, hooks etc used by multiple screens.
+  - User centric assertions. E.g. "Should show a toast message when the submit button is pressed" and not "Should call the submit function and update state" or "Should render correctly".
 - Test API and service files.
 - E2E happy path test features.
 
-Testing stack will be:
+Testing is:
 
 - Jest + RNTL for unit and integration tests.
 - Maestro for E2E.
