@@ -71,6 +71,12 @@ const getSpacingStyle = (spacingKey: Spacing, property: string) => {
       return {};
   }
 };
+/**
+ * I had created a base Box component, then built HBox and VBox on that just passing the flexDirection to determine which to render,
+ * but in a profiling test done by rendering 1000 VBox components render time was around ~20% slower than what I've done here.
+ * This might be due to the additional layer of React component resolution, but honestly not sure the exact cause.
+ * All I know is this approach with its small amount of duped code is faster and so I'm going with it.
+ */
 
 export function HBox({ children, flex, justifyContent, alignItems, gap, style, ...rest }: BoxProps) {
   const spacingStyles = Object.keys(rest).map(key => getSpacingStyle(rest[key as MarginAndPaddingKey], key));
