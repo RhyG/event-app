@@ -24,7 +24,8 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
 
   const { styles, theme } = useThemedStyles(stylesFn);
 
-  const { data: previewImage } = useEventPreviewImageQuery({ photoURL: preview_url!, enabled: !!preview_url });
+  const { data } = useEventPreviewImageQuery({ photoURL: preview_url!, enabled: !!preview_url });
+  const previewImage = { signedUrl: data };
 
   return (
     <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(EventScreenName, { id, name: event_name })} key={id}>

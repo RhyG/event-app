@@ -15,7 +15,7 @@ export function decodeFromBase64(base64Image: string) {
  */
 export async function uploadPhoto(eventId: string, file: string) {
   const start = performance.now();
-  console.log('Uploading');
+  console.log('Saving initial details');
   try {
     const savedPhoto = await PhotoAPI.savePhotoDetails(eventId);
     console.log('Saved');
@@ -33,16 +33,21 @@ export async function uploadPhoto(eventId: string, file: string) {
 
     console.log('Uploading');
     const { data, error } = await PhotoAPI.uploadPhoto({ eventId, photoId: savedPhoto.id, file: toSave });
-    console.log('Uploaded');
 
-    if (error) throw error;
+    if (error) {
+      console.log('Upload error', error);
+      throw error;
+    }
+
+    console.log('Uploaded');
 
     void PhotoAPI.savePhotoStorageURL(data.path, savedPhoto.id);
 
     const end = performance.now();
     console.log('Finished upload in', `${end - start}ms`);
 
-    return await PhotoAPI.getSignedUrlForEventPhoto(data.path, { height: 200 });
+    const test = await PhotoAPI.getSignedUrlForEventPhoto(data.path, { height: 200 });
+    return test;
   } catch (error) {
     console.log('Error uploading photo:', error);
     throw error;
@@ -71,7 +76,10 @@ export async function uploadPhotos(eventId: string, files: PhotoFile[]) {
 export async function getPhoto(url: string) {
   try {
     const data = await PhotoAPI.getSignedUrlForEventPhoto(url);
-    return data.signedUrl;
+
+    // Temporary because I keep maxing out free tier for Supabase storage egress limits in dev.
+    return getRandomPlaceholderPhoto();
+    // return data.signedUrl;
   } catch (error) {
     console.log(`Error getting photo for ${url}:`, error);
     return;
@@ -86,9 +94,35 @@ export async function getPhoto(url: string) {
 export async function getEventPhotos(eventId: string): Promise<string[]> {
   const eventPhotos = await PhotoAPI.getPhotosForEvent(eventId);
 
-  const promises = eventPhotos.map(photo => PhotoAPI.getSignedUrlForEventPhoto(photo.storage_url, { height: 200 }));
+  // const promises = eventPhotos.map(photo => PhotoAPI.getSignedUrlForEventPhoto(photo.storage_url, { height: 200 }));
 
-  const photos = (await Promise.allSettled(promises)).filter((photo): photo is PromiseFulfilledResult<{ signedUrl: string }> => photo.status === 'fulfilled');
+  // const photos = (await Promise.allSettled(promises)).filter((photo): photo is PromiseFulfilledResult<{ signedUrl: string }> => photo.status === 'fulfilled');
 
-  return photos.map(photo => photo.value.signedUrl);
+  return getEightRandomPhotos();
+  // return photos.map(photo => photo.value.signedUrl);
 }
+
+function getEightRandomPhotos() {
+  let randomPhotos = [];
+  for (let i = 0; i < 8; i++) {
+    randomPhotos.push(getRandomPlaceholderPhoto());
+  }
+  return randomPhotos;
+}
+
+function getRandomPlaceholderPhoto(): string {
+  const randomIndex = Math.floor(Math.random() * placeholder_photos.length);
+  return placeholder_photos[randomIndex]!;
+}
+
+const placeholder_photos = [
+  'https://plus.unsplash.com/premium_photo-1666184130709-f3709060899a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1586105449897-20b5efeb3233?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1523301343968-6a6ebf63c672?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1682681906306-357b0ec8bc06?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1543168256-8133cc8e3ee4?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1682295740507-305c16980a02?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1687826541778-3f2bf4c03bc3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+];

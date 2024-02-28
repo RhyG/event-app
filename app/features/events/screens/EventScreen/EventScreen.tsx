@@ -57,10 +57,11 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
   const { data: event, isLoading, isError } = useEventDetailsQuery(id);
   const { data: photos = [] } = useEventPhotosQuery(id);
 
-  const { data: previewImage } = useEventPreviewImageQuery({
+  const { data } = useEventPreviewImageQuery({
     photoURL: event?.preview_url ?? '',
     enabled: !!event,
   });
+  const previewImage = { signedUrl: data };
 
   function onImagePress(index: number) {
     navigation.navigate(PhotoCarouselScreenName, { initialIndex: index, eventId: id });
