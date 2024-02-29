@@ -6,6 +6,10 @@ import { QueryClientProvider } from '@app/core/providers/QueryClientProvider';
 
 import { UserProvider } from '@feature/user/context/UserContext';
 
+import { ToastProvider } from '@core/providers/ToastProvider';
+
+import { ErrorToast } from '@ui/components/Toast';
+
 import './app/i18n/i18n';
 import { AppNavigator } from './app/navigation/AppNavigator';
 
@@ -13,13 +17,16 @@ export default function App() {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <BottomSheetModalProvider>
-          <QueryClientProvider>
-            <UserProvider>
-              <AppNavigator />
-            </UserProvider>
-          </QueryClientProvider>
-        </BottomSheetModalProvider>
+        <ToastProvider>
+          <BottomSheetModalProvider>
+            <QueryClientProvider>
+              <UserProvider>
+                <AppNavigator />
+                <ErrorToast />
+              </UserProvider>
+            </QueryClientProvider>
+          </BottomSheetModalProvider>
+        </ToastProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );
