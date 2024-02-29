@@ -89,16 +89,12 @@ export function PhotoCarouselScreen({ route, navigation }: ScreenProp<typeof Pho
     headerShown: false,
   });
 
-  console.log('Got photo paths:', photoPaths?.filter(Boolean).length ?? 0);
-
   return (
     <>
       <View
         style={{
           width: Dimensions.get('screen').width,
           backgroundColor: 'black',
-          // borderWidth: 1,
-          // borderColor: 'red',
         }}>
         {shouldRender ? (
           <FlatList

@@ -40,16 +40,12 @@ export function PreviousEventsSection() {
 
   const { data } = usePreviousEventsQuery();
 
-  const mergedData = [...(data ?? []), ...placeholders];
-
   if (!data) return null;
 
   return (
     <VBox>
       <HBox justifyContent="space-between" alignItems="center" mb="small">
-        <Text preset="subheading">
-          {I18n.t('homeScreen.previousEvents')} ({mergedData?.length ?? 0})
-        </Text>
+        <Text preset="subheading">{I18n.t('homeScreen.previousEvents')}</Text>
 
         <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate(AllEventsScreenName)}>
           <Text colour={colours.sky['700']} size="xxs">

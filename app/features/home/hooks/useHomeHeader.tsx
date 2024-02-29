@@ -15,7 +15,7 @@ function NotificationIcon() {
   return (
     <>
       <TouchableOpacity style={styles.notificationIconContainer}>
-        <Feather name="bell" size={18} color={theme.colours.textPrimary} />
+        <Feather name="bell" size={18} color={theme.icon.primaryColour} />
       </TouchableOpacity>
       {hasNotifications ? <View style={styles.notificationIndicator} /> : null}
     </>
@@ -40,10 +40,18 @@ const stylesFn = (theme: Theme) =>
   StyleSheet.create({
     notificationIconContainer: {
       borderRadius: 50,
-      borderColor: theme.colours.palette.sky['100'],
+      borderColor: theme.colours.borderColour,
       borderWidth: 1,
       padding: 8,
       ...theme.layout.fullyCentred,
     },
-    notificationIndicator: { position: 'absolute', backgroundColor: 'red', bottom: 20, left: 18, height: 8, width: 8, borderRadius: 8 },
+    notificationIndicator: {
+      position: 'absolute',
+      backgroundColor: theme.colours.palette.red['500'],
+      bottom: 20,
+      left: 18,
+      height: 8,
+      width: 8,
+      borderRadius: 8,
+    },
   });

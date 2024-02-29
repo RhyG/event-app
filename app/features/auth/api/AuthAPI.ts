@@ -7,7 +7,7 @@ export const AuthAPI = {
       password,
     });
 
-    console.log(data);
+    // console.log(data, error);
 
     if (error) {
       throw error;

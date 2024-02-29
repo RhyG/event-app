@@ -14,7 +14,7 @@ function formatDate(date: Date): string {
 
 // Date input styled to look like the regular text input component (almost bang on but can't be stuffed at the moment)
 // TODO: Be stuffed to get it ridgy didge
-export function DateInput({ defaultDate, onChangeDate }: { defaultDate: string; onChangeDate: (date: Date) => void }) {
+export function DateInput({ defaultDate, onChangeDate }: { defaultDate?: string; onChangeDate: (date: Date) => void }) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
   const [date, setDate] = useState<Date | undefined>(() => (defaultDate ? new Date(defaultDate) : undefined));

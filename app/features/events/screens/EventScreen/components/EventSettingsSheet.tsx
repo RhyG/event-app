@@ -1,12 +1,13 @@
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
+import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
 import I18n from 'i18n-js';
 import { ReactNode, useCallback, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 
-import { copyEventAccessCode, copyEventInvite } from '@feature/events/services/EventService';
+import { getEventInvite } from '@feature/events/services/EventService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -16,6 +17,15 @@ import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { EditEventScreenName } from '../../EditEventScreen/EditEventScreen';
+
+export function copyEventInvite(eventName: string, eventAccessCode: string) {
+  const invite = getEventInvite(eventName, eventAccessCode);
+  Clipboard.setString(invite);
+}
+
+export function copyEventAccessCode(eventAccessCode: string) {
+  Clipboard.setString(eventAccessCode);
+}
 
 const SNAP_POINTS = ['25%', '35%'];
 

@@ -25,7 +25,7 @@ export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
     <Screen backgroundColor={theme.colours.secondaryBackground} preset="fixed" style={styles.container}>
       <View style={{ marginBottom: !!subheading ? theme.spacing.large : 0 }}>
         {/* TODO: Add a big ol app logo or some sort of illustration here to make it POP */}
-        <Text preset="heading" align="center" style={styles.heading}>
+        <Text preset="heading" align="center" style={styles.heading} numberOfLines={2}>
           {heading}
         </Text>
         {!!subheading && (

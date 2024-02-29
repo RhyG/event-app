@@ -11,4 +11,6 @@ export interface Event {
   preview_url: string | null;
 }
 
+export type EventById = Pick<Event, 'event_date' | 'id' | 'event_description' | 'event_name' | 'host_id' | 'access_code' | 'preview_url'>;
+
 export type NewEvent = Pick<Event, 'event_date' | 'event_description' | 'event_name' | 'host_id' | 'is_private' | 'password'>;

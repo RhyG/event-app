@@ -7,9 +7,7 @@ export const en = {
   },
   createEventScreen: {
     heading: 'Create an Event',
-    nameInputLabel: 'Name',
     nameInputPlaceholder: 'Enter event name',
-    descriptionInputLabel: 'Description (optional)',
     descriptionInputPlaceholder: 'Enter event description',
     createEvent: 'Create Event',
   },
@@ -23,5 +21,11 @@ export const en = {
   },
   editEventScreen: {
     heading: 'Edit Event',
+    updateButton: 'Update Event Details',
+  },
+  eventCommon: {
+    name: 'Name',
+    date: 'Date',
+    description: 'Description (optional)',
   },
 } as const;
