@@ -11,7 +11,7 @@ import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 
 import { DateInput } from '../CreateEventScreen/DateInput';
-import { useEventCreationForm } from '../CreateEventScreen/useEventCreationForm';
+import { useEditEventForm } from './EditEventScreen.hooks';
 import { useEditEventDetails } from './useEditEventDetails';
 
 export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName>) {
@@ -19,39 +19,40 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
 
   const { data } = useEditEventDetails(id);
 
-  const { submitNewEvent, setDetail } = useEventCreationForm();
+  // TODO: Narrow in hook, but we can safely assume data is defined.
+  const { setDetail, updateEvent } = useEditEventForm(data!, id);
 
   if (!data) {
-    console.log('No data found for event with id: ', id);
     return null;
   }
 
   const { event_name, event_description, event_date, eventIsInPast } = data;
 
   return (
-    <WelcomeFlowScreen heading={I18n.t('editEventScreen.heading')}>
+    <WelcomeFlowScreen heading={'Edit ' + data.event_name}>
       <VBox gap="small">
         <InputWithLabel
-          label={I18n.t('createEventScreen.nameInputLabel')}
+          label={I18n.t('eventCommon.name')}
           placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
-          onChangeText={value => setDetail('name', value)}
+          onChangeText={value => setDetail('event_name', value)}
           defaultValue={event_name}
         />
 
-        {!eventIsInPast ? <DateInput onChangeDate={value => setDetail('date', value)} defaultDate={event_date} /> : null}
+        {!eventIsInPast ? <DateInput onChangeDate={value => setDetail('event_date', value)} defaultDate={event_date} /> : null}
         <InputWithLabel
-          label={I18n.t('createEventScreen.descriptionInputLabel')}
+          label={I18n.t('eventCommon.description')}
           placeholder={I18n.t('createEventScreen.descriptionInputPlaceholder')}
-          onChangeText={value => setDetail('description', value)}
+          onChangeText={value => setDetail('event_description', value)}
           inputStyle={styles.descriptionInput}
           multiline
           maxLength={120}
           defaultValue={event_description ?? ''}
         />
 
-        <PasswordInput onChangeText={value => setDetail('password', value)} optional />
+        {/* TODO: Allow for changing event passwords - probably post V1 */}
+        {/* <PasswordInput onChangeText={value => setDetail('password', value)} optional /> */}
 
-        <Button onPress={submitNewEvent} label={I18n.t('createEventScreen.createEvent')} />
+        <Button onPress={updateEvent} label={I18n.t('editEventScreen.updateButton')} />
       </VBox>
     </WelcomeFlowScreen>
   );
@@ -64,3 +65,4 @@ const styles = StyleSheet.create({
 });
 
 export const EditEventScreenName = 'EditEventScreen' as const;
+export type EditEventScreenParams = { id: string };

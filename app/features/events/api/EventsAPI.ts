@@ -2,9 +2,7 @@ import { FunctionsHttpError } from '@supabase/supabase-js';
 
 import { supabase } from '@core/lib/supabase';
 
-import { Event, NewEvent } from '../types';
-
-type EventById = Pick<Event, 'event_date' | 'id' | 'event_description' | 'event_name' | 'host_id' | 'access_code' | 'preview_url'>;
+import { Event, EventById, NewEvent } from '../types';
 
 export const EventsAPI = {
   async getJoinDetails(code: string): Promise<Pick<Event, 'id' | 'is_private' | 'event_name'> | null> {
@@ -61,5 +59,14 @@ export const EventsAPI = {
     if (error) throw error;
 
     return data[0] as EventById;
+  },
+  async updateEventDetails(eventId: string, updatedData: Partial<Event>) {
+    const { data, error } = await supabase.from('Events').update(updatedData).eq('id', eventId).select('id,event_name,event_description,event_date');
+
+    console.log(`Result for ${eventId}`, data, error);
+
+    if (error) throw error;
+
+    return data;
   },
 };
