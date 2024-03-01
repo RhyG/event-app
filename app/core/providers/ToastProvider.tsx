@@ -1,12 +1,14 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
+export type ToastType = 'INFO' | 'ERROR' | 'SUCCESS';
 interface Toast {
   message: string;
+  type: ToastType;
 }
 
 export type ToastContextType = {
   toast: Toast | undefined;
-  showToast: (message: string) => void;
+  showToast: ({ message, type }: { message: string; type: ToastType }) => void;
   hideToast: () => void;
 };
 
@@ -19,8 +21,8 @@ const ToastContext = createContext<ToastContextType>({
 export function ToastProvider({ children }: PropsWithChildren<{}>) {
   const [currentToast, setCurrentToast] = useState<Toast | undefined>();
 
-  function showToast(message: string) {
-    setCurrentToast({ message });
+  function showToast({ message, type }: { message: string; type: ToastType }) {
+    setCurrentToast({ message, type });
   }
 
   function hideToast() {

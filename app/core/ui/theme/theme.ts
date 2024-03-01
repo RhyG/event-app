@@ -16,6 +16,9 @@ const colours = {
 
   black: palette.black,
   white: palette.white,
+
+  angry: palette.red['500'],
+  success: palette.green['500'],
 } as const;
 
 export const theme = {
