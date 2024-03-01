@@ -18,14 +18,14 @@ export function CreateEventScreen() {
     <WelcomeFlowScreen heading={I18n.t('createEventScreen.heading')}>
       <VBox gap="small">
         <InputWithLabel
-          label={I18n.t('createEventScreen.nameInputLabel')}
+          label={I18n.t('eventCommon.name')}
           placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
           onChangeText={value => setDetail('name', value)}
         />
 
         <DateInput onChangeDate={value => setDetail('date', value)} />
         <InputWithLabel
-          label={I18n.t('createEventScreen.descriptionInputLabel')}
+          label={I18n.t('eventCommon.description')}
           placeholder={I18n.t('createEventScreen.descriptionInputPlaceholder')}
           onChangeText={value => setDetail('description', value)}
           inputStyle={styles.descriptionInput}
