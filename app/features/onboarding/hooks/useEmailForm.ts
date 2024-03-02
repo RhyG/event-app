@@ -20,8 +20,7 @@ export function useEmailForm() {
   }
 
   return {
-    email: details.current.email,
-    password: details.current.password,
     changeDetails,
+    getFormValues: () => details.current,
   };
 }

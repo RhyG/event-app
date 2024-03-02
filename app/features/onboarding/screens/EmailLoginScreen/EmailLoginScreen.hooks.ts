@@ -18,11 +18,13 @@ export function useCreateAccountPress() {
 }
 
 export function useEmailLogin() {
-  const { email, password, changeDetails } = useEmailForm();
+  const { changeDetails, getFormValues } = useEmailForm();
 
   const loginUser = useLogin();
 
   function login() {
+    const { email, password } = getFormValues();
+
     if (email.length === 0 || password.length === 0) {
       return;
     }

@@ -10,10 +10,11 @@ export function useEmailSignUp() {
   const navigation = useNavigation();
   const setUser = useSetUser();
 
-  const { changeDetails, email, password } = useEmailForm();
+  const { changeDetails, getFormValues } = useEmailForm();
 
   async function createUser() {
     try {
+      const { email, password } = getFormValues();
       const data = await AuthAPI.createAccount(email, password);
 
       if (data) {
