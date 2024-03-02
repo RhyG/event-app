@@ -1,49 +1,46 @@
 import { ListRenderItem, MasonryFlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import { useCallback } from 'react';
-import { TouchableOpacity, useWindowDimensions } from 'react-native';
+import { StyleProp, TouchableOpacity, View, ViewStyle, useWindowDimensions } from 'react-native';
 
 // TODO: Move to generating hash and saving with image in DB.
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+
+const GAP = 5;
+const NUM_OF_COLUMNS = 3;
 
 type ImageSize = {
   width: number;
   height: number;
 };
 
-// Calculates the size of the image based on the viewport width so that they render evenly sized and spaced.
 function calculateImageSize(viewportWidth: number): ImageSize {
-  const gap = 13;
-  const totalHorizontalGaps = 4;
-
-  const width = (viewportWidth - gap * totalHorizontalGaps) / 3;
-
-  const height = width;
-
-  return { width, height };
+  const width = (viewportWidth - GAP) / NUM_OF_COLUMNS;
+  return { width, height: width }; // Ensuring the image is square
 }
 
 function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress: (index: number) => void; index: number }) {
   const { width: windowWidth } = useWindowDimensions();
-  const { height, width } = calculateImageSize(windowWidth);
+
+  // 30 is the sum of the horizontal padding + gap between columns, needs adjusting if the parent container has different padding.
+  // There's probably a better way to do this but I'm shit as fuck at maths.
+  const availableSpace = windowWidth - 30;
+
+  const { width, height } = calculateImageSize(availableSpace);
+
+  const containerStyle = {
+    width,
+    height,
+    marginBottom: GAP,
+    borderRadius: 5,
+  } as StyleProp<ViewStyle>;
 
   return (
-    <TouchableOpacity onPress={() => onImagePress(index)}>
-      <Image
-        style={{ width, height, marginBottom: 6, borderRadius: 8 }}
-        source={{
-          uri,
-        }}
-        transition={200}
-        placeholder={blurhash}
-      />
+    <TouchableOpacity onPress={() => onImagePress(index)} style={containerStyle}>
+      <Image style={{ width: '100%', height: '100%', borderRadius: 5 }} source={{ uri }} transition={200} placeholder={blurhash} />
     </TouchableOpacity>
   );
-}
-
-function overrideItemLayout() {
-  return { height: 115, width: 115 };
 }
 
 export function Gallery({ photos, onImagePress }: { photos: Array<string>; onImagePress: (index: number) => void }) {
@@ -52,15 +49,22 @@ export function Gallery({ photos, onImagePress }: { photos: Array<string>; onIma
   }, []);
 
   return (
-    <MasonryFlashList
-      data={photos ?? dummy_images}
-      numColumns={3}
-      renderItem={renderItem}
-      estimatedItemSize={110}
-      optimizeItemArrangement
-      overrideItemLayout={overrideItemLayout}
-    />
+    <View style={{ height: '100%' }}>
+      {/* This parent view is arbitrary but suppresses the "FlashList's rendered size is not usable" warning */}
+      <MasonryFlashList
+        data={photos ?? []}
+        numColumns={NUM_OF_COLUMNS}
+        renderItem={renderItem}
+        estimatedItemSize={110}
+        optimizeItemArrangement
+        overrideItemLayout={overrideItemLayout}
+      />
+    </View>
   );
+}
+
+function overrideItemLayout() {
+  return { height: 115, width: 115 };
 }
 
 const dummy_images = [

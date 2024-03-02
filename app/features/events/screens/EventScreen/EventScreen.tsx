@@ -92,7 +92,6 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
 
             <Feather name="share-2" size={24} color={theme.icon.primaryColour} />
           </HBox>
-
           <Gallery photos={photos} onImagePress={onImagePress} />
         </VBox>
       </ScrollView>
