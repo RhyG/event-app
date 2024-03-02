@@ -1,5 +1,4 @@
 import I18n from 'i18n-js';
-import { StyleSheet, View } from 'react-native';
 
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { TwoPartPressableText } from '@feature/onboarding/components/TwoPartPressableText';
@@ -7,21 +6,18 @@ import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScr
 
 import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
-import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
+import { VBox } from '@ui/components/layout/Box';
 
 import { useEmailSignUp, useSignUpPress } from './EmailSignUpScreen.hooks';
 
 export function EmailSignUpScreen() {
-  const { styles } = useThemedStyles(stylesFn);
-
   const { changeDetails, createUser } = useEmailSignUp();
 
   const onSignInPress = useSignUpPress();
 
   return (
     <WelcomeFlowScreen heading={I18n.t('emailSignUpScreen.heading')}>
-      <View style={styles.container}>
+      <VBox gap="small">
         <InputWithLabel
           placeholder={I18n.t('emailSignUpScreen.emailInputPlaceholder')}
           label={I18n.t('emailSignUpScreen.emailInputLabel')}
@@ -32,16 +28,9 @@ export function EmailSignUpScreen() {
         <TwoPartPressableText texts={['Have an account already?', 'Sign in']} onPress={onSignInPress} />
 
         <Button onPress={createUser} label={I18n.t('emailSignUpScreen.createAccount')} />
-      </View>
+      </VBox>
     </WelcomeFlowScreen>
   );
 }
-
-const stylesFn = (theme: Theme) =>
-  StyleSheet.create({
-    container: {
-      gap: theme.spacing.small,
-    },
-  });
 
 export const EmailSignUpScreenName = 'EmailSignUpScreen' as const;
