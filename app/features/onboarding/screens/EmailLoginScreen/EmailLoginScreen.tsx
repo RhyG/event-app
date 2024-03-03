@@ -1,4 +1,5 @@
 import I18n from 'i18n-js';
+import { Controller } from 'react-hook-form';
 
 import { ScreenProp } from '@app/navigation/types';
 
@@ -12,27 +13,53 @@ import { VBox } from '@ui/components/layout/Box';
 import { useSafeAreaInsetsStyle } from '@ui/hooks/useSafeAreaInsetsStyle';
 
 import { ResetPasswordScreenName } from '../ResetPasswordScreen/ResetPasswordScreen';
-import { useCreateAccountPress, useEmailLogin } from './EmailLoginScreen.hooks';
+import { useCreateAccountPress, useEmailLoginForm } from './EmailLoginScreen.hooks';
 
 export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScreenName>) {
-  const { changeDetails, login } = useEmailLogin();
+  const {
+    control,
+    submitLogin,
+    formState: { errors },
+  } = useEmailLoginForm();
 
   const onCreateAccountPress = useCreateAccountPress();
 
   // Bit ugly, but ensures content is above bottom bar and satisfies the arithmetic type requirements.
-  const insets = useSafeAreaInsetsStyle(['bottom']);
-  const paddingBottom = ((insets?.paddingBottom as number) ?? 0) * 1.8;
+  // const insets = useSafeAreaInsetsStyle(['bottom']);
+  // const paddingBottom = ((insets?.paddingBottom as number) ?? 0) * 1.8;
 
   return (
     <WelcomeFlowScreen heading={I18n.t('emailLoginScreen.heading')}>
       <VBox gap="small" style={{ marginBottom: 'auto' }}>
-        <InputWithLabel
-          placeholder={I18n.t('emailLoginScreen.emailInputPlaceholder')}
-          label={I18n.t('emailLoginScreen.emailInputLabel')}
-          onChangeText={value => changeDetails('email', value)}
-          autoCapitalize="none"
+        <Controller
+          control={control}
+          rules={{
+            required: 'Email is required',
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputWithLabel
+              placeholder={I18n.t('emailLoginScreen.emailInputPlaceholder')}
+              label={I18n.t('emailLoginScreen.emailInputLabel')}
+              onChangeText={onChange}
+              autoCapitalize="none"
+              onBlur={onBlur}
+              value={value}
+              error={errors.email?.message}
+            />
+          )}
+          name="email"
         />
-        <PasswordInput onChangeText={value => changeDetails('password', value)} />
+
+        <Controller
+          control={control}
+          rules={{
+            required: 'Password is required',
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <PasswordInput onBlur={onBlur} onChangeText={onChange} value={value} error={errors.password?.message} />
+          )}
+          name="password"
+        />
 
         <TwoPartPressableText texts={['New here?', 'Create an account']} onPress={onCreateAccountPress} />
       </VBox>
@@ -40,7 +67,7 @@ export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScr
       <VBox style={{ marginTop: 300 }}>
         <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(ResetPasswordScreenName)} />
 
-        <ButtonWithLoading loading={false} onPress={login} label={I18n.t('emailLoginScreen.signIn')} />
+        <ButtonWithLoading loading={false} onPress={submitLogin} label={I18n.t('emailLoginScreen.signIn')} />
       </VBox>
     </WelcomeFlowScreen>
   );

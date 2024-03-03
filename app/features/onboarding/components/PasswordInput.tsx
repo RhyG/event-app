@@ -7,20 +7,20 @@ import { useToggle } from '@core/hooks/useToggle';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { theme } from '@ui/theme';
 
-interface Props {
+type Props = {
   onChangeText: ComponentProps<typeof InputWithLabel>['onChangeText'];
   optional?: boolean;
-}
+} & Partial<ComponentProps<typeof InputWithLabel>>;
 
-export function PasswordInput({ onChangeText, optional, ...props }: Props) {
+export function PasswordInput({ onChangeText, optional, label, placeholder, ...props }: Props) {
   const [hidden, toggleHidden] = useToggle(true);
 
   return (
     <InputWithLabel
       {...props}
       onChangeText={onChangeText}
-      placeholder="Enter password"
-      label={`Password${optional ? ' (optional)' : ''}`}
+      placeholder={placeholder ?? 'Enter password'}
+      label={label ?? `Password${optional ? ' (optional)' : ''}`}
       secureTextEntry={hidden}
       autoCapitalize="none"
       RightAccessory={() => (

@@ -3,7 +3,7 @@
  */
 export const spacing = {
   micro: 2,
-  tiny: 4,
+  tiny: 5,
   extraSmall: 8,
   small: 10,
   medium: 14,

@@ -1,9 +1,10 @@
+import { useLogin } from '@features/auth/hooks/useLogin';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
-import { useEmailForm } from '@feature/onboarding/hooks/useEmailForm';
-
-import { useLogin } from '../../../auth/hooks/useLogin';
+import { EmailAuthSchema } from '@feature/onboarding/models/models';
 
 export function useCreateAccountPress() {
   const navigation = useNavigation();
@@ -17,20 +18,19 @@ export function useCreateAccountPress() {
   return onCreateAccountPress;
 }
 
-export function useEmailLogin() {
-  const { changeDetails, getFormValues } = useEmailForm();
+type EmailLoginFieldData = {
+  email: string;
+  password: string;
+};
+
+export function useEmailLoginForm() {
+  const { handleSubmit, ...rest } = useForm<EmailLoginFieldData>({
+    resolver: zodResolver(EmailAuthSchema),
+  });
 
   const loginUser = useLogin();
 
-  function login() {
-    const { email, password } = getFormValues();
+  const submitLogin = handleSubmit(loginUser);
 
-    if (email.length === 0 || password.length === 0) {
-      return;
-    }
-
-    loginUser(email, password);
-  }
-
-  return { changeDetails, login };
+  return { submitLogin, ...rest };
 }
