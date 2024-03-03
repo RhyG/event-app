@@ -18,12 +18,12 @@ import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { EditEventScreenName } from '../../EditEventScreen/EditEventScreen';
 
-export function copyEventInvite(eventName: string, eventAccessCode: string) {
+function copyEventInvite(eventName: string, eventAccessCode: string) {
   const invite = getEventInvite(eventName, eventAccessCode);
   Clipboard.setString(invite);
 }
 
-export function copyEventAccessCode(eventAccessCode: string) {
+function copyEventAccessCode(eventAccessCode: string) {
   Clipboard.setString(eventAccessCode);
 }
 

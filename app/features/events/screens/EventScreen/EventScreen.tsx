@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import { HeaderBackButton } from '@react-navigation/elements';
 import { BlurView } from 'expo-blur';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -22,6 +21,7 @@ import { PhotoCarouselScreenName } from '../PhotoCarouselScreen/PhotoCarouselScr
 import { AddPhotosFAB } from './components/AddPhotosFAB';
 import { EventScreenHeader } from './components/EventScreenHeader';
 import { EventSettingsSheet } from './components/EventSettingsSheet';
+import { ShareButton } from './components/ShareButton';
 import { useImagePicker } from './useImagePicker';
 import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
 
@@ -90,7 +90,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
               {!!event.event_description ? <Text>{event.event_description}</Text> : null}
             </VBox>
 
-            <Feather name="share-2" size={24} color={theme.icon.primaryColour} />
+            <ShareButton eventAccessCode={event.access_code} eventName={event.event_name} />
           </HBox>
           <Gallery photos={photos} onImagePress={onImagePress} />
         </VBox>
