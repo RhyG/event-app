@@ -1,20 +1,30 @@
 import { Feather } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import { useToastContext } from '@core/providers/ToastProvider';
 
-import { Theme } from '@ui/theme';
+import { theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { Text } from './Text';
+import { HBox } from './layout/Box';
 
-const iconName = {
-  ERROR: 'alert-circle',
-  SUCCESS: 'check',
-  INFO: 'info',
-} as const;
+const TOAST_DURATION = 3000;
+
+function ToastIcon({ type }: { type: 'ERROR' | 'SUCCESS' | 'INFO' }) {
+  if (type === 'ERROR') {
+    return <Feather name="alert-circle" size={20} color={theme.colours.angry} />;
+  }
+
+  if (type === 'SUCCESS') {
+    return <Octicons name="check-circle" size={20} color={theme.colours.success} />;
+  }
+
+  return <Feather name="info" size={20} color={theme.colours.palette.blue['400']} />;
+}
 
 export function Toast() {
   const { styles, theme } = useThemedStyles(styleFn);
@@ -24,7 +34,7 @@ export function Toast() {
 
   const style = useAnimatedStyle(() => {
     return {
-      bottom: withTiming(isVisible ? 100 : -100, {
+      bottom: withTiming(isVisible ? 80 : -100, {
         duration: 500,
         easing: Easing.bezier(0.25, 0.1, 0.25, 1),
       }),
@@ -37,7 +47,7 @@ export function Toast() {
         setIsVisible(true);
         timeout.current = setTimeout(() => {
           setIsVisible(false);
-        }, 3500);
+        }, TOAST_DURATION);
       }
     },
     [toast],
@@ -76,32 +86,36 @@ export function Toast() {
   })();
 
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.outerContainer}>
-      <Animated.View style={[style, styles.innerContainer, { backgroundColor: toastBackground }]}>
-        <Feather name={iconName[toast?.type ?? 'INFO']} size={20} color={theme.colours.white} />
-        <Text colour={theme.colours.white}>{toast?.message}</Text>
+    <Pressable onPress={handlePress} style={styles.outerContainer}>
+      <Animated.View style={[style, styles.innerContainer, { backgroundColor: 'white' }]}>
+        <View style={[styles.bar, { backgroundColor: toastBackground }]} />
+        <HBox pl="small" pr="base" pv="small" alignItems="center" gap="small">
+          <ToastIcon type={toast?.type ?? 'INFO'} />
+          {/* <Feather name={iconName[toast?.type ?? 'INFO']} /> */}
+          <Text preset="formLabel">{toast?.message}</Text>
+        </HBox>
       </Animated.View>
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 
-const styleFn = (theme: Theme) =>
+const styleFn = () =>
   StyleSheet.create({
     outerContainer: {
       position: 'absolute',
       bottom: 0,
-      width: Dimensions.get('window').width * 0.8,
       alignSelf: 'center',
       alignItems: 'center',
       zIndex: 1,
+      height: 60,
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.2,
+      shadowRadius: 6,
     },
     innerContainer: {
-      paddingHorizontal: theme.spacing.base,
-      paddingVertical: theme.spacing.small,
-      borderRadius: 12,
+      borderRadius: 8,
       flexDirection: 'row',
-      gap: theme.spacing.small,
-      alignItems: 'center',
-      justifyContent: 'center',
+      overflow: 'hidden',
     },
+    bar: { height: '100%', width: 5 },
   });
