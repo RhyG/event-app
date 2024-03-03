@@ -75,7 +75,7 @@ export async function uploadPhotos(eventId: string, files: PhotoFile[]) {
  */
 export async function getPhoto(url: string) {
   try {
-    const data = await PhotoAPI.getSignedUrlForEventPhoto(url);
+    // const data = await PhotoAPI.getSignedUrlForEventPhoto(url);
 
     // Temporary because I keep maxing out free tier for Supabase storage egress limits in dev.
     return getRandomPlaceholderPhoto();
@@ -104,7 +104,7 @@ export async function getEventPhotos(eventId: string): Promise<string[]> {
 
 function getEightRandomPhotos() {
   let randomPhotos = [];
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 11; i++) {
     randomPhotos.push(getRandomPlaceholderPhoto());
   }
   return randomPhotos;

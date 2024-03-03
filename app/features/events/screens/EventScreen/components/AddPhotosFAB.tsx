@@ -49,7 +49,7 @@ const stylesFn = (theme: Theme) =>
       zIndex: 0,
     },
     buttonContainer: {
-      backgroundColor: theme.colours.palette.green['400'],
+      backgroundColor: theme.colours.success,
       height: 40,
       width: 40,
       borderRadius: 40,

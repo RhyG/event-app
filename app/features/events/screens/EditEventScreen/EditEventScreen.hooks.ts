@@ -6,9 +6,13 @@ import { EventsAPI } from '@feature/events/api/EventsAPI';
 import { eventDetailsQueryKey } from '@feature/events/api/query-keys';
 import { Event } from '@feature/events/types';
 
+import { useToastContext } from '@core/providers/ToastProvider';
+
 export function useEditEventForm(currentDetails: Pick<Event, 'event_name' | 'event_description' | 'event_date'>, eventId: string) {
   const navigation = useNavigation();
   const queryClient = useQueryClient();
+
+  const { showToast } = useToastContext();
 
   const details = useRef<typeof currentDetails>(currentDetails);
 
@@ -24,7 +28,8 @@ export function useEditEventForm(currentDetails: Pick<Event, 'event_name' | 'eve
 
       queryClient.invalidateQueries({ queryKey: eventDetailsQueryKey(eventId) });
 
-      // TODO: Show success toast here.
+      showToast({ type: 'SUCCESS', message: 'Event updated successfully' });
+
       navigation.goBack();
     } catch (error) {
       console.log(error);

@@ -6,8 +6,6 @@ import { ScreenProp } from '@app/navigation/types';
 
 import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
 
-import { useToastContext } from '@core/providers/ToastProvider';
-
 import { Button } from '@ui/components/Button';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
@@ -31,10 +29,8 @@ function JoinEventButton({ onPress }: { onPress: () => void }) {
 function CreateEventButton({ onPress }: { onPress: () => void }) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
-  const { showToast } = useToastContext();
-
   return (
-    <Button onPress={() => showToast('OOPS')} style={styles.eventActionButton} LeftAccessory={() => <Feather name="plus" size={18} color="white" />}>
+    <Button onPress={onPress} style={styles.eventActionButton} LeftAccessory={() => <Feather name="plus" size={18} color="white" />}>
       <Text colour={theme.colours.palette.white}>{I18n.t('homeScreen.createEvent')}</Text>
     </Button>
   );
