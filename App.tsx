@@ -8,7 +8,7 @@ import { UserProvider } from '@feature/user/context/UserContext';
 
 import { ToastProvider } from '@core/providers/ToastProvider';
 
-import { ErrorToast } from '@ui/components/Toast';
+import { Toast } from '@ui/components/Toast';
 
 import './app/i18n/i18n';
 import { AppNavigator } from './app/navigation/AppNavigator';
@@ -22,7 +22,7 @@ export default function App() {
             <QueryClientProvider>
               <UserProvider>
                 <AppNavigator />
-                <ErrorToast />
+                <Toast />
               </UserProvider>
             </QueryClientProvider>
           </BottomSheetModalProvider>
