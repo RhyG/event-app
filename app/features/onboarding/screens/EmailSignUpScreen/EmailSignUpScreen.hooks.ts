@@ -26,7 +26,6 @@ export function useEmailSignUp() {
 
   async function createUser({ email, password }: { email: string; password: string }) {
     try {
-      throw new Error();
       const data = await AuthAPI.createAccount(email, password);
 
       if (data) {
