@@ -11,7 +11,7 @@ export function ResetPasswordScreen({ navigation }: ScreenProp<typeof ResetPassw
     <WelcomeFlowScreen heading="Reset Password">
       <VBox gap="small">
         <InputWithLabel label="Email" placeholder="Enter your email" />
-        <TwoPartPressableText texts={['Know your password', 'Sign in']} onPress={() => navigation.goBack()} />
+        <TwoPartPressableText texts={['Know your password?', 'Sign in']} onPress={() => navigation.goBack()} />
       </VBox>
     </WelcomeFlowScreen>
   );
