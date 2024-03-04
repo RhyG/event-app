@@ -19,6 +19,9 @@ const ToastContext = createContext<ToastContextType>({
 });
 
 export function ToastProvider({ children }: PropsWithChildren<{}>) {
+  {
+    /* This will trigger high in the tree remounts so fix that */
+  }
   const [currentToast, setCurrentToast] = useState<Toast | undefined>();
 
   function showToast({ message, type }: { message: string; type: ToastType }) {

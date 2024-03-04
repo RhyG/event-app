@@ -1,33 +1,70 @@
 import I18n from 'i18n-js';
+import { Controller } from 'react-hook-form';
 
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { TwoPartPressableText } from '@feature/onboarding/components/TwoPartPressableText';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
-import { Button } from '@ui/components/Button';
+import { ButtonWithLoading } from '@ui/components/ButtonWithLoading';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 
 import { useEmailSignUp, useSignUpPress } from './EmailSignUpScreen.hooks';
 
 export function EmailSignUpScreen() {
-  const { changeDetails, createUser } = useEmailSignUp();
+  const {
+    submitSignup,
+    formState: { errors },
+    control,
+  } = useEmailSignUp();
 
   const onSignInPress = useSignUpPress();
 
   return (
     <WelcomeFlowScreen heading={I18n.t('emailSignUpScreen.heading')}>
-      <VBox gap="small">
-        <InputWithLabel
-          placeholder={I18n.t('emailSignUpScreen.emailInputPlaceholder')}
-          label={I18n.t('emailSignUpScreen.emailInputLabel')}
-          onChangeText={value => changeDetails('email', value)}
+      <VBox gap="base">
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputWithLabel
+              placeholder={I18n.t('emailLoginScreen.emailInputPlaceholder')}
+              label={I18n.t('emailLoginScreen.emailInputLabel')}
+              onChangeText={onChange}
+              autoCapitalize="none"
+              onBlur={onBlur}
+              value={value}
+              error={errors.email?.message}
+            />
+          )}
+          name="email"
         />
-        <PasswordInput onChangeText={value => changeDetails('password', value)} />
+
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <PasswordInput onBlur={onBlur} onChangeText={onChange} value={value} error={errors.password?.message} />
+          )}
+          name="password"
+        />
+
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <PasswordInput
+              label="Confirm password"
+              placeholder="Confirm password"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              error={errors.confirmPassword?.message}
+            />
+          )}
+          name="confirmPassword"
+        />
 
         <TwoPartPressableText texts={['Have an account already?', 'Sign in']} onPress={onSignInPress} />
 
-        <Button onPress={createUser} label={I18n.t('emailSignUpScreen.createAccount')} />
+        <ButtonWithLoading loading={false} onPress={submitSignup} label={I18n.t('emailSignUpScreen.createAccount')} />
       </VBox>
     </WelcomeFlowScreen>
   );

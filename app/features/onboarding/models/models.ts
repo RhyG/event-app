@@ -1,11 +1,10 @@
-import { ZodType, z } from 'zod';
+import { z } from 'zod';
 
-interface EmailAuthData {
-  email: string;
-  password: string;
-}
-
-export const EmailAuthSchema: ZodType<EmailAuthData> = z.object({
+export const EmailAuthSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
+
+export const EmailSignupSchema = EmailAuthSchema.extend({
+  confirmPassword: z.string(),
+}).refine(data => data.password === data.confirmPassword, { message: 'Passwords must match', path: ['confirmPassword'] });

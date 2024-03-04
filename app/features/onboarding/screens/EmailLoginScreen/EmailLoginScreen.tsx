@@ -33,9 +33,6 @@ export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScr
       <VBox gap="small" style={{ marginBottom: 'auto' }}>
         <Controller
           control={control}
-          rules={{
-            required: 'Email is required',
-          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <InputWithLabel
               placeholder={I18n.t('emailLoginScreen.emailInputPlaceholder')}
@@ -52,9 +49,6 @@ export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScr
 
         <Controller
           control={control}
-          rules={{
-            required: 'Password is required',
-          }}
           render={({ field: { onChange, onBlur, value } }) => (
             <PasswordInput onBlur={onBlur} onChangeText={onChange} value={value} error={errors.password?.message} />
           )}

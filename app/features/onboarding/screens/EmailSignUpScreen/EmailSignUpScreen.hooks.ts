@@ -1,20 +1,32 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
 
 import { AuthAPI } from '@feature/auth/api/AuthAPI';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
+import { EmailSignupSchema } from '@feature/onboarding/models/models';
 import { useSetUser } from '@feature/user';
 
-import { useEmailForm } from '../../hooks/useEmailForm';
+import { useToastContext } from '@core/providers/ToastProvider';
+
+type EmailSignupFieldData = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 export function useEmailSignUp() {
   const navigation = useNavigation();
   const setUser = useSetUser();
+  const { showToast } = useToastContext();
 
-  const { changeDetails, getFormValues } = useEmailForm();
+  const { handleSubmit, ...rest } = useForm<EmailSignupFieldData>({
+    resolver: zodResolver(EmailSignupSchema),
+  });
 
-  async function createUser() {
+  async function createUser({ email, password }: { email: string; password: string }) {
     try {
-      const { email, password } = getFormValues();
+      throw new Error();
       const data = await AuthAPI.createAccount(email, password);
 
       if (data) {
@@ -22,11 +34,13 @@ export function useEmailSignUp() {
         navigation.navigate('TabNavigator');
       }
     } catch (error) {
-      // TODO: Something with the error
+      showToast({ message: 'Something went wrong', type: 'ERROR' });
     }
   }
 
-  return { changeDetails, createUser };
+  const submitSignup = handleSubmit(createUser);
+
+  return { submitSignup, ...rest };
 }
 
 export function useSignUpPress() {
