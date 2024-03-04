@@ -5,6 +5,7 @@ import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
+import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
@@ -23,7 +24,7 @@ export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
 
   return (
     <Screen backgroundColor={theme.colours.secondaryBackground} preset="fixed" style={styles.container}>
-      <View style={{ marginBottom: !!subheading ? theme.spacing.large : 0 }}>
+      <VBox mb={!!subheading ? 'large' : 0}>
         {/* TODO: Add a big ol app logo or some sort of illustration here to make it POP */}
         <Text preset="heading" align="center" style={styles.heading} numberOfLines={2}>
           {heading}
@@ -33,7 +34,7 @@ export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
             {subheading}
           </Text>
         )}
-      </View>
+      </VBox>
       {children}
     </Screen>
   );
@@ -44,9 +45,6 @@ const stylesFn = (theme: Theme) =>
     container: {
       paddingHorizontal: theme.spacing.large,
       paddingTop: theme.spacing.ginormous * 1.2,
-    },
-    headerContainer: {
-      marginBottom: theme.spacing.large,
     },
     heading: {
       marginBottom: theme.spacing.medium,

@@ -22,7 +22,7 @@ export function EmailSignUpScreen() {
 
   return (
     <WelcomeFlowScreen heading={I18n.t('emailSignUpScreen.heading')}>
-      <VBox gap="base">
+      <VBox gap="small">
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
@@ -63,7 +63,6 @@ export function EmailSignUpScreen() {
         />
 
         <TwoPartPressableText texts={['Have an account already?', 'Sign in']} onPress={onSignInPress} />
-
         <ButtonWithLoading loading={false} onPress={submitSignup} label={I18n.t('emailSignUpScreen.createAccount')} />
       </VBox>
     </WelcomeFlowScreen>

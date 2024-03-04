@@ -3,24 +3,27 @@ import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { Spacing, spacing } from '@ui/theme';
 
+// Allows conditional values e.g. if true then 'small' else 0
+type ValidSpacing = Spacing | 0;
+
 type Margins = {
-  m?: Spacing;
-  mt?: Spacing;
-  mb?: Spacing;
-  ml?: Spacing;
-  mr?: Spacing;
-  mh?: Spacing;
-  mv?: Spacing;
+  m?: ValidSpacing;
+  mt?: ValidSpacing;
+  mb?: ValidSpacing;
+  ml?: ValidSpacing;
+  mr?: ValidSpacing;
+  mh?: ValidSpacing;
+  mv?: ValidSpacing;
 };
 
 type Paddings = {
-  p?: Spacing;
-  pt?: Spacing;
-  pb?: Spacing;
-  pl?: Spacing;
-  pr?: Spacing;
-  ph?: Spacing;
-  pv?: Spacing;
+  p?: ValidSpacing;
+  pt?: ValidSpacing;
+  pb?: ValidSpacing;
+  pl?: ValidSpacing;
+  pr?: ValidSpacing;
+  ph?: ValidSpacing;
+  pv?: ValidSpacing;
 };
 
 type MarginAndPaddingKey = keyof Margins & keyof Paddings;
