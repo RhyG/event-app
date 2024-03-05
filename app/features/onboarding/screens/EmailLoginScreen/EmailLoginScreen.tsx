@@ -30,7 +30,7 @@ export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScr
 
   return (
     <WelcomeFlowScreen heading={I18n.t('emailLoginScreen.heading')}>
-      <VBox gap="small" style={{ marginBottom: 'auto' }}>
+      <VBox gap="medium" style={{ marginBottom: 'auto' }}>
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (

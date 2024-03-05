@@ -15,7 +15,7 @@ import { EventScreenName } from '../EventScreen/EventScreen';
 const CreateEventSchema = z.object({
   name: z.string(),
   date: z.date(),
-  description: z.string().optional(),
+  description: z.string().optional(), // TODO - enforce max length
   password: z.string().optional(),
 });
 

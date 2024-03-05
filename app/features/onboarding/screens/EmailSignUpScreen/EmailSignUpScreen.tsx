@@ -22,7 +22,7 @@ export function EmailSignUpScreen() {
 
   return (
     <WelcomeFlowScreen heading={I18n.t('emailSignUpScreen.heading')}>
-      <VBox gap="small">
+      <VBox gap="medium">
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (

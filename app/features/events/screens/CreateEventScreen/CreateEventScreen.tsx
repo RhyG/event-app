@@ -21,7 +21,7 @@ export function CreateEventScreen() {
 
   return (
     <WelcomeFlowScreen heading={I18n.t('createEventScreen.heading')}>
-      <VBox gap="small">
+      <VBox gap="medium">
         <Controller
           control={control}
           render={({ field: { onChange, onBlur, value } }) => (
@@ -38,7 +38,7 @@ export function CreateEventScreen() {
           name="name"
         />
 
-        <Controller control={control} render={({ field: { onChange } }) => <DateInput onChangeDate={onChange} />} name="date" />
+        <Controller control={control} render={({ field: { onChange } }) => <DateInput onChangeDate={onChange} error={errors.date?.message} />} name="date" />
 
         <Controller
           control={control}
@@ -49,7 +49,7 @@ export function CreateEventScreen() {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
-              error={errors.name?.message}
+              error={errors.description?.message}
               inputStyle={styles.descriptionInput}
               multiline
               maxLength={120}
