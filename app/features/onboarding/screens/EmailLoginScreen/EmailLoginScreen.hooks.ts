@@ -1,9 +1,9 @@
-import { useLogin } from '@features/auth/hooks/useLogin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useLogin } from '@feature/auth/hooks/useLogin';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 
 const EmailLoginSchema = z.object({

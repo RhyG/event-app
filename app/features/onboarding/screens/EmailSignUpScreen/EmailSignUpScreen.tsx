@@ -9,14 +9,14 @@ import { ButtonWithLoading } from '@ui/components/ButtonWithLoading';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 
-import { useEmailSignUp, useSignUpPress } from './EmailSignUpScreen.hooks';
+import { useEmailSignUpForm, useSignUpPress } from './EmailSignUpScreen.hooks';
 
 export function EmailSignUpScreen() {
   const {
     submitSignup,
     formState: { errors },
     control,
-  } = useEmailSignUp();
+  } = useEmailSignUpForm();
 
   const onSignInPress = useSignUpPress();
 

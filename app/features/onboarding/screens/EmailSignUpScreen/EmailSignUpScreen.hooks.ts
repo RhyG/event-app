@@ -9,6 +9,8 @@ import { useSetUser } from '@feature/user';
 
 import { useToastContext } from '@core/providers/ToastProvider';
 
+// Schemas are fine here for now just be conscious of re-use
+// and if shared move to a schema folder for the feature.
 export const EmailSignupSchema = z
   .object({
     email: z.string().email(),
@@ -17,16 +19,18 @@ export const EmailSignupSchema = z
   })
   .refine(data => data.password === data.confirmPassword, { message: 'Passwords must match', path: ['confirmPassword'] });
 
-export function useEmailSignUp() {
+type EmailSignupForm = z.infer<typeof EmailSignupSchema>;
+
+export function useEmailSignUpForm() {
   const navigation = useNavigation();
   const setUser = useSetUser();
   const { showToast } = useToastContext();
 
-  const { handleSubmit, ...rest } = useForm<z.infer<typeof EmailSignupSchema>>({
+  const { handleSubmit, ...rest } = useForm<EmailSignupForm>({
     resolver: zodResolver(EmailSignupSchema),
   });
 
-  async function createUser({ email, password }: { email: string; password: string }) {
+  async function createUser({ email, password }: EmailSignupForm) {
     try {
       const data = await AuthAPI.createAccount(email, password);
 
