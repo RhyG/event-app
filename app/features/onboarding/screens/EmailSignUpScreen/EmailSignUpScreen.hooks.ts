@@ -1,26 +1,28 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { AuthAPI } from '@feature/auth/api/AuthAPI';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
-import { EmailSignupSchema } from '@feature/onboarding/models/models';
 import { useSetUser } from '@feature/user';
 
 import { useToastContext } from '@core/providers/ToastProvider';
 
-type EmailSignupFieldData = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+export const EmailSignupSchema = z
+  .object({
+    email: z.string().email(),
+    password: z.string(),
+    confirmPassword: z.string(),
+  })
+  .refine(data => data.password === data.confirmPassword, { message: 'Passwords must match', path: ['confirmPassword'] });
 
 export function useEmailSignUp() {
   const navigation = useNavigation();
   const setUser = useSetUser();
   const { showToast } = useToastContext();
 
-  const { handleSubmit, ...rest } = useForm<EmailSignupFieldData>({
+  const { handleSubmit, ...rest } = useForm<z.infer<typeof EmailSignupSchema>>({
     resolver: zodResolver(EmailSignupSchema),
   });
 
