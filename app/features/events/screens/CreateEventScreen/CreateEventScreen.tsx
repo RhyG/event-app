@@ -1,4 +1,5 @@
 import I18n from 'i18n-js';
+import { Controller } from 'react-hook-form';
 import { StyleSheet } from 'react-native';
 
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
@@ -12,28 +13,58 @@ import { DateInput } from './DateInput';
 import { useEventCreationForm } from './useEventCreationForm';
 
 export function CreateEventScreen() {
-  const { submitNewEvent, setDetail } = useEventCreationForm();
+  const {
+    submitNewEvent,
+    formState: { errors },
+    control,
+  } = useEventCreationForm();
 
   return (
     <WelcomeFlowScreen heading={I18n.t('createEventScreen.heading')}>
       <VBox gap="small">
-        <InputWithLabel
-          label={I18n.t('eventCommon.name')}
-          placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
-          onChangeText={value => setDetail('name', value)}
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputWithLabel
+              label={I18n.t('eventCommon.name')}
+              placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
+              onChangeText={onChange}
+              autoCapitalize="none"
+              onBlur={onBlur}
+              value={value}
+              error={errors.name?.message}
+            />
+          )}
+          name="name"
         />
 
-        <DateInput onChangeDate={value => setDetail('date', value)} />
-        <InputWithLabel
-          label={I18n.t('eventCommon.description')}
-          placeholder={I18n.t('createEventScreen.descriptionInputPlaceholder')}
-          onChangeText={value => setDetail('description', value)}
-          inputStyle={styles.descriptionInput}
-          multiline
-          maxLength={120}
+        <Controller control={control} render={({ field: { onChange } }) => <DateInput onChangeDate={onChange} />} name="date" />
+
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputWithLabel
+              label={I18n.t('eventCommon.description')}
+              placeholder={I18n.t('createEventScreen.descriptionInputPlaceholder')}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+              error={errors.name?.message}
+              inputStyle={styles.descriptionInput}
+              multiline
+              maxLength={120}
+            />
+          )}
+          name="description"
         />
 
-        <PasswordInput onChangeText={value => setDetail('password', value)} optional />
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <PasswordInput onBlur={onBlur} onChangeText={onChange} value={value} error={errors.password?.message} optional />
+          )}
+          name="password"
+        />
 
         <Button onPress={submitNewEvent} label={I18n.t('createEventScreen.createEvent')} />
       </VBox>

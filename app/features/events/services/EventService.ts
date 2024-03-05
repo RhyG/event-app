@@ -1,8 +1,8 @@
 interface EventDetails {
   name: string;
   date: Date;
-  description: string | null;
-  password: string | null;
+  description?: string;
+  password?: string;
 }
 
 export function prepareEventData(event: EventDetails, userId: string) {

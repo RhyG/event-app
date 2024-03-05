@@ -1,44 +1,38 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
-import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { prepareEventData } from '@feature/events/services/EventService';
 import { useUserContext } from '@feature/user';
 
 import { queryClient } from '@core/providers/QueryClientProvider';
+import { useToastContext } from '@core/providers/ToastProvider';
 
 import { EventsAPI } from '../../api/EventsAPI';
 import { EventScreenName } from '../EventScreen/EventScreen';
 
-interface FormFields {
-  name: string | null;
-  date: Date | null;
-  description: string | null;
-  password: string | null;
-}
+const CreateEventSchema = z.object({
+  name: z.string(),
+  date: z.date(),
+  description: z.string().optional(),
+  password: z.string().optional(),
+});
+
+type CreateEventForm = z.infer<typeof CreateEventSchema>;
 
 export function useEventCreationForm() {
   const navigation = useNavigation();
+  const { showToast } = useToastContext();
+
+  const { handleSubmit, ...rest } = useForm<CreateEventForm>({
+    resolver: zodResolver(CreateEventSchema),
+  });
 
   const { user } = useUserContext();
 
-  const details = useRef<FormFields>({
-    name: null,
-    date: null,
-    description: null,
-    password: null,
-  });
-
-  function setDetail(key: keyof typeof details.current, value: string | Date) {
-    details.current = { ...details.current, [key]: value };
-  }
-
-  async function submitNewEvent() {
-    const event = details.current;
-
-    const { name, date, ...rest } = event;
-
-    // TODO: Properly validate fields
-    if (!name || !date || !user?.id) {
+  async function _submitNewEvent({ name, date, ...rest }: CreateEventForm) {
+    if (!user?.id) {
       return;
     }
 
@@ -47,15 +41,17 @@ export function useEventCreationForm() {
     try {
       const data = await EventsAPI.createEvent(newEvent);
 
-      if (!data) throw new Error('Event creation failed');
+      if (!data) throw new Error();
 
       queryClient.refetchQueries({ queryKey: ['events'], type: 'active', exact: true });
 
       navigation.navigate(EventScreenName, { id: data.id, name: data.event_name, shouldPreventBack: true });
     } catch (error) {
-      console.log(error);
+      showToast({ message: 'Something went wrong creating the event.', type: 'ERROR' });
     }
   }
 
-  return { submitNewEvent, setDetail };
+  const submitNewEvent = handleSubmit(_submitNewEvent);
+
+  return { submitNewEvent, ...rest };
 }
