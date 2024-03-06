@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import Clipboard from '@react-native-clipboard/clipboard';
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
@@ -7,6 +6,7 @@ import { getEventInvite } from '@feature/events/services/EventService';
 
 import { useToastContext } from '@core/providers/ToastProvider';
 
+import { Icon } from '@ui/components/Icon';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
@@ -27,7 +27,7 @@ export function ShareButton({ eventName, eventAccessCode }: { eventName: string;
 
   return (
     <TouchableOpacity style={styles.shareButton} onPress={onSharePress}>
-      <Feather name="share-2" size={20} color={theme.colours.palette.sky['700']} />
+      <Icon family="Feather" name="share-2" size={20} color={theme.colours.palette.sky['700']} />
     </TouchableOpacity>
   );
 }

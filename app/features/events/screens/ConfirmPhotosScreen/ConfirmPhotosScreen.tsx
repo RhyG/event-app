@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -9,6 +8,7 @@ import { PhotoFile } from '@feature/photo-management/types';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
+import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
@@ -39,7 +39,7 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof Con
   useHeaderOptions({
     headerRight: () => (
       <TouchableOpacity onPress={onPress}>
-        <Feather name="save" size={24} color="black" />
+        <Icon family="Feather" name="save" size={24} color="black" />
       </TouchableOpacity>
     ),
   });

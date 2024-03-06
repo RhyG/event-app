@@ -1,9 +1,9 @@
-import { Feather } from '@expo/vector-icons';
 import { ComponentProps } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { useToggle } from '@core/hooks/useToggle';
 
+import { Icon } from '@ui/components/Icon';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { theme } from '@ui/theme';
 
@@ -25,7 +25,7 @@ export function PasswordInput({ onChangeText, optional, label, placeholder, ...p
       autoCapitalize="none"
       RightAccessory={() => (
         <TouchableOpacity onPress={toggleHidden}>
-          <Feather name={`eye${hidden ? '' : '-off'}`} size={20} color={theme.icon.primaryColour} />
+          <Icon family="Feather" name={`eye${hidden ? '' : '-off'}`} size={20} color={theme.icon.primaryColour} />
         </TouchableOpacity>
       )}
     />

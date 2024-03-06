@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import I18n from 'i18n-js';
 import { StyleSheet } from 'react-native';
 
@@ -7,6 +6,7 @@ import { ScreenProp } from '@app/navigation/types';
 import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
 
 import { Button } from '@ui/components/Button';
+import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 import { HBox } from '@ui/components/layout/Box';
@@ -20,7 +20,7 @@ function JoinEventButton({ onPress }: { onPress: () => void }) {
   const { styles } = useThemedStyles(stylesFn);
 
   return (
-    <Button onPress={onPress} preset="secondary" style={styles.eventActionButton} LeftAccessory={() => <Feather name="user-plus" size={18} />}>
+    <Button onPress={onPress} preset="secondary" style={styles.eventActionButton} LeftAccessory={() => <Icon family="Feather" name="user-plus" size={18} />}>
       <Text>{I18n.t('homeScreen.joinEvent')}</Text>
     </Button>
   );
@@ -30,7 +30,7 @@ function CreateEventButton({ onPress }: { onPress: () => void }) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
   return (
-    <Button onPress={onPress} style={styles.eventActionButton} LeftAccessory={() => <Feather name="plus" size={18} color="white" />}>
+    <Button onPress={onPress} style={styles.eventActionButton} LeftAccessory={() => <Icon family="Feather" name="plus" size={18} color="white" />}>
       <Text colour={theme.colours.palette.white}>{I18n.t('homeScreen.createEvent')}</Text>
     </Button>
   );

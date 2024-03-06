@@ -1,8 +1,8 @@
-import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
@@ -15,7 +15,7 @@ function NotificationIcon() {
   return (
     <>
       <TouchableOpacity style={styles.notificationIconContainer}>
-        <Feather name="bell" size={18} color={theme.icon.primaryColour} />
+        <Icon family="Feather" name="bell" size={18} color={theme.icon.primaryColour} />
       </TouchableOpacity>
       {hasNotifications ? <View style={styles.notificationIndicator} /> : null}
     </>

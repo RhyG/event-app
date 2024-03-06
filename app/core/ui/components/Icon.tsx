@@ -1,16 +1,16 @@
-import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Feather, Octicons } from '@expo/vector-icons';
 import { IconProps } from '@expo/vector-icons/build/createIconSet';
 import * as React from 'react';
 
 type GenericIconProps = IconProps<any>;
 
-// This will need to be extended when using new icon families.
-type IconFamily = 'Feather' | 'AntDesign' | 'Ionicons';
+// This will need to be extended when using new icon families but try really hard to exclusively use Feather.
+type IconFamily = 'Feather' | 'AntDesign' | 'Octicons';
 
 const IconFamilyMap: Record<IconFamily, React.ComponentType<GenericIconProps>> = {
   Feather,
   AntDesign,
-  Ionicons,
+  Octicons,
 };
 
 interface Props extends GenericIconProps {

@@ -1,9 +1,9 @@
-import { Feather } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import { ImageBackground } from 'expo-image';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 
+import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { HBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
@@ -17,7 +17,7 @@ function PhotoCountView({ count }: { count: number }) {
     <View style={photoCountStyles.container}>
       <BlurView style={photoCountStyles.blurView} intensity={15}>
         <HBox gap="small" alignItems="center" ph="medium" pv="extraSmall">
-          <Feather name="camera" size={20} color="white" />
+          <Icon family="Feather" name="camera" size={20} color="white" />
           <Text colour="white">{count}</Text>
         </HBox>
       </BlurView>

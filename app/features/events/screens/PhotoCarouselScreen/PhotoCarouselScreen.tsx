@@ -1,4 +1,3 @@
-import { Feather } from '@expo/vector-icons';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { ActivityIndicator, Dimensions, FlatList, ListRenderItem, TouchableOpacity, View } from 'react-native';
@@ -10,6 +9,8 @@ import { getPhoto } from '@feature/photo-management/services/PhotoService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
+
+import { Icon } from '@ui/components/Icon';
 
 // TODO: Move to generating hash and saving with image in DB.
 const blurhash =
@@ -110,7 +111,7 @@ export function PhotoCarouselScreen({ route, navigation }: ScreenProp<typeof Pho
         ) : null}
       </View>
       <TouchableOpacity onPress={() => navigation.pop()} style={{ position: 'absolute', right: 20, top: 40 }}>
-        <Feather name="x" size={24} color="white" />
+        <Icon family="Feather" name="x" size={24} color="white" />
       </TouchableOpacity>
     </>
   );

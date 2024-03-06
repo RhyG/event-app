@@ -1,5 +1,3 @@
-import { Feather } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, withTiming } from 'react-native-reanimated';
@@ -9,6 +7,7 @@ import { useToastContext } from '@core/providers/ToastProvider';
 import { theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
+import { Icon } from './Icon';
 import { Text } from './Text';
 import { HBox } from './layout/Box';
 
@@ -16,14 +15,14 @@ const TOAST_DURATION = 3000;
 
 function ToastIcon({ type }: { type: 'ERROR' | 'SUCCESS' | 'INFO' }) {
   if (type === 'ERROR') {
-    return <Feather name="alert-circle" size={20} color={theme.colours.angry} />;
+    return <Icon family="Feather" name="alert-circle" size={20} color={theme.colours.angry} />;
   }
 
   if (type === 'SUCCESS') {
-    return <Octicons name="check-circle" size={20} color={theme.colours.success} />;
+    return <Icon family="Octicons" name="check-circle" size={20} color={theme.colours.success} />;
   }
 
-  return <Feather name="info" size={20} color={theme.colours.palette.blue['400']} />;
+  return <Icon family="Feather" name="info" size={20} color={theme.colours.palette.blue['400']} />;
 }
 
 export function Toast() {

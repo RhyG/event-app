@@ -1,5 +1,3 @@
-import { AntDesign } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import I18n from 'i18n-js';
 import { Platform, StyleSheet, View } from 'react-native';
@@ -12,6 +10,7 @@ import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScr
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 
 import { Button } from '@ui/components/Button';
+import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
@@ -40,12 +39,12 @@ export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenNam
         preset="secondary"
         onPress={navigateToEmailAuthScreen}
         label={`Sign ${showingLogin ? 'in' : 'up'} with email`}
-        LeftAccessory={() => <Feather name="mail" size={20} color={theme.icon.primaryColour} style={{ marginRight: 5 }} />}
+        LeftAccessory={() => <Icon family="Feather" name="mail" size={20} color={theme.icon.primaryColour} style={{ marginRight: 5 }} />}
       />
       <HBox gap="small" mt="small">
         {Platform.OS === 'ios' && (
           <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>
-            <AntDesign name="apple1" size={24} color={theme.icon.primaryColour} />
+            <Icon family="AntDesign" name="apple1" size={24} color={theme.icon.primaryColour} />
           </Button>
         )}
         <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>

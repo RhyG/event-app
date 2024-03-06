@@ -1,8 +1,8 @@
-import { Feather } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
+import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
@@ -68,7 +68,7 @@ export function DateInput({ defaultDate, onChangeDate, error }: Props) {
         <Text colour={date ? theme.colours.textPrimary : '#c8c8c8'} style={{ fontSize: 13 }}>
           {value ?? 'Select a date'}
         </Text>
-        <Feather name="calendar" size={20} color={theme.icon.primaryColour} style={{ marginLeft: 'auto' }} />
+        <Icon family="Feather" name="calendar" size={20} color={theme.icon.primaryColour} style={{ marginLeft: 'auto' }} />
       </TouchableOpacity>
 
       <DateTimePickerModal isVisible={isDatePickerVisible} mode="date" onConfirm={handleConfirm} onCancel={hideDatePicker} display="inline" />
