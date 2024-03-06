@@ -1,5 +1,9 @@
 import { supabase } from '@app/core/lib/supabase';
 
+/**
+ * Gets the current user in session.
+ * @returns the current user in session.
+ */
 export async function getUser() {
   const { data, error } = await supabase.auth.getSession();
 

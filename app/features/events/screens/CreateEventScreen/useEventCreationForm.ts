@@ -3,13 +3,12 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { prepareEventData } from '@feature/events/services/EventService';
+import { createEvent } from '@feature/events/services/EventService';
 import { useUserContext } from '@feature/user';
 
 import { queryClient } from '@core/providers/QueryClientProvider';
 import { useToastContext } from '@core/providers/ToastProvider';
 
-import { EventsAPI } from '../../api/EventsAPI';
 import { EventScreenName } from '../EventScreen/EventScreen';
 
 const CreateEventSchema = z.object({
@@ -31,17 +30,13 @@ export function useEventCreationForm() {
 
   const { user } = useUserContext();
 
-  async function _submitNewEvent({ name, date, ...rest }: CreateEventForm) {
+  async function _submitNewEvent(eventData: CreateEventForm) {
     if (!user?.id) {
       return;
     }
 
-    const newEvent = prepareEventData({ name, date, ...rest }, user.id);
-
     try {
-      const data = await EventsAPI.createEvent(newEvent);
-
-      if (!data) throw new Error();
+      const data = await createEvent(eventData, user?.id);
 
       queryClient.refetchQueries({ queryKey: ['events'], type: 'active', exact: true });
 

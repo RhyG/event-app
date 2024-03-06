@@ -1,7 +1,14 @@
-import { PropsWithChildren, createContext, useContext, useMemo, useReducer, useState } from 'react';
+import { PropsWithChildren, createContext, useContext, useMemo, useReducer } from 'react';
 
 interface WelcomeFlowContextProps {
+  /**
+   * Current form mode.
+   * @default LOGIN
+   */
   formMode: 'LOGIN' | 'SIGNUP';
+  /**
+   * Toggles the form between login and signup.
+   */
   toggleFormMode: React.DispatchWithoutAction;
 }
 
