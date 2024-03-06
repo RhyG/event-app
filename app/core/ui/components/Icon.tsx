@@ -17,7 +17,10 @@ interface Props extends GenericIconProps {
   family: keyof typeof IconFamilyMap;
 }
 
-// Wrapper around icons exported by @expo/vector-icons
+/**
+ * Wrapper around icons exported by @expo/vector-icons
+ * @link For all icons see https://icons.expo.fyi/
+ */
 export function Icon({ family, ...props }: Props) {
   const IconComponent = IconFamilyMap[family];
 

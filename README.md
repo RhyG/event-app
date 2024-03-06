@@ -206,7 +206,7 @@ function Component() {
 No tests are written yet, but the approach will be:
 
 - Unit test things in `/core`. Given that these are core functionality used throughout the app, they should be well tested.
-- Integration test screens. The goal is to avoid redundant test, and test as a user would use the app. This means:
+- Integration test screens. The goal is to avoid redundant tests, and test as a user would use the app. This means:
   - Not testing components, hooks etc used only by a screen as these are covered by the screen test.
   - Only testing components, hooks etc used by multiple screens.
   - User centric assertions. E.g. "Should show a toast message when the submit button is pressed" and not "Should call the submit function and update state" or "Should render correctly".
