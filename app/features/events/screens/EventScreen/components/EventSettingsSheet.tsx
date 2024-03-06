@@ -1,13 +1,10 @@
 import { Feather } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
-import Clipboard from '@react-native-clipboard/clipboard';
 import { useNavigation } from '@react-navigation/native';
 import I18n from 'i18n-js';
 import { ReactNode, useCallback, useRef } from 'react';
 import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-
-import { getEventInvite } from '@feature/events/services/EventService';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
@@ -17,17 +14,9 @@ import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { EditEventScreenName } from '../../EditEventScreen/EditEventScreen';
+import { useEventSettingsSheet } from './EventSettingsSheet.hooks';
 
-function copyEventInvite(eventName: string, eventAccessCode: string) {
-  const invite = getEventInvite(eventName, eventAccessCode);
-  Clipboard.setString(invite);
-}
-
-function copyEventAccessCode(eventAccessCode: string) {
-  Clipboard.setString(eventAccessCode);
-}
-
-const SNAP_POINTS = ['25%', '35%'];
+const SNAP_POINTS = ['25%', '30%'];
 
 function SettingsRow({ label, onPress, icon }: { label: string; onPress: () => void; icon: ReactNode }) {
   const { styles } = useThemedStyles(stylesFn);
@@ -54,6 +43,8 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
     ),
   });
 
+  const { copyEventInvite, copyEventAccessCode } = useEventSettingsSheet(closeSheet);
+
   function closeSheet() {
     bottomSheetRef.current?.close();
   }
@@ -64,10 +55,7 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
 
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          closeSheet();
-        }}>
+      <TouchableWithoutFeedback onPress={closeSheet}>
         <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={1} />
       </TouchableWithoutFeedback>
     ),
@@ -81,7 +69,7 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
 
   return (
     <BottomSheetModal ref={bottomSheetRef} index={1} snapPoints={SNAP_POINTS} enablePanDownToClose={true} backdropComponent={renderBackdrop}>
-      <VBox>
+      <VBox gap="medium" pt="medium" ph="medium">
         <SettingsRow
           label={I18n.t('eventScreen.shareEventInvite')}
           onPress={() => copyEventInvite(eventName, accessCode)}
@@ -110,16 +98,9 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
 
 const stylesFn = ({ spacing }: Theme) =>
   StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 24,
-      backgroundColor: 'grey',
-    },
     settingsRow: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: spacing.medium,
-      paddingHorizontal: spacing.medium,
       gap: spacing.small,
     },
   });
