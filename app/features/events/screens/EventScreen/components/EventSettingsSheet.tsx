@@ -1,5 +1,3 @@
-import { Feather } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import I18n from 'i18n-js';
@@ -8,6 +6,7 @@ import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-na
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
+import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
@@ -38,7 +37,7 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
   useHeaderOptions({
     headerRight: () => (
       <TouchableOpacity onPress={openSheet} hitSlop={{ left: 30, top: 40, right: 40, bottom: 40 }}>
-        <Feather name="menu" size={26} color={theme.colours.white} />
+        <Icon family="Feather" name="menu" size={26} color={theme.colours.white} />
       </TouchableOpacity>
     ),
   });
@@ -73,23 +72,23 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
         <SettingsRow
           label={I18n.t('eventScreen.shareEventInvite')}
           onPress={() => copyEventInvite(eventName, accessCode)}
-          icon={<Feather name="share" size={20} color={theme.icon.primaryColour} />}
+          icon={<Icon family="Feather" name="share" size={20} color={theme.icon.primaryColour} />}
         />
         <SettingsRow
           label={I18n.t('eventScreen.copyEventAccessCode')}
           onPress={() => copyEventAccessCode(accessCode)}
-          icon={<Feather name="copy" size={20} color={theme.icon.primaryColour} />}
+          icon={<Icon family="Feather" name="copy" size={20} color={theme.icon.primaryColour} />}
         />
         {/* TODO: Link to printable PDF hosted somewhere that shows the QR code and a nice message */}
         <SettingsRow
           label={I18n.t('eventScreen.generateQRCode')}
           onPress={() => {}}
-          icon={<AntDesign name="qrcode" size={20} color={theme.icon.primaryColour} />}
+          icon={<Icon family="AntDesign" name="qrcode" size={20} color={theme.icon.primaryColour} />}
         />
         <SettingsRow
           label={I18n.t('eventScreen.editEvent')}
           onPress={navigateToEditEventScreen}
-          icon={<Feather name="edit-2" size={20} color={theme.icon.primaryColour} />}
+          icon={<Icon family="Feather" name="edit-2" size={20} color={theme.icon.primaryColour} />}
         />
       </VBox>
     </BottomSheetModal>
