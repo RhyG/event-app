@@ -1,4 +1,6 @@
-import { AntDesign, Feather, Octicons } from '@expo/vector-icons';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Feather from '@expo/vector-icons/Feather';
+import Octicons from '@expo/vector-icons/Octicons';
 import { IconProps } from '@expo/vector-icons/build/createIconSet';
 import * as React from 'react';
 
