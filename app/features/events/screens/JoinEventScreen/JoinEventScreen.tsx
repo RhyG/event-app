@@ -1,5 +1,5 @@
 import I18n from 'i18n-js';
-import { StyleSheet } from 'react-native';
+import { Controller } from 'react-hook-form';
 
 import { ScreenProp } from '@app/navigation/types';
 
@@ -10,31 +10,50 @@ import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
-import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
+import { useTheme } from '@ui/theme/useTheme';
 
-import { useJoinEvent } from './useJoinEvent';
+import { useJoinEventForm } from './JoinEventScreen.hooks';
 
 export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
-  const { styles, theme } = useThemedStyles(stylesFn);
+  const theme = useTheme();
 
-  const { handleFormChange, submitJoin, eventRequiresPassword, submitJoinWithPassword } = useJoinEvent();
+  const {
+    control,
+    submitJoin,
+    submitJoinWithPassword,
+    eventRequiresPassword,
+    formState: { errors },
+  } = useJoinEventForm();
 
   return (
     <WelcomeFlowScreen heading={I18n.t('joinEventScreen.heading')}>
-      <VBox gap="small">
-        <InputWithLabel
-          label={I18n.t('joinEventScreen.eventCodeInputLabel')}
-          placeholder={I18n.t('joinEventScreen.eventCodeInputPlaceholder')}
-          onChangeText={val => handleFormChange('code', val)}
+      <VBox gap="medium">
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <InputWithLabel
+              label={I18n.t('joinEventScreen.eventCodeInputLabel')}
+              placeholder={I18n.t('joinEventScreen.eventCodeInputPlaceholder')}
+              onChangeText={onChange}
+              autoCapitalize="none"
+              onBlur={onBlur}
+              value={value}
+              error={errors.code?.message}
+            />
+          )}
+          name="code"
         />
-        {eventRequiresPassword ? <PasswordInput onChangeText={val => handleFormChange('password', val)} /> : null}
+        {eventRequiresPassword ? (
+          <Controller
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <PasswordInput onBlur={onBlur} onChangeText={onChange} value={value} error={errors.password?.message} />
+            )}
+            name="password"
+          />
+        ) : null}
+        <Button onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin} label={I18n.t('joinEventScreen.joinEvent')} />
       </VBox>
-      <Button
-        style={styles.joinEventButton}
-        onPress={eventRequiresPassword ? submitJoinWithPassword : submitJoin}
-        label={I18n.t('joinEventScreen.joinEvent')}
-      />
 
       <VBox mt="extraLarge" gap="small">
         <Text align="center" colour={theme.colours.textSubdued}>
@@ -45,12 +64,5 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
     </WelcomeFlowScreen>
   );
 }
-
-const stylesFn = (theme: Theme) =>
-  StyleSheet.create({
-    joinEventButton: {
-      marginTop: theme.spacing.small,
-    },
-  });
 
 export const JoinEventScreenName = 'JoinEventScreen' as const;
