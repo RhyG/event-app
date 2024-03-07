@@ -41,7 +41,7 @@ const renderItem: ListRenderItem<Event> = ({ item }) => {
 export function UpcomingEventsSection() {
   const { data } = useUpcomingEventsQuery();
 
-  if (!data) return <Text>No data</Text>;
+  if (!data || data.length === 0) return null;
 
   return (
     <VBox mb="base" gap="small">

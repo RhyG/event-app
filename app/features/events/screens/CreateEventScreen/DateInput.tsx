@@ -68,7 +68,7 @@ export function DateInput({ defaultDate, onChangeDate, error }: Props) {
         <Text colour={date ? theme.colours.textPrimary : '#c8c8c8'} style={{ fontSize: 13 }}>
           {value ?? 'Select a date'}
         </Text>
-        <Icon family="Feather" name="calendar" size={20} color={theme.icon.primaryColour} style={{ marginLeft: 'auto' }} />
+        <Icon family="Feather" name="calendar" size={20} style={{ marginLeft: 'auto' }} />
       </TouchableOpacity>
 
       <DateTimePickerModal isVisible={isDatePickerVisible} mode="date" onConfirm={handleConfirm} onCancel={hideDatePicker} display="inline" />

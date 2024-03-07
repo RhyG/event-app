@@ -72,24 +72,16 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
         <SettingsRow
           label={I18n.t('eventScreen.shareEventInvite')}
           onPress={() => copyEventInvite(eventName, accessCode)}
-          icon={<Icon family="Feather" name="share" size={20} color={theme.icon.primaryColour} />}
+          icon={<Icon family="Feather" name="share" size={20} />}
         />
         <SettingsRow
           label={I18n.t('eventScreen.copyEventAccessCode')}
           onPress={() => copyEventAccessCode(accessCode)}
-          icon={<Icon family="Feather" name="copy" size={20} color={theme.icon.primaryColour} />}
+          icon={<Icon family="Feather" name="copy" size={20} />}
         />
         {/* TODO: Link to printable PDF hosted somewhere that shows the QR code and a nice message */}
-        <SettingsRow
-          label={I18n.t('eventScreen.generateQRCode')}
-          onPress={() => {}}
-          icon={<Icon family="AntDesign" name="qrcode" size={20} color={theme.icon.primaryColour} />}
-        />
-        <SettingsRow
-          label={I18n.t('eventScreen.editEvent')}
-          onPress={navigateToEditEventScreen}
-          icon={<Icon family="Feather" name="edit-2" size={20} color={theme.icon.primaryColour} />}
-        />
+        <SettingsRow label={I18n.t('eventScreen.generateQRCode')} onPress={() => {}} icon={<Icon family="AntDesign" name="qrcode" size={20} />} />
+        <SettingsRow label={I18n.t('eventScreen.editEvent')} onPress={navigateToEditEventScreen} icon={<Icon family="Feather" name="edit-2" size={20} />} />
       </VBox>
     </BottomSheetModal>
   );

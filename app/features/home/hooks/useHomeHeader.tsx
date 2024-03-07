@@ -8,14 +8,14 @@ import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 function NotificationIcon() {
-  const { styles, theme } = useThemedStyles(stylesFn);
+  const { styles } = useThemedStyles(stylesFn);
 
   const hasNotifications = false;
 
   return (
     <>
       <TouchableOpacity style={styles.notificationIconContainer}>
-        <Icon family="Feather" name="bell" size={18} color={theme.icon.primaryColour} />
+        <Icon family="Feather" name="bell" size={18} />
       </TouchableOpacity>
       {hasNotifications ? <View style={styles.notificationIndicator} /> : null}
     </>

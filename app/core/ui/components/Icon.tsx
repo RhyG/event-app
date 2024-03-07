@@ -4,6 +4,8 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { IconProps } from '@expo/vector-icons/build/createIconSet';
 import * as React from 'react';
 
+import { useTheme } from '@ui/theme/useTheme';
+
 type GenericIconProps = IconProps<any>;
 
 // This will need to be extended when using new icon families but try really hard to exclusively use Feather.
@@ -24,6 +26,8 @@ interface Props extends GenericIconProps {
  * @link For all icons see https://icons.expo.fyi/
  */
 export function Icon({ family, ...props }: Props) {
+  const theme = useTheme();
+
   const IconComponent = IconFamilyMap[family];
 
   if (!IconComponent) {
@@ -31,5 +35,5 @@ export function Icon({ family, ...props }: Props) {
     return null;
   }
 
-  return <IconComponent {...props} />;
+  return <IconComponent color={theme.icon.primaryColour} {...props} />;
 }

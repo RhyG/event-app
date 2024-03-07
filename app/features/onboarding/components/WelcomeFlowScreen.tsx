@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 

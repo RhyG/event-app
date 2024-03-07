@@ -8,7 +8,6 @@ import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
 import { Button } from '@ui/components/Button';
 import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
-import { Text } from '@ui/components/Text';
 import { HBox } from '@ui/components/layout/Box';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
@@ -21,17 +20,17 @@ function JoinEventButton({ onPress }: { onPress: () => void }) {
 
   return (
     <Button onPress={onPress} preset="secondary" style={styles.eventActionButton} LeftAccessory={() => <Icon family="Feather" name="user-plus" size={18} />}>
-      <Text>{I18n.t('homeScreen.joinEvent')}</Text>
+      {I18n.t('homeScreen.joinEvent')}
     </Button>
   );
 }
 
 function CreateEventButton({ onPress }: { onPress: () => void }) {
-  const { styles, theme } = useThemedStyles(stylesFn);
+  const { styles } = useThemedStyles(stylesFn);
 
   return (
     <Button onPress={onPress} style={styles.eventActionButton} LeftAccessory={() => <Icon family="Feather" name="plus" size={18} color="white" />}>
-      <Text colour={theme.colours.palette.white}>{I18n.t('homeScreen.createEvent')}</Text>
+      {I18n.t('homeScreen.createEvent')}
     </Button>
   );
 }

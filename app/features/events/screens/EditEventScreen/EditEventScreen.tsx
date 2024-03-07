@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
@@ -30,7 +29,7 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
 
   return (
     <WelcomeFlowScreen heading={'Edit ' + data.event_name}>
-      <VBox gap="small">
+      <VBox gap="medium">
         <InputWithLabel
           label={I18n.t('eventCommon.name')}
           placeholder={I18n.t('createEventScreen.nameInputPlaceholder')}
@@ -50,7 +49,6 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
         />
 
         {/* TODO: Allow for changing event passwords - probably post V1 */}
-        {/* <PasswordInput onChangeText={value => setDetail('password', value)} optional /> */}
 
         <Button onPress={updateEvent} label={I18n.t('editEventScreen.updateButton')} />
       </VBox>

@@ -39,12 +39,12 @@ export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenNam
         preset="secondary"
         onPress={navigateToEmailAuthScreen}
         label={`Sign ${showingLogin ? 'in' : 'up'} with email`}
-        LeftAccessory={() => <Icon family="Feather" name="mail" size={20} color={theme.icon.primaryColour} style={{ marginRight: 5 }} />}
+        LeftAccessory={() => <Icon family="Feather" name="mail" size={20} style={{ marginRight: 5 }} />}
       />
       <HBox gap="small" mt="small">
         {Platform.OS === 'ios' && (
           <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>
-            <Icon family="AntDesign" name="apple1" size={24} color={theme.icon.primaryColour} />
+            <Icon family="AntDesign" name="apple1" size={24} />
           </Button>
         )}
         <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>

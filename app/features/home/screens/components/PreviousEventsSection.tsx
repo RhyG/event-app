@@ -40,7 +40,7 @@ export function PreviousEventsSection() {
 
   const { data } = usePreviousEventsQuery();
 
-  if (!data) return null;
+  if (!data || data.length === 0) return null;
 
   return (
     <VBox>
