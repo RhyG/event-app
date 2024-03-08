@@ -7,9 +7,13 @@ import { EventsAPI } from './EventsAPI';
 
 const userEventsQueryKey = ['events'];
 
+function sortEventsByDate(a: Event, b: Event) {
+  return new Date(a.event_date).getTime() - new Date(b.event_date).getTime();
+}
+
 const selectors = {
-  selectPreviousEvents: (events: Event[]) => events.filter(event => new Date(event.event_date) < new Date()),
-  selectUpcomingEvents: (events: Event[]) => events.filter(event => new Date(event.event_date) >= new Date()),
+  selectPreviousEvents: (events: Event[]) => events.filter(event => new Date(event.event_date) < new Date()).sort(sortEventsByDate),
+  selectUpcomingEvents: (events: Event[]) => events.filter(event => new Date(event.event_date) >= new Date()).sort(sortEventsByDate),
 };
 
 export function useAllEventsQuery(selector?: (events: Event[]) => Event[]) {

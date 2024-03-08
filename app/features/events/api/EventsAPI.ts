@@ -63,8 +63,6 @@ export const EventsAPI = {
   async updateEventDetails(eventId: string, updatedData: Partial<Event>) {
     const { data, error } = await supabase.from('Events').update(updatedData).eq('id', eventId).select('id,event_name,event_description,event_date');
 
-    console.log(`Result for ${eventId}`, data, error);
-
     if (error) throw error;
 
     return data;
