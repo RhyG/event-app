@@ -21,6 +21,7 @@ import { PhotoCarouselScreenName } from '../PhotoCarouselScreen/PhotoCarouselScr
 import { AddPhotosFAB } from './components/AddPhotosFAB';
 import { EventScreenHeader } from './components/EventScreenHeader';
 import { EventSettingsSheet } from './components/EventSettingsSheet';
+import { EventTags } from './components/EventTags';
 import { ShareButton } from './components/ShareButton';
 import { useImagePicker } from './useImagePicker';
 import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
@@ -82,8 +83,8 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
       <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
         <EventScreenHeader previewImage={previewImage?.signedUrl ?? ''} photoCount={photos.length} />
 
-        <VBox ph="small" mt="base">
-          <HBox justifyContent="space-between" alignItems="center" mb="base">
+        <VBox ph="small" mt="base" gap="small">
+          <HBox justifyContent="space-between" alignItems="center">
             <VBox>
               <Text preset="heading">{event.event_name}</Text>
               <Text colour={theme.colours.textSubdued}>{formatTimestamp(event.event_date)}</Text>
@@ -92,6 +93,9 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
 
             <ShareButton eventAccessCode={event.access_code} eventName={event.event_name} />
           </HBox>
+
+          <EventTags eventId={id} />
+
           <Gallery photos={photos} onImagePress={onImagePress} />
         </VBox>
       </ScrollView>
