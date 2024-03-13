@@ -1,7 +1,10 @@
 import { ListRenderItem, MasonryFlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { StyleProp, TouchableOpacity, View, ViewStyle, useWindowDimensions } from 'react-native';
+
+import { Icon } from '@ui/components/Icon';
+import { useTheme } from '@ui/theme/useTheme';
 
 // TODO: Move to generating hash and saving with image in DB.
 const blurhash =
@@ -20,7 +23,39 @@ function calculateImageSize(viewportWidth: number): ImageSize {
   return { width, height: width }; // Ensuring the image is square
 }
 
-function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress: (index: number) => void; index: number }) {
+function SelectedIndicator() {
+  const theme = useTheme();
+
+  return (
+    <View
+      style={{
+        backgroundColor: theme.button.primaryBackground,
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 20,
+        padding: 3,
+        position: 'absolute',
+        bottom: 8,
+        right: 8,
+      }}>
+      <Icon family="Feather" name="check" size={12} color="white" />
+    </View>
+  );
+}
+
+function ImagePreview({
+  uri,
+  onImagePress,
+  index,
+  onImageLongPress,
+  selected,
+}: {
+  uri: string;
+  onImagePress: (index: number) => void;
+  index: number;
+  onImageLongPress: (uri: string) => void;
+  selected: boolean;
+}) {
   const { width: windowWidth } = useWindowDimensions();
 
   // 30 is the sum of the horizontal padding + gap between columns, needs adjusting if the parent container has different padding.
@@ -36,17 +71,43 @@ function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress:
     borderRadius: 5,
   } as StyleProp<ViewStyle>;
 
+  function onPress() {
+    if (selected) {
+      onImageLongPress(uri);
+    } else {
+      onImagePress(index);
+    }
+  }
+
   return (
-    <TouchableOpacity onPress={() => onImagePress(index)} style={containerStyle}>
+    <TouchableOpacity onPress={onPress} style={containerStyle} onLongPress={() => onImageLongPress(uri)}>
       <Image style={{ width: '100%', height: '100%', borderRadius: 5 }} source={{ uri }} transition={200} placeholder={blurhash} />
+      {selected && <SelectedIndicator />}
     </TouchableOpacity>
   );
 }
 
 export function Gallery({ photos, onImagePress }: { photos: Array<string>; onImagePress: (index: number) => void }) {
-  const renderItem: ListRenderItem<string> = useCallback(({ item, index }) => {
-    return <ImagePreview uri={item} index={index} onImagePress={onImagePress} />;
-  }, []);
+  const [selectedPhotos, setSelectedPhotos] = useState<Array<string>>([]);
+
+  const renderItem: ListRenderItem<string> = useCallback(
+    ({ item, index }) => {
+      return (
+        <ImagePreview
+          uri={item}
+          index={index}
+          onImagePress={onImagePress}
+          onImageLongPress={uri =>
+            setSelectedPhotos(curr => {
+              return curr.includes(uri) ? curr.filter(photo => photo !== uri) : [...curr, uri];
+            })
+          }
+          selected={selectedPhotos.includes(item)}
+        />
+      );
+    },
+    [selectedPhotos],
+  );
 
   return (
     <View style={{ height: '100%' }}>
@@ -58,6 +119,7 @@ export function Gallery({ photos, onImagePress }: { photos: Array<string>; onIma
         estimatedItemSize={110}
         optimizeItemArrangement
         overrideItemLayout={overrideItemLayout}
+        extraData={selectedPhotos}
       />
     </View>
   );
