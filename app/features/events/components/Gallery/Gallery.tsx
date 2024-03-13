@@ -1,10 +1,10 @@
 import { ListRenderItem, MasonryFlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { StyleProp, TouchableOpacity, View, ViewStyle, useWindowDimensions } from 'react-native';
 
-import { Icon } from '@ui/components/Icon';
-import { useTheme } from '@ui/theme/useTheme';
+import { GalleryProvider, useGalleryContext } from './GalleryProvider';
+import { SelectedIndicator } from './SelectedIndicator';
 
 // TODO: Move to generating hash and saving with image in DB.
 const blurhash =
@@ -23,40 +23,12 @@ function calculateImageSize(viewportWidth: number): ImageSize {
   return { width, height: width }; // Ensuring the image is square
 }
 
-function SelectedIndicator() {
-  const theme = useTheme();
-
-  return (
-    <View
-      style={{
-        backgroundColor: theme.button.primaryBackground,
-        borderWidth: 2,
-        borderColor: 'white',
-        borderRadius: 20,
-        padding: 3,
-        position: 'absolute',
-        bottom: 8,
-        right: 8,
-      }}>
-      <Icon family="Feather" name="check" size={12} color="white" />
-    </View>
-  );
-}
-
-function ImagePreview({
-  uri,
-  onImagePress,
-  index,
-  onImageLongPress,
-  selected,
-}: {
-  uri: string;
-  onImagePress: (index: number) => void;
-  index: number;
-  onImageLongPress: (uri: string) => void;
-  selected: boolean;
-}) {
+function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress: (index: number) => void; index: number }) {
   const { width: windowWidth } = useWindowDimensions();
+
+  const { selectedPhotos, updateSelectedPhotos } = useGalleryContext();
+
+  const selected = selectedPhotos.includes(uri);
 
   // 30 is the sum of the horizontal padding + gap between columns, needs adjusting if the parent container has different padding.
   // There's probably a better way to do this but I'm shit as fuck at maths.
@@ -72,15 +44,16 @@ function ImagePreview({
   } as StyleProp<ViewStyle>;
 
   function onPress() {
+    // If the image is selected pressing should remove from selections instead of opening the image.
     if (selected) {
-      onImageLongPress(uri);
+      updateSelectedPhotos(uri);
     } else {
       onImagePress(index);
     }
   }
 
   return (
-    <TouchableOpacity onPress={onPress} style={containerStyle} onLongPress={() => onImageLongPress(uri)}>
+    <TouchableOpacity onPress={onPress} style={containerStyle} onLongPress={() => updateSelectedPhotos(uri)}>
       <Image style={{ width: '100%', height: '100%', borderRadius: 5 }} source={{ uri }} transition={200} placeholder={blurhash} />
       {selected && <SelectedIndicator />}
     </TouchableOpacity>
@@ -88,40 +61,22 @@ function ImagePreview({
 }
 
 export function Gallery({ photos, onImagePress }: { photos: Array<string>; onImagePress: (index: number) => void }) {
-  const [selectedPhotos, setSelectedPhotos] = useState<Array<string>>([]);
-
-  const renderItem: ListRenderItem<string> = useCallback(
-    ({ item, index }) => {
-      return (
-        <ImagePreview
-          uri={item}
-          index={index}
-          onImagePress={onImagePress}
-          onImageLongPress={uri =>
-            setSelectedPhotos(curr => {
-              return curr.includes(uri) ? curr.filter(photo => photo !== uri) : [...curr, uri];
-            })
-          }
-          selected={selectedPhotos.includes(item)}
-        />
-      );
-    },
-    [selectedPhotos],
-  );
+  const renderItem: ListRenderItem<string> = useCallback(({ item, index }) => <ImagePreview uri={item} index={index} onImagePress={onImagePress} />, []);
 
   return (
-    <View style={{ height: '100%' }}>
-      {/* This parent view is arbitrary but suppresses the "FlashList's rendered size is not usable" warning */}
-      <MasonryFlashList
-        data={photos ?? []}
-        numColumns={NUM_OF_COLUMNS}
-        renderItem={renderItem}
-        estimatedItemSize={110}
-        optimizeItemArrangement
-        overrideItemLayout={overrideItemLayout}
-        extraData={selectedPhotos}
-      />
-    </View>
+    <GalleryProvider>
+      <View style={{ height: '100%' }}>
+        {/* This parent view is arbitrary but suppresses the "FlashList's rendered size is not usable" warning */}
+        <MasonryFlashList
+          data={photos ?? []}
+          numColumns={NUM_OF_COLUMNS}
+          renderItem={renderItem}
+          estimatedItemSize={110}
+          optimizeItemArrangement
+          overrideItemLayout={overrideItemLayout}
+        />
+      </View>
+    </GalleryProvider>
   );
 }
 

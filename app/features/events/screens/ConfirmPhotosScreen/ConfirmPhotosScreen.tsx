@@ -12,7 +12,7 @@ import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 
-import { Gallery } from '../../components/Gallery';
+import { Gallery } from '../../components/Gallery/Gallery';
 import { useUploadPhotos } from './useUploadPhotos';
 
 export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof ConfirmPhotosScreenName>) {

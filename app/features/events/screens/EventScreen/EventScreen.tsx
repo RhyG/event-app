@@ -15,7 +15,7 @@ import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { theme } from '@ui/theme/theme';
 
-import { Gallery } from '../../components/Gallery';
+import { Gallery } from '../../components/Gallery/Gallery';
 import { ConfirmPhotosScreenName } from '../ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { PhotoCarouselScreenName } from '../PhotoCarouselScreen/PhotoCarouselScreen';
 import { AddPhotosFAB } from './components/AddPhotosFAB';
