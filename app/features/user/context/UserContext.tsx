@@ -4,8 +4,6 @@ import { Text, View } from 'react-native';
 import * as UserService from '@app/features/user/services/UserService';
 import { User } from '@app/features/user/types';
 
-import { AuthAPI } from '@feature/auth/api/AuthAPI';
-
 interface UserContextProps {
   user: User | null;
   setUser: (userToSet: User | null) => void;
@@ -30,37 +28,36 @@ type UserContextState = {
 
 type UserAction = { type: 'GOT_USER'; payload: User } | { type: 'LOADING' } | { type: 'ERROR'; payload: unknown } | { type: 'USER_CLEARED' };
 
+const userReducerActions = {
+  GOT_USER: (state: UserContextState, action: { type: 'GOT_USER'; payload: User }) => ({
+    ...state,
+    user: action.payload,
+    loading: false,
+    error: null,
+  }),
+  LOADING: (state: UserContextState) => ({
+    ...state,
+    loading: true,
+    error: null,
+  }),
+  ERROR: (state: UserContextState, action: { type: 'ERROR'; payload: unknown }) => ({
+    ...state,
+    loading: false,
+    error: action.payload,
+  }),
+  USER_CLEARED: (state: UserContextState) => ({
+    ...state,
+    user: null,
+    loading: false,
+    error: null,
+  }),
+};
 function userReducer(state: UserContextState, action: UserAction): UserContextState {
-  switch (action.type) {
-    case 'GOT_USER':
-      return {
-        ...state,
-        user: action.payload,
-        loading: false,
-        error: null,
-      };
-    case 'LOADING':
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    case 'ERROR':
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-      };
-    case 'USER_CLEARED':
-      return {
-        ...state,
-        user: null,
-        loading: false,
-        error: null,
-      };
-    default:
-      return state;
+  const handler = userReducerActions[action.type];
+  if (handler) {
+    return handler(state, action as any);
   }
+  return state;
 }
 
 function useUserReducer() {
