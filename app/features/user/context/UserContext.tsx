@@ -29,35 +29,43 @@ type UserContextState = {
 type UserAction = { type: 'GOT_USER'; payload: User } | { type: 'LOADING' } | { type: 'ERROR'; payload: unknown } | { type: 'USER_CLEARED' };
 
 const userReducerActions = {
-  GOT_USER: (state: UserContextState, action: { type: 'GOT_USER'; payload: User }) => ({
-    ...state,
-    user: action.payload,
-    loading: false,
-    error: null,
-  }),
-  LOADING: (state: UserContextState) => ({
-    ...state,
-    loading: true,
-    error: null,
-  }),
-  ERROR: (state: UserContextState, action: { type: 'ERROR'; payload: unknown }) => ({
-    ...state,
-    loading: false,
-    error: action.payload,
-  }),
-  USER_CLEARED: (state: UserContextState) => ({
-    ...state,
-    user: null,
-    loading: false,
-    error: null,
-  }),
+  gotUser: (user: User): UserAction => ({ type: 'GOT_USER', payload: user }),
+  loading: (): UserAction => ({ type: 'LOADING' }),
+  error: (error: unknown): UserAction => ({ type: 'ERROR', payload: error }),
+  userCleared: (): UserAction => ({ type: 'USER_CLEARED' }),
 };
+
 function userReducer(state: UserContextState, action: UserAction): UserContextState {
-  const handler = userReducerActions[action.type];
-  if (handler) {
-    return handler(state, action as any);
+  switch (action.type) {
+    case 'GOT_USER':
+      return {
+        ...state,
+        user: action.payload,
+        loading: false,
+        error: null,
+      };
+    case 'LOADING':
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case 'ERROR':
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case 'USER_CLEARED':
+      return {
+        ...state,
+        user: null,
+        loading: false,
+        error: null,
+      };
+    default:
+      return state;
   }
-  return state;
 }
 
 function useUserReducer() {
@@ -72,21 +80,21 @@ function useUserReducer() {
         const user = await UserService.getUser();
 
         if (user) {
-          dispatch({ type: 'GOT_USER', payload: user });
+          dispatch(userReducerActions.gotUser(user));
         } else {
-          dispatch({ type: 'USER_CLEARED' });
+          dispatch(userReducerActions.userCleared());
         }
       } catch (e) {
-        dispatch({ type: 'ERROR', payload: e });
+        dispatch(userReducerActions.error(e));
       }
     })();
   }, []);
 
   function setUser(userToSet: User | null) {
     if (userToSet) {
-      dispatch({ type: 'GOT_USER', payload: userToSet });
+      dispatch(userReducerActions.gotUser(userToSet));
     } else {
-      dispatch({ type: 'USER_CLEARED' });
+      dispatch(userReducerActions.userCleared());
     }
   }
 
