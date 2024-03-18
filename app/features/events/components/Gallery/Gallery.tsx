@@ -48,7 +48,7 @@ function ImagePreview({ uri, onImagePress, index }: { uri: string; onImagePress:
     if (selected) {
       updateSelectedPhotos(uri);
     } else {
-      onImagePress(index);
+      selectedPhotos.length > 0 ? updateSelectedPhotos(uri) : onImagePress(index);
     }
   }
 
