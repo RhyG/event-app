@@ -43,7 +43,20 @@ Deno.serve(async req => {
 
     const { event } = await req.json();
 
-    event.access_code = generateRandomCode();
+    /**
+     * Ensures event access codes are unique by creating one, checking if it exists, and trying again if it does.
+     * Probably not optimal but keeps codes relatively simple.
+     */
+    let unique = false;
+    let accessCode = '';
+    while (!unique) {
+      accessCode = generateRandomCode();
+      const { data, error } = await supabaseClient.from('Events').select('access_code').eq('access_code', accessCode);
+      if (error) {
+        throw new Error('Error checking code uniqueness');
+      }
+      unique = data.length === 0;
+    }
 
     if (event.is_private && event.password) {
       const pass = await hashPassword(event.password);
