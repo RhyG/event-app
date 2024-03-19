@@ -23,7 +23,7 @@ export function WelcomeFlowScreen({ heading, subheading, children }: Props) {
   });
 
   return (
-    <Screen backgroundColor={theme.colours.secondaryBackground} preset="fixed" style={styles.container}>
+    <Screen backgroundColor={theme.colours.secondaryBackground} preset="fixed" contentContainerStyle={styles.container} safeAreaEdges={['bottom']}>
       <VBox mb={!!subheading ? 'large' : 0}>
         {/* TODO: Add a big ol app logo or some sort of illustration here to make it POP */}
         <Text preset="heading" align="center" style={styles.heading} numberOfLines={2}>

@@ -227,7 +227,5 @@ const outerStyle: ViewStyle = {
 };
 
 const innerStyle: ViewStyle = {
-  justifyContent: 'flex-start',
-  alignItems: 'stretch',
   flex: 1,
 };
