@@ -116,7 +116,7 @@ function useAutoPreset(props: AutoScreenProps) {
     if (!scrollEnabled && !contentFitsScreen) setScrollEnabled(true);
   }
 
-  function onContentSizeChange(w: number, h: number) {
+  function onContentSizeChange(_: number, h: number) {
     // update scroll-view content height
     scrollViewContentHeight.current = h;
     updateScrollState();
@@ -229,4 +229,5 @@ const outerStyle: ViewStyle = {
 const innerStyle: ViewStyle = {
   justifyContent: 'flex-start',
   alignItems: 'stretch',
+  flex: 1,
 };
