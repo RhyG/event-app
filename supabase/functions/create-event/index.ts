@@ -58,6 +58,8 @@ Deno.serve(async req => {
       unique = data.length === 0;
     }
 
+    event.access_code = accessCode;
+
     if (event.is_private && event.password) {
       const pass = await hashPassword(event.password);
       event.password = pass;
