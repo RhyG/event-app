@@ -1,50 +1,43 @@
 import I18n from 'i18n-js';
-import { StyleSheet } from 'react-native';
+import { ViewStyle } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
 import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
 import { useAllEventsQuery } from '@feature/events/api/useUserEventsQuery';
+import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
 import { Button } from '@ui/components/Button';
 import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
-import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { useHomeHeader } from '../hooks/useHomeHeader';
 import { PreviousEventsSection } from './components/PreviousEventsSection';
 import { UpcomingEventsSection } from './components/UpcomingEventsSection';
 
-function NoEventsView({ navigateToCreateEvent, navigateToJoinEvent }: { navigateToCreateEvent: () => void; navigateToJoinEvent: () => void }) {
+function NoEventsView({ onCreateEventPress, onJoinEventPress }: { onCreateEventPress: () => void; onJoinEventPress: () => void }) {
   return (
-    <VBox ph="base" justifyContent="center" flex={1}>
-      <Text align="center" preset="subheading">
-        You haven't joined any events yet
-      </Text>
-      <Text align="center">Join an event or create a new one</Text>
-      <CreateEventButton onPress={navigateToCreateEvent} />
-      <JoinEventButton onPress={navigateToJoinEvent} />
-    </VBox>
+    <WelcomeFlowScreen heading={I18n.t('homeScreen.emptyScreenHeading')} subheading={I18n.t('homeScreen.emptyScreenSubheading')}>
+      <VBox gap="medium">
+        <CreateEventButton onPress={onCreateEventPress} />
+        <JoinEventButton onPress={onJoinEventPress} />
+      </VBox>
+    </WelcomeFlowScreen>
   );
 }
 
-function JoinEventButton({ onPress }: { onPress: () => void }) {
-  const { styles } = useThemedStyles(stylesFn);
-
+function JoinEventButton({ onPress, style }: { onPress: () => void; style?: ViewStyle }) {
   return (
-    <Button onPress={onPress} preset="secondary" style={styles.eventActionButton} LeftAccessory={() => <Icon family="Feather" name="user-plus" size={18} />}>
+    <Button onPress={onPress} preset="secondary" style={style} LeftAccessory={() => <Icon family="Feather" name="user-plus" size={18} />}>
       {I18n.t('homeScreen.joinEvent')}
     </Button>
   );
 }
 
-function CreateEventButton({ onPress }: { onPress: () => void }) {
-  const { styles } = useThemedStyles(stylesFn);
-
+function CreateEventButton({ onPress, style }: { onPress: () => void; style?: ViewStyle }) {
   return (
-    <Button onPress={onPress} style={styles.eventActionButton} LeftAccessory={() => <Icon family="Feather" name="plus" size={18} color="white" />}>
+    <Button onPress={onPress} style={style} LeftAccessory={() => <Icon family="Feather" name="plus" size={18} color="white" />}>
       {I18n.t('homeScreen.createEvent')}
     </Button>
   );
@@ -65,14 +58,14 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   }
 
   return (
-    <Screen style={{ flex: 1 }}>
+    <Screen preset={userHasNoEvents ? 'fixed' : 'scroll'}>
       {userHasNoEvents ? (
-        <NoEventsView navigateToCreateEvent={navigateToCreateEvent} navigateToJoinEvent={navigateToJoinEvent} />
+        <NoEventsView onCreateEventPress={navigateToCreateEvent} onJoinEventPress={navigateToJoinEvent} />
       ) : (
         <>
           <HBox mv="base" gap="small">
-            <JoinEventButton onPress={navigateToJoinEvent} />
-            <CreateEventButton onPress={navigateToCreateEvent} />
+            <JoinEventButton onPress={navigateToJoinEvent} style={{ flex: 1 }} />
+            <CreateEventButton onPress={navigateToCreateEvent} style={{ flex: 1 }} />
           </HBox>
 
           <UpcomingEventsSection />
@@ -81,14 +74,6 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
       )}
     </Screen>
   );
-}
-
-function stylesFn() {
-  return StyleSheet.create({
-    eventActionButton: {
-      flex: 1,
-    },
-  });
 }
 
 export const HomeScreenName = 'HomeScreen' as const;
