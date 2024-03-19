@@ -38,6 +38,13 @@
         {
           "photosPermission": "APP NAME needs access to your photos to let you add them to events."
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "recordAudioAndroid": false
+        }
       ]
     ]
   }
