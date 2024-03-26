@@ -1,6 +1,6 @@
 # Event App (name WIP)
 
-<div align="center"><img src="https://i.imgur.com/4yfAKYw.jpeg" height=550 /></div>
+<div align="center"><img src="https://i.imgur.com/2fbOZXA.png" height=550 /></div>
 
 - [Stack](#stack)
 - [Project Structure](#project-structure)
