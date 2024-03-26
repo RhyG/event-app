@@ -1,5 +1,7 @@
 # Event App (name WIP)
 
+<div align="center"><img src="https://i.imgur.com/4yfAKYw.jpeg" height=550 /></div>
+
 - [Stack](#stack)
 - [Project Structure](#project-structure)
   - [Feature folders](#feature-folders)
@@ -205,6 +207,7 @@ function Component() {
 
 No tests are written yet, but the approach will be:
 
+- Static type checking with Typescript. This is a pretty big part of the testing pyramid I think, and reduces the need for explicit unit tests.
 - Unit test things in `/core`. Given that these are core functionality used throughout the app, they should be well tested.
 - Integration test screens. The goal is to avoid redundant tests, and test as a user would use the app. This means:
   - Not testing components, hooks etc used only by a screen as these are covered by the screen test.
