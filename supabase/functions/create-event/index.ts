@@ -10,8 +10,11 @@ export const corsHeaders = {
 function generateRandomCode(): string {
   const codeLength = 10;
   const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
   let result = '';
+
   const charactersLength = characters.length;
+
   for (let i = 0; i < codeLength; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
