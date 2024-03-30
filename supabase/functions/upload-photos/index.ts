@@ -3,8 +3,8 @@ import { PutObjectCommand, S3Client } from 'https://deno.land/x/aws_api/client_s
 
 const AWS_ACCESS_KEY_ID = Deno.env.get('AWS_ACCESS_KEY_ID');
 const AWS_SECRET_ACCESS_KEY = Deno.env.get('AWS_SECRET_ACCESS_KEY');
-const S3_BUCKET_NAME = '<Your-S3-Bucket-Name>';
-const AWS_REGION = '<Your-AWS-Region>';
+const S3_BUCKET_NAME = 'event-app-photos';
+const AWS_REGION = 'ap-southeast-2';
 
 const s3 = new S3Client({
   credentials: {
