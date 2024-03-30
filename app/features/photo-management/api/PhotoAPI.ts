@@ -13,6 +13,18 @@ export const PhotoAPI = {
 
     return response;
   },
+  async uploadPhotoToS3(formData: FormData) {
+    const { data, error } = await supabase.functions.invoke('upload-photos', {
+      body: formData,
+    });
+
+    if (error) {
+      console.log('ERROR UPLOADING TO S3:', error);
+      throw error;
+    }
+
+    return data;
+  },
   async savePhotoDetails(eventId: string) {
     const { data, error } = await supabase
       .from('Photos')

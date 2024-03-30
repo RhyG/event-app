@@ -54,6 +54,24 @@ export async function uploadPhoto(eventId: string, file: string) {
   }
 }
 
+export async function uploadPhotoToS3(eventId: string, file: string) {
+  try {
+    const formData = new FormData();
+
+    formData.append('file', {
+      uri: file,
+      type: 'image/jpeg',
+      name: `${eventId}.jpg`,
+    });
+
+    await PhotoAPI.uploadPhotoToS3(formData);
+
+    return 'SUCCESS';
+  } catch (error) {
+    return 'ERROR';
+  }
+}
+
 /**
  * Iterates over an array of photo files and uploads them to the event.
  * @param eventId ID of the event to upload photos to.
@@ -98,7 +116,7 @@ export async function getEventPhotos(eventId: string): Promise<string[]> {
 
   // const photos = (await Promise.allSettled(promises)).filter((photo): photo is PromiseFulfilledResult<{ signedUrl: string }> => photo.status === 'fulfilled');
 
-  return getEightRandomPhotos();
+  return [...new Set(placeholder_photos)];
   // return photos.map(photo => photo.value.signedUrl);
 }
 
@@ -125,4 +143,7 @@ const placeholder_photos = [
   'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://plus.unsplash.com/premium_photo-1687826541778-3f2bf4c03bc3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1568006818649-e888e736fc1c?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://plus.unsplash.com/premium_photo-1698529232838-bf2cc8bd35ff?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  'https://images.unsplash.com/photo-1543191219-92c8ed3d8cfd?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 ];
