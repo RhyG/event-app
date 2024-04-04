@@ -27,7 +27,7 @@ export function ShareButton({ eventName, eventAccessCode }: { eventName: string;
 
   return (
     <TouchableOpacity style={styles.shareButton} onPress={onSharePress}>
-      <Icon family="Feather" name="share-2" size={20} color={theme.colours.palette.sky['700']} />
+      <Icon family="Feather" name="share" size={20} color={theme.colours.palette.sky['700']} />
     </TouchableOpacity>
   );
 }

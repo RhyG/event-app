@@ -8,9 +8,9 @@ import { PhotoFile } from '@feature/photo-management/types';
 
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
-import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
+import { useTheme } from '@ui/theme/useTheme';
 
 import { Gallery } from '../../components/Gallery/Gallery';
 import { useUploadPhotos } from './useUploadPhotos';
@@ -19,9 +19,7 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof Con
   const { photos, eventId } = route.params;
   const numberOfPhotos = photos.length;
 
-  useHeaderOptions({
-    headerTitle: `Uploading ${numberOfPhotos} photo${numberOfPhotos > 1 ? 's' : ''}`,
-  });
+  const theme = useTheme();
 
   const [uploading, setUploading] = useState(false);
 
@@ -37,9 +35,13 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof Con
   }
 
   useHeaderOptions({
+    headerTitle: `Uploading ${numberOfPhotos} photo${numberOfPhotos > 1 ? 's' : ''}`,
     headerRight: () => (
       <TouchableOpacity onPress={onPress}>
-        <Icon family="Feather" name="save" size={24} color="black" />
+        {/* TODO: Update to match platform header buttons */}
+        <Text colour={theme.colours.palette.sky['700']} size="lg">
+          Done
+        </Text>
       </TouchableOpacity>
     ),
   });
