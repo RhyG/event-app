@@ -20,6 +20,7 @@ export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScr
     control,
     submitLogin,
     formState: { errors },
+    isSubmitting,
   } = useEmailLoginForm();
 
   const onCreateAccountPress = useCreateAccountPress();
@@ -61,7 +62,7 @@ export function EmailLoginScreen({ navigation }: ScreenProp<typeof EmailLoginScr
       <VBox style={{ marginTop: 300 }}>
         <TwoPartPressableText texts={['Forgot password?', 'Reset it']} onPress={() => navigation.navigate(ResetPasswordScreenName)} />
 
-        <ButtonWithLoading loading={false} onPress={submitLogin} label={I18n.t('emailLoginScreen.signIn')} />
+        <ButtonWithLoading loading={isSubmitting} onPress={submitLogin} label={I18n.t('emailLoginScreen.signIn')} />
       </VBox>
     </WelcomeFlowScreen>
   );

@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -24,13 +25,21 @@ export function useCreateAccountPress() {
 }
 
 export function useEmailLoginForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { handleSubmit, ...rest } = useForm<z.infer<typeof EmailLoginSchema>>({
     resolver: zodResolver(EmailLoginSchema),
   });
 
-  const loginUser = useLogin();
+  const _loginUser = useLogin();
+
+  async function loginUser({ email, password }: { email: string; password: string }) {
+    setIsSubmitting(true);
+    await _loginUser({ email, password });
+    setIsSubmitting(false);
+  }
 
   const submitLogin = handleSubmit(loginUser);
 
-  return { submitLogin, ...rest };
+  return { submitLogin, isSubmitting, ...rest };
 }

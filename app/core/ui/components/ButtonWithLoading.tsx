@@ -8,5 +8,10 @@ interface Props extends ComponentProps<typeof Button> {
 }
 
 export function ButtonWithLoading({ loading, label, ...buttonProps }: Props) {
-  return <Button {...buttonProps}>{loading ? <ActivityIndicator size={24} color={'white'} /> : label}</Button>;
+  const preset = loading ? 'disabled' : 'primary';
+  return (
+    <Button {...buttonProps} preset={preset}>
+      {loading ? <ActivityIndicator size={24} color={'white'} /> : label}
+    </Button>
+  );
 }
