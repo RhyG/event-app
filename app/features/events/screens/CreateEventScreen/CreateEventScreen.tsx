@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
-import { Button } from '@ui/components/Button';
+import { ButtonWithLoading } from '@ui/components/ButtonWithLoading';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 
@@ -17,6 +17,7 @@ export function CreateEventScreen() {
     submitNewEvent,
     formState: { errors },
     control,
+    isCreatingEvent,
   } = useEventCreationForm();
 
   return (
@@ -66,7 +67,7 @@ export function CreateEventScreen() {
           name="password"
         />
 
-        <Button onPress={submitNewEvent} label={I18n.t('createEventScreen.createEvent')} />
+        <ButtonWithLoading onPress={submitNewEvent} label={I18n.t('createEventScreen.createEvent')} loading={isCreatingEvent} />
       </VBox>
     </WelcomeFlowScreen>
   );

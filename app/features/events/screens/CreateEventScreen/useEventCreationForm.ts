@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -24,6 +25,8 @@ export function useEventCreationForm() {
   const navigation = useNavigation();
   const { showToast } = useToastContext();
 
+  const [isCreatingEvent, setIsCreatingEvent] = useState(false);
+
   const { handleSubmit, ...rest } = useForm<CreateEventForm>({
     resolver: zodResolver(CreateEventSchema),
   });
@@ -31,11 +34,12 @@ export function useEventCreationForm() {
   const { user } = useUserContext();
 
   async function _submitNewEvent(eventData: CreateEventForm) {
-    if (!user?.id) {
-      return;
-    }
-
     try {
+      setIsCreatingEvent(true);
+      if (!user?.id) {
+        return;
+      }
+
       const data = await createEvent(eventData, user?.id);
 
       queryClient.refetchQueries({ queryKey: ['events'], type: 'active', exact: true });
@@ -43,10 +47,12 @@ export function useEventCreationForm() {
       navigation.navigate(EventScreenName, { id: data.id, name: data.event_name, shouldPreventBack: true });
     } catch (error) {
       showToast({ message: 'Something went wrong creating the event.', type: 'ERROR' });
+    } finally {
+      setIsCreatingEvent(false);
     }
   }
 
   const submitNewEvent = handleSubmit(_submitNewEvent);
 
-  return { submitNewEvent, ...rest };
+  return { submitNewEvent, isCreatingEvent, ...rest };
 }
