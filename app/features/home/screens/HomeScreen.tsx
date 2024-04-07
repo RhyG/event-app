@@ -46,7 +46,7 @@ function CreateEventButton({ onPress, style }: { onPress: () => void; style?: Vi
 export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   useHomeHeader();
 
-  const { data } = useAllEventsQuery();
+  const { data, isLoading } = useAllEventsQuery();
   const userHasNoEvents = data?.length === 0;
 
   function navigateToCreateEvent() {
@@ -56,6 +56,9 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   function navigateToJoinEvent() {
     navigation.navigate(JoinEventScreenName);
   }
+
+  // TODO: Show nice loading state or ensure this is done in startup
+  if (isLoading) return null;
 
   return (
     <Screen preset={userHasNoEvents ? 'fixed' : 'scroll'}>
