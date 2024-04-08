@@ -36,21 +36,21 @@ export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenNam
   return (
     <WelcomeFlowScreen heading={I18n.t('welcomeScreen.heading')} subheading={I18n.t('welcomeScreen.subheading')}>
       <Button
-        preset="secondary"
+        preset="outlined"
         onPress={navigateToEmailAuthScreen}
         label={`Sign ${showingLogin ? 'in' : 'up'} with email`}
         LeftAccessory={() => <Icon family="Feather" name="mail" size={20} style={{ marginRight: 5 }} />}
       />
       <HBox gap="small" mt="small">
         {Platform.OS === 'ios' && (
-          <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>
+          <Button preset="outlined" onPress={() => console.log('')} style={{ flex: 1 }}>
             <Icon family="AntDesign" name="apple1" size={24} />
           </Button>
         )}
-        <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>
+        <Button preset="outlined" onPress={() => console.log('')} style={{ flex: 1 }}>
           <Image style={{ height: 24, width: 24 }} source={require('/assets/google-symbol.png')} contentFit="cover" transition={1000} />
         </Button>
-        <Button preset="secondary" onPress={() => console.log('')} style={{ flex: 1 }}>
+        <Button preset="outlined" onPress={() => console.log('')} style={{ flex: 1 }}>
           <Image style={{ height: 24, width: 24 }} source={require('/assets/Facebook_Logo_Primary.png')} contentFit="cover" transition={1000} />
         </Button>
       </HBox>

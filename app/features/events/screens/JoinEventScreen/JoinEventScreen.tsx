@@ -59,7 +59,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
         <Text align="center" colour={theme.colours.textSubdued}>
           {I18n.t('joinEventScreen.scanQrCode')}
         </Text>
-        <Button preset="secondary" onPress={() => navigation.navigate('QRCodeScannerScreen')} label={I18n.t('joinEventScreen.openCamera')} />
+        <Button preset="outlined" onPress={() => navigation.navigate('QRCodeScannerScreen')} label={I18n.t('joinEventScreen.openCamera')} />
       </VBox>
     </WelcomeFlowScreen>
   );
