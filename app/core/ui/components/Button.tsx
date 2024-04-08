@@ -75,7 +75,7 @@ const textPresets = {
   primary: {
     color: theme.colours.palette.white,
   },
-  secondary: {
+  outlined: {
     color: theme.colours.textPrimary,
   },
   disabled: {},
@@ -89,8 +89,12 @@ const presets = StyleSheet.create({
   secondary: {
     ...baseStyles,
     backgroundColor: theme.button.secondaryBackground,
+  },
+  outlined: {
+    ...baseStyles,
+    backgroundColor: theme.button.outlinedBackground,
     borderWidth: theme.button.borderWidth,
-    borderColor: theme.button.secondaryBorderColor,
+    borderColor: theme.button.outlinedBorderColor,
   },
   disabled: {
     ...baseStyles,

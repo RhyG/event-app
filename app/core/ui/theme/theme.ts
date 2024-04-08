@@ -31,9 +31,13 @@ export const theme = {
     primaryBackground: palette.sky['500'],
     primaryText: palette.white,
 
-    secondaryBackground: palette.white,
+    secondaryBackground: palette.grey['200'],
     secondaryText: colours.textPrimary,
     secondaryBorderColor: colours.palette.grey['200'],
+
+    outlinedBackground: palette.white,
+    outlinedText: colours.textPrimary,
+    outlinedBorderColor: colours.palette.grey['200'],
 
     disabledBackground: palette.slate['200'],
     disabledText: colours.textPrimary,
