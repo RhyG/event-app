@@ -79,6 +79,7 @@ const textPresets = {
     color: theme.colours.textPrimary,
   },
   disabled: {},
+  secondary: {},
 };
 
 const presets = StyleSheet.create({
