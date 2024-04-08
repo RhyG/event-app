@@ -4,6 +4,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { formatTimestamp } from '@core/lib/date';
 
+import { Button } from '@ui/components/Button';
+import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
@@ -44,6 +46,20 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
           <Text size="xxs" colour={theme.colours.textSecondary}>
             {Math.floor(Math.random() * 36) + 5} photos
           </Text>
+        </HBox>
+
+        <HBox gap="extraSmall" pt="small">
+          <Button
+            preset="secondary"
+            onPress={() => console.log('Upload photos')}
+            label="Add Photos"
+            style={{ flex: 6 }}
+            LeftAccessory={() => <Icon family="Feather" name="plus" size={20} />}
+          />
+
+          <Button preset="secondary" onPress={() => console.log('Share event')} label="View Event" style={{ flex: 1 }}>
+            <Icon family="Feather" name="share" size={16} />
+          </Button>
         </HBox>
       </VBox>
     </TouchableOpacity>
