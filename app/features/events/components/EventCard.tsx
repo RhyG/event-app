@@ -2,8 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { formatTimestamp } from '@core/lib/date';
-
 import { Button } from '@ui/components/Button';
 import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
@@ -11,9 +9,9 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-import { useEventPreviewImageQuery } from '../api/useEventPreviewQuery';
 import { EventScreenName } from '../screens/EventScreen/EventScreen';
 import { Event } from '../types';
+import { useEventCard } from './EventCard.hooks';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
@@ -26,8 +24,7 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
 
   const { styles, theme } = useThemedStyles(stylesFn);
 
-  const { data } = useEventPreviewImageQuery({ photoURL: preview_url!, enabled: !!preview_url });
-  const previewImage = { signedUrl: data };
+  const { previewImage, formattedDate } = useEventCard(preview_url, event_date);
 
   return (
     <TouchableOpacity style={styles.eventContainer} onPress={() => navigation.navigate(EventScreenName, { id, name: event_name })} key={id}>
@@ -36,14 +33,17 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
       </View>
 
       <VBox p="extraSmall">
-        <Text size="xs" colour={theme.colours.textPrimary}>
-          {event_name}
-        </Text>
-        <HBox justifyContent="space-between">
+        <HBox justifyContent="space-between" alignItems="center">
+          <VBox>
+            <Text size="xs" colour={theme.colours.textPrimary}>
+              {event_name}
+            </Text>
+            <Text size="xxs" colour={theme.colours.textSecondary}>
+              {formattedDate}
+            </Text>
+          </VBox>
           <Text size="xxs" colour={theme.colours.textSecondary}>
-            {formatTimestamp(event_date)}
-          </Text>
-          <Text size="xxs" colour={theme.colours.textSecondary}>
+            {/* TODO: Randomise photo count while we get S3 up and running */}
             {Math.floor(Math.random() * 36) + 5} photos
           </Text>
         </HBox>
