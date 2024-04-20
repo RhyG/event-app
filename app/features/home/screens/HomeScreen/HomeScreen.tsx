@@ -12,7 +12,7 @@ import { Icon } from '@ui/components/Icon';
 import { Screen } from '@ui/components/Screen';
 import { HBox, VBox } from '@ui/components/layout/Box';
 
-import { useHomeHeader } from '../hooks/useHomeHeader';
+import { useHomeHeader } from '../../hooks/useHomeHeader';
 import { PreviousEventsSection } from './components/PreviousEventsSection';
 import { UpcomingEventsSection } from './components/UpcomingEventsSection';
 
