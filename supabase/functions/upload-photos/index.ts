@@ -1,20 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
-import { PutObjectCommand, S3Client } from 'https://deno.land/x/aws_api/client_s3/mod.ts';
+import { PutObjectCommand, S3Client } from 'npm:@aws-sdk/client-s3';
 
 const AWS_ACCESS_KEY_ID = Deno.env.get('AWS_ACCESS_KEY_ID');
 const AWS_SECRET_ACCESS_KEY = Deno.env.get('AWS_SECRET_ACCESS_KEY');
 const S3_BUCKET_NAME = 'event-app-photos';
 const AWS_REGION = 'ap-southeast-2';
 
-const s3 = new S3Client({
-  credentials: {
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY,
-  },
-  region: AWS_REGION,
-});
-
 Deno.serve(async req => {
+  console.log('Request received:', { req, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY });
   if (req.method !== 'POST') {
     return new Response('Method Not Allowed', { status: 405 });
   }
@@ -35,7 +28,19 @@ Deno.serve(async req => {
   };
 
   try {
-    await s3.send(new PutObjectCommand(uploadParams));
+    const config = {
+      credentials: {
+        accessKeyId: AWS_ACCESS_KEY_ID,
+        secretAccessKey: AWS_SECRET_ACCESS_KEY,
+      },
+      region: AWS_REGION,
+    };
+
+    console.log({ config });
+
+    const client = new S3Client(config);
+
+    await client.send(new PutObjectCommand(uploadParams));
 
     return new Response(JSON.stringify({ message: 'File uploaded successfully.' }), {
       status: 200,
