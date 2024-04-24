@@ -13,8 +13,7 @@ import { Screen } from '@ui/components/Screen';
 import { HBox, VBox } from '@ui/components/layout/Box';
 
 import { useHomeHeader } from '../../hooks/useHomeHeader';
-import { PreviousEventsSection } from './components/PreviousEventsSection';
-import { UpcomingEventsSection } from './components/UpcomingEventsSection';
+import { EventList } from './components/EventList';
 
 function NoEventsView({ onCreateEventPress, onJoinEventPress }: { onCreateEventPress: () => void; onJoinEventPress: () => void }) {
   return (
@@ -71,8 +70,7 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
             <CreateEventButton onPress={navigateToCreateEvent} style={{ flex: 1 }} />
           </HBox>
 
-          <UpcomingEventsSection />
-          <PreviousEventsSection />
+          <EventList />
         </>
       )}
     </Screen>
