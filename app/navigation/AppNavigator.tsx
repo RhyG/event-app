@@ -8,7 +8,7 @@ import { ConfirmPhotosScreen, ConfirmPhotosScreenName } from '@feature/events/sc
 import { EditEventScreen, EditEventScreenName } from '@feature/events/screens/EditEventScreen/EditEventScreen';
 import { EventScreen, EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
 import { PhotoCarouselScreen, PhotoCarouselScreenName } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
-import { HomeScreen, HomeScreenName } from '@feature/home/screens/HomeScreen';
+import { HomeScreen, HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 import { WelcomeNavigator } from '@feature/onboarding/navigation/WelcomeNavigator';
 import { AccountScreen, AccountScreenName, useIsLoggedIn } from '@feature/user';
 
