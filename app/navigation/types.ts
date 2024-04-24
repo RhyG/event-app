@@ -9,7 +9,7 @@ import type { EditEventScreenName, EditEventScreenParams } from '@feature/events
 import type { EventScreenName, EventScreenParams } from '@feature/events/screens/EventScreen/EventScreen';
 import { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/JoinEventScreen';
 import type { PhotoCarouselScreenName, PhotoCarouselScreenParams } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
-import { HomeScreenName } from '@feature/home/screens/HomeScreen';
+import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 import { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';
 import { ResetPasswordScreenName } from '@feature/onboarding/screens/ResetPasswordScreen/ResetPasswordScreen';
 import { AccountScreenName } from '@feature/user';
