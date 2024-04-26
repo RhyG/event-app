@@ -8,10 +8,7 @@ function selectSortedEvents(events: Event[]) {
   return events.sort((a: Event, b: Event) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
 }
 
-const renderItem: ListRenderItem<Event> = ({ item }) => {
-  console.log('Rendering item:', item);
-  return <EventCard {...item} />;
-};
+const renderItem: ListRenderItem<Event> = ({ item }) => <EventCard {...item} />;
 
 export function EventList() {
   const { data: events } = useAllEventsQuery(selectSortedEvents);
