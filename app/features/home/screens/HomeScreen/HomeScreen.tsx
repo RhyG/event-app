@@ -60,7 +60,7 @@ export function HomeScreen({ navigation }: ScreenProp<'HomeScreen'>) {
   if (isLoading) return null;
 
   return (
-    <Screen preset={userHasNoEvents ? 'fixed' : 'scroll'}>
+    <Screen preset="fixed">
       {userHasNoEvents ? (
         <NoEventsView onCreateEventPress={navigateToCreateEvent} onJoinEventPress={navigateToJoinEvent} />
       ) : (
