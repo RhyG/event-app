@@ -6,6 +6,7 @@ import { QueryClientProvider } from '@app/core/providers/QueryClientProvider';
 
 import { UserProvider } from '@feature/user/context/UserContext';
 
+import '@core/lib/polyfills';
 import { ToastProvider } from '@core/providers/ToastProvider';
 
 import { Toast } from '@ui/components/Toast';
