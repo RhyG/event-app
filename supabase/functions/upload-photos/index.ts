@@ -12,6 +12,10 @@ Deno.serve(async req => {
     return new Response('Method Not Allowed', { status: 405 });
   }
 
+  if (!AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
+    return new Response('AWS credentials not found.', { status: 500 });
+  }
+
   const formData = await req.formData();
   const file = formData.get('file') as File;
 
@@ -35,8 +39,6 @@ Deno.serve(async req => {
       },
       region: AWS_REGION,
     };
-
-    console.log({ config });
 
     const client = new S3Client(config);
 

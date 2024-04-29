@@ -8,7 +8,7 @@ export function useImagePicker({ onSuccess }: { onSuccess: (photos: Array<{ uri:
       allowsEditing: false,
       allowsMultipleSelection: true,
       quality: 1,
-      base64: true,
+      // base64: true,
     });
 
     if (!result.canceled) {
