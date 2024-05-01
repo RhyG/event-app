@@ -37,7 +37,7 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof Con
   useHeaderOptions({
     headerTitle: `Uploading ${numberOfPhotos} photo${numberOfPhotos > 1 ? 's' : ''}`,
     headerRight: () => (
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity onPress={onPress} accessibilityRole="button">
         {/* TODO: Update to match platform header buttons */}
         <Text colour={theme.colours.palette.sky['700']} size="lg">
           Done
@@ -49,7 +49,7 @@ export function ConfirmPhotosScreen({ route, navigation }: ScreenProp<typeof Con
   return (
     <>
       <Screen>
-        <Gallery photos={photosToDisplay} />
+        <Gallery photos={photosToDisplay} onImagePress={() => {}} />
       </Screen>
       {uploading ? <LoadingCover /> : null}
     </>
