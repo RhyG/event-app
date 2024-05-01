@@ -1,6 +1,7 @@
 import { decode } from 'base64-arraybuffer';
 
 import { PhotoAPI } from '../api/PhotoAPI';
+import { PhotosModule } from '../modules/PhotosModule';
 import { PhotoFile } from '../types';
 
 export function decodeFromBase64(base64Image: string) {
@@ -54,21 +55,22 @@ export async function uploadPhoto(eventId: string, file: string) {
   }
 }
 
-export async function uploadPhotoToS3(eventId: string, file: string) {
+export async function _uploadPhoto(eventId: string, file: string) {
   try {
-    const formData = new FormData();
+    const savedPhoto = await PhotoAPI.savePhotoDetails(eventId);
 
-    formData.append('file', {
-      uri: file,
-      type: 'image/jpeg',
-      name: `${eventId}.jpg`,
-    });
+    if (!savedPhoto) {
+      console.log('Failed to save photo details');
+      return;
+    }
 
-    await PhotoAPI.uploadPhotoToS3(formData);
+    const response = await fetch(file);
+    const blob = await response.blob();
 
-    return 'SUCCESS';
+    await PhotosModule.uploadFile(savedPhoto.id, eventId, blob);
   } catch (error) {
-    return 'ERROR';
+    console.log('Error uploading photo:', error);
+    throw error;
   }
 }
 

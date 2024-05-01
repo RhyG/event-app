@@ -1,7 +1,7 @@
 import * as ImagePicker from 'expo-image-picker';
 
 // TODO: Refactor away from being a hook now that it isn't stateful.
-export function useImagePicker({ onSuccess }: { onSuccess: (photos: Array<{ uri: string; base64: string }>) => void }) {
+export function useImagePicker({ onSuccess }: { onSuccess: (photos: Array<{ uri: string; type: string }>) => void }) {
   const pickImages = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -19,7 +19,7 @@ export function useImagePicker({ onSuccess }: { onSuccess: (photos: Array<{ uri:
         onSuccess([]);
       }
 
-      onSuccess(images.map(image => ({ uri: image.uri!, base64: image.base64! })));
+      onSuccess(images.map(image => ({ uri: image.uri!, type: image.mimeType! })));
     }
   };
 
