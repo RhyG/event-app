@@ -2,10 +2,11 @@ import { useNavigation } from '@react-navigation/native';
 import I18n from 'i18n-js';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { usePreviousEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { EventCard } from '@feature/events/components/EventCard';
 import { AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
-import { Event } from '@feature/events/types';
+
+import { usePreviousEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
+import { Event } from '@core/domains/events/types';
 
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';

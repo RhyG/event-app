@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { createEvent } from '@feature/events/services/EventService';
 import { useUserContext } from '@feature/user';
 
+import { createEvent } from '@core/domains/events/services/EventService';
 import { queryClient } from '@core/providers/QueryClientProvider';
 import { useToastContext } from '@core/providers/ToastProvider';
 

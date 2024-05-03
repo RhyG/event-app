@@ -1,7 +1,7 @@
-import { useAllEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { EventCard } from '@feature/events/components/EventCard';
-import { Event } from '@feature/events/types';
 
+import { useAllEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
+import { Event } from '@core/domains/events/types';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Screen } from '@ui/components/Screen';

@@ -1,8 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
-import { eventPhotosPathsQueryKey } from '@feature/events/api/query-keys';
-
+import { eventPhotosPathsQueryKey } from '@core/domains/events/api/query-keys';
 import { PhotoAPI } from '@core/domains/photo-management/api/PhotoAPI';
 
 /**

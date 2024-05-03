@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, ListRenderItem, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { useUpcomingEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
-import { Event } from '@feature/events/types';
 
+import { useUpcomingEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
+import { Event } from '@core/domains/events/types';
 import { formatTimestamp } from '@core/lib/date';
 
 import { Text } from '@ui/components/Text';

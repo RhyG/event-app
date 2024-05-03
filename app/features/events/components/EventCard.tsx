@@ -11,9 +11,9 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-import { useEventPreviewImageQuery } from '../api/useEventPreviewQuery';
+import { useEventPreviewImageQuery } from '../../../core/domains/events/api/useEventPreviewQuery';
+import { Event } from '../../../core/domains/events/types';
 import { EventScreenName } from '../screens/EventScreen/EventScreen';
-import { Event } from '../types';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';

@@ -4,9 +4,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { useEventPreviewImageQuery } from '@feature/events/api/useEventPreviewQuery';
-import { useEventDetailsQuery, useEventPhotosQuery } from '@feature/events/api/useEventQuery';
-
+import { useEventPreviewImageQuery } from '@core/domains/events/api/useEventPreviewQuery';
+import { useEventDetailsQuery, useEventPhotosQuery } from '@core/domains/events/api/useEventQuery';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
 import { formatTimestamp } from '@core/lib/date';

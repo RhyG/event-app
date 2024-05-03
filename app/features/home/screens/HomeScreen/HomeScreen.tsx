@@ -4,8 +4,9 @@ import { ViewStyle } from 'react-native';
 import { ScreenProp } from '@app/navigation/types';
 
 import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
-import { useAllEventsQuery } from '@feature/events/api/useUserEventsQuery';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
+
+import { useAllEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
 
 import { Button } from '@ui/components/Button';
 import { Icon } from '@ui/components/Icon';
