@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useLogin } from '@feature/auth/hooks/useLogin';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
+
+import { useLogin } from '@core/domains/auth/hooks/useLogin';
 
 const EmailLoginSchema = z.object({
   email: z.string().email(),

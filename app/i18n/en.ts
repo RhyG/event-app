@@ -1,6 +1,7 @@
-import { en as authEn } from '@feature/auth/i18n/en';
 import { en as eventEn } from '@feature/events/i18n/en';
 import { en as homeEn } from '@feature/home/i18n/en';
+
+import { en as authEn } from '@core/domains/auth/i18n/en';
 
 export const en = {
   common: {

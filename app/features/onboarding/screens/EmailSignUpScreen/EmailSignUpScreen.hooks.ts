@@ -3,10 +3,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { AuthAPI } from '@feature/auth/api/AuthAPI';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 import { useSetUser } from '@feature/user';
 
+import { AuthAPI } from '@core/domains/auth/api/AuthAPI';
 import { useToastContext } from '@core/providers/ToastProvider';
 
 // Schemas are fine here for now just be conscious of re-use

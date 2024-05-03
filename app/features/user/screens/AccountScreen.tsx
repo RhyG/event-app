@@ -1,4 +1,4 @@
-import { useLogout } from '@feature/auth/hooks/useLogout';
+import { useLogout } from '@core/domains/auth/hooks/useLogout';
 
 import { Button } from '@ui/components/Button';
 import { Screen } from '@ui/components/Screen';
