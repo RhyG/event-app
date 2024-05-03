@@ -1,9 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 
 import { eventPhotosQueryKey } from '@feature/events/api/query-keys';
-import { PhotosModule } from '@feature/photo-management/modules/PhotosModule';
-import { _uploadPhoto, uploadPhotoToS3 } from '@feature/photo-management/services/PhotoService';
-import { PhotoFile } from '@feature/photo-management/types';
+
+import { PhotosModule } from '@core/domains/photo-management/modules/PhotosModule';
+import { _uploadPhoto, uploadPhotoToS3 } from '@core/domains/photo-management/services/PhotoService';
+import { PhotoFile } from '@core/domains/photo-management/types';
 
 export function useUploadPhotos(eventId: string, photos: PhotoFile[]) {
   const queryClient = useQueryClient();

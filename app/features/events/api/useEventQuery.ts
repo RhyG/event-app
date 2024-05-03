@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
-import { getEventPhotos } from '@feature/photo-management/services/PhotoService';
+import { getEventPhotos } from '@core/domains/photo-management/services/PhotoService';
 
 import { EventById } from '../types';
 import { EventsAPI } from './EventsAPI';

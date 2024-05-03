@@ -4,8 +4,7 @@ import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from '
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { PhotoFile } from '@feature/photo-management/types';
-
+import { PhotoFile } from '@core/domains/photo-management/types';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Screen } from '@ui/components/Screen';

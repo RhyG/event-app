@@ -42,7 +42,7 @@ export function EventScreenHeader({ previewImage, photoCount }: { previewImage: 
 
 const stylesFn = ({ colours }: Theme) =>
   StyleSheet.create({
-    imageBackgroundStyle: { height: 280 },
+    imageBackgroundStyle: { height: 220 },
     imageStyle: { borderBottomLeftRadius: 14, borderBottomRightRadius: 14 },
     headerBackgroundStyle: { backgroundColor: colours.black, opacity: 0.35, width: '100%', height: '40%' },
   });

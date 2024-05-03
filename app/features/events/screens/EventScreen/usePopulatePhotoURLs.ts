@@ -2,7 +2,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import { eventPhotosPathsQueryKey } from '@feature/events/api/query-keys';
-import { PhotoAPI } from '@feature/photo-management/api/PhotoAPI';
+
+import { PhotoAPI } from '@core/domains/photo-management/api/PhotoAPI';
 
 /**
  * Used to fetch all the photo urls for an event and populate the query cache with them.

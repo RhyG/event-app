@@ -18,9 +18,6 @@ import { Event } from '../types';
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
-const defaultImage =
-  'https://images.unsplash.com/photo-1501238295340-c810d3c156d2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-
 export function EventCardImage({ photoURL }: { photoURL: string }) {
   const { styles } = useThemedStyles(stylesFn);
 
@@ -29,7 +26,7 @@ export function EventCardImage({ photoURL }: { photoURL: string }) {
 
   return (
     <View style={styles.imageContainer}>
-      <Image style={styles.image} source={previewImage?.signedUrl ?? defaultImage} contentFit="cover" transition={1000} placeholder={blurhash} />
+      <Image style={styles.image} source={previewImage.signedUrl} contentFit="cover" transition={1000} placeholder={blurhash} />
     </View>
   );
 }
