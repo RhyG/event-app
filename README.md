@@ -38,6 +38,7 @@ This is an overview of the main project folders, an in depth architecture will c
 │   │   │   └── theme/       # tokens and theme files
 │   │   ├── lib/             # libraries and shared code for whole app
 │   │   └── modules/         # self-contained core modules and facades
+│   │   └── domains/         # domain logic (e.g. APIs, services) used by the app
 │   ├── i18n/                # internationalisation
 │   ├── navigation/          # app navigator and nav types
 │   └── tests/               # test utilities
@@ -49,9 +50,9 @@ This is an overview of the main project folders, an in depth architecture will c
 
 A feature folder contains all the code for a single feature of the app. A feature is a self-contained piece of functionality, and will hold all the interfaces, logic and UI for that feature. Feature folders will typically contain the following folders:
 
-- `/api` - API files, including Tanstack Query hooks used throughout the feature or imported by other features.
-- `/components` - React components used throughout the feature or imported by other features.
-- `/hooks` - React hooks used throughout the feature or imported by other features.
+- `/api` - API files (predominantly Tanstack Query hooks) used throughout the feature.
+- `/components` - React components used throughout the feature.
+- `/hooks` - React hooks used throughout the feature.
 - `/screens` - Feature screens.
 - `/types` - Types used throughout the feature or imported by other features.
 
