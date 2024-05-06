@@ -3,8 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useSetUser } from '@feature/account';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
-import { useSetUser } from '@feature/user';
 
 import { AuthAPI } from '@core/domains/auth/api/AuthAPI';
 import { useToastContext } from '@core/providers/ToastProvider';

@@ -1,6 +1,6 @@
 import { RenderOptions, render } from '@testing-library/react-native';
 
-import { UserProvider } from '@feature/user';
+import { UserProvider } from '@feature/account';
 
 import { QueryClientProvider } from '@core/providers/QueryClientProvider';
 

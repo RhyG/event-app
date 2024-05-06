@@ -1,4 +1,4 @@
-import { useSetUser } from '@app/features/user';
+import { useSetUser } from '@feature/account';
 
 import { AuthAPI } from '../api/AuthAPI';
 

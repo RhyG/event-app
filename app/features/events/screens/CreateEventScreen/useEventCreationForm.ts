@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useUserContext } from '@feature/user';
+import { useUserContext } from '@feature/account';
 
 import { createEvent } from '@core/domains/events/services/EventService';
 import { queryClient } from '@core/providers/QueryClientProvider';

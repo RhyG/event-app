@@ -1,6 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import { AccountScreenName } from '@feature/account';
 import { CreateEventScreenName } from '@feature/events';
 import { AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import type { ConfirmPhotosScreenName, ConfirmPhotosScreenParams } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
@@ -11,7 +12,6 @@ import type { PhotoCarouselScreenName, PhotoCarouselScreenParams } from '@featur
 import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 import { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';
 import { ResetPasswordScreenName } from '@feature/onboarding/screens/ResetPasswordScreen/ResetPasswordScreen';
-import { AccountScreenName } from '@feature/user';
 
 import { EmailSignUpScreenName, WelcomeScreenName } from '@core/domains/auth';
 
