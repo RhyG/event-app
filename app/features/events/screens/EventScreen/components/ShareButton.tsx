@@ -2,7 +2,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { useToastContext } from '@core/context/ToastProvider';
+import { useToastContext } from '@core/context/ToastContext';
 import { getEventInvite } from '@core/domains/events/services/EventService';
 
 import { Icon } from '@ui/components/Icon';

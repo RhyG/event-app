@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRef } from 'react';
 
-import { useToastContext } from '@core/context/ToastProvider';
+import { useToastContext } from '@core/context/ToastContext';
 import { EventsAPI } from '@core/domains/events/api/EventsAPI';
 import { eventDetailsQueryKey } from '@core/domains/events/api/query-keys';
 import { Event } from '@core/domains/events/types';

@@ -3,7 +3,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
 import { QueryClientProvider } from '@core/context/QueryClientProvider';
-import { ToastProvider } from '@core/context/ToastProvider';
+import { ToastProvider } from '@core/context/ToastContext';
 import { UserProvider } from '@core/domains/user/context/UserContext';
 import '@core/lib/polyfills';
 

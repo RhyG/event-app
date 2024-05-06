@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useToastContext } from '@core/context/ToastProvider';
+import { useToastContext } from '@core/context/ToastContext';
 import { EventsAPI } from '@core/domains/events/api/EventsAPI';
 
 import { EventScreenName } from '../EventScreen/EventScreen';
