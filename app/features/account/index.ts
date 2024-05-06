@@ -1,4 +1,4 @@
-export * from '../../core/domains/user/context/UserContext';
+export * from '../../core/context/UserContext';
 
 export * from '../../core/domains/user/services/UserService';
 

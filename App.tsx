@@ -4,7 +4,7 @@ import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-c
 
 import { QueryClientProvider } from '@core/context/QueryClientProvider';
 import { ToastProvider } from '@core/context/ToastContext';
-import { UserProvider } from '@core/domains/user/context/UserContext';
+import { UserProvider } from '@core/context/UserContext';
 import '@core/lib/polyfills';
 
 import { Toast } from '@ui/components/Toast';

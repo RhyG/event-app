@@ -1,4 +1,4 @@
-import { useSetUser } from '@core/domains/user/context/UserContext';
+import { useSetUser } from '@core/context/UserContext';
 
 import { AuthAPI } from '../api/AuthAPI';
 
