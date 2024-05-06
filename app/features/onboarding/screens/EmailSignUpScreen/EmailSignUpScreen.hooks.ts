@@ -6,8 +6,8 @@ import { z } from 'zod';
 import { useSetUser } from '@feature/account';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 
+import { useToastContext } from '@core/context/ToastProvider';
 import { AuthAPI } from '@core/domains/auth/api/AuthAPI';
-import { useToastContext } from '@core/providers/ToastProvider';
 
 // Schemas are fine here for now just be conscious of re-use
 // and if shared move to a schema folder for the feature.

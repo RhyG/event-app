@@ -6,9 +6,9 @@ import { z } from 'zod';
 
 import { useUserContext } from '@feature/account';
 
+import { queryClient } from '@core/context/QueryClientProvider';
+import { useToastContext } from '@core/context/ToastProvider';
 import { createEvent } from '@core/domains/events/services/EventService';
-import { queryClient } from '@core/providers/QueryClientProvider';
-import { useToastContext } from '@core/providers/ToastProvider';
 
 import { EventScreenName } from '../EventScreen/EventScreen';
 

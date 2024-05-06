@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import { useToastContext } from '@core/providers/ToastProvider';
+import { useToastContext } from '@core/context/ToastProvider';
 
 import { theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';

@@ -2,7 +2,7 @@ import { RenderOptions, render } from '@testing-library/react-native';
 
 import { UserProvider } from '@feature/account';
 
-import { QueryClientProvider } from '@core/providers/QueryClientProvider';
+import { QueryClientProvider } from '@core/context/QueryClientProvider';
 
 const RenderWithProviders = ({ children }: React.PropsWithChildren<Record<string, unknown>>) => {
   return (

@@ -2,11 +2,10 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
-import { QueryClientProvider } from '@app/core/providers/QueryClientProvider';
-
+import { QueryClientProvider } from '@core/context/QueryClientProvider';
+import { ToastProvider } from '@core/context/ToastProvider';
 import { UserProvider } from '@core/domains/user/context/UserContext';
 import '@core/lib/polyfills';
-import { ToastProvider } from '@core/providers/ToastProvider';
 
 import { Toast } from '@ui/components/Toast';
 

@@ -1,7 +1,7 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 
+import { useToastContext } from '@core/context/ToastProvider';
 import { getEventInvite } from '@core/domains/events/services/EventService';
-import { useToastContext } from '@core/providers/ToastProvider';
 
 function copyEventInviteToClipboard(eventName: string, eventAccessCode: string) {
   const invite = getEventInvite(eventName, eventAccessCode);
