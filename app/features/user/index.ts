@@ -1,7 +1,7 @@
-export * from './context/UserContext';
+export * from '../../core/domains/user/context/UserContext';
 
-export * from './services/UserService';
+export * from '../../core/domains/user/services/UserService';
 
-export * from './types';
+export * from '../../core/domains/user/types';
 
 export * from './screens/AccountScreen';

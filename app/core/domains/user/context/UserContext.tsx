@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, createContext, useEffect, useReducer } from 'react';
 import { Text, View } from 'react-native';
 
-import * as UserService from '@app/features/user/services/UserService';
-import { User } from '@app/features/user/types';
+import * as UserService from '../services/UserService';
+import { User } from '../types';
 
 interface UserContextProps {
   user: User | null;
