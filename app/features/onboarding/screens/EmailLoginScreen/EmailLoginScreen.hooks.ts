@@ -6,7 +6,8 @@ import { z } from 'zod';
 
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
 
-import { useLogin } from '@core/domains/auth/hooks/useLogin';
+import { useSetUser } from '@core/context/UserContext';
+import { loginUser as _loginUser } from '@core/domains/auth/services/AuthService';
 
 const EmailLoginSchema = z.object({
   email: z.string().email(),
@@ -26,17 +27,16 @@ export function useCreateAccountPress() {
 }
 
 export function useEmailLoginForm() {
+  const setUser = useSetUser();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { handleSubmit, ...rest } = useForm<z.infer<typeof EmailLoginSchema>>({
     resolver: zodResolver(EmailLoginSchema),
   });
 
-  const _loginUser = useLogin();
-
   async function loginUser({ email, password }: { email: string; password: string }) {
     setIsSubmitting(true);
-    await _loginUser({ email, password });
+    await _loginUser({ email, password, onSuccess: setUser });
     setIsSubmitting(false);
   }
 
