@@ -11,3 +11,13 @@ export async function loginUser({ email, password, onSuccess }: { email: string;
     console.log(error);
   }
 }
+
+export async function logoutUser(onSuccess: () => void) {
+  try {
+    const result = await AuthAPI.logout();
+
+    if (result === 'SUCCESS') onSuccess();
+  } catch (error) {
+    console.error(error);
+  }
+}
