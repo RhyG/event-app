@@ -38,7 +38,7 @@ This is an overview of the main project folders, an in depth architecture will c
 │   │   │   └── theme/       # tokens and theme files
 │   │   ├── lib/             # libraries and shared code for whole app
 │   │   └── modules/         # self-contained core modules and facades
-│   │   └── domains/         # domain logic (e.g. APIs, services) used by the app
+│   │   └── domains/         # domain logic (e.g. APIs, services) used throughout the app
 │   ├── i18n/                # internationalisation
 │   ├── navigation/          # app navigator and nav types
 │   └── tests/               # test utilities

@@ -11,9 +11,9 @@ import { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/Joi
 import type { PhotoCarouselScreenName, PhotoCarouselScreenParams } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
 import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 import { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';
+import { EmailSignUpScreenName } from '@feature/onboarding/screens/EmailSignUpScreen/EmailSignUpScreen';
 import { ResetPasswordScreenName } from '@feature/onboarding/screens/ResetPasswordScreen/ResetPasswordScreen';
-
-import { EmailSignUpScreenName, WelcomeScreenName } from '@core/domains/auth';
+import { WelcomeScreenName } from '@feature/onboarding/screens/WelcomeScreen/WelcomeScreen';
 
 export type TabParamList = {
   HomeTab: NavigatorScreenParams<Record<string, never>>;
