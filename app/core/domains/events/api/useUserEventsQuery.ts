@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useUserContext } from '@feature/account';
+import { useUserContext } from '@core/context/UserContext';
 
 import { Event } from '../types';
 import { EventsAPI } from './EventsAPI';
