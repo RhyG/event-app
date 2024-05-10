@@ -11,8 +11,8 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-import { useEventPreviewImageQuery } from '../../../core/domains/events/api/useEventPreviewQuery';
 import { Event } from '../../../core/domains/events/types';
+import { useEventPreviewImageQuery } from '../api/useEventPreviewQuery';
 import { EventScreenName } from '../screens/EventScreen/EventScreen';
 
 const blurhash =
