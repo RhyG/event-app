@@ -77,7 +77,9 @@ The `index.ts` file in the root of a feature folder then acts as the public inte
 
 ### The `core` folder
 
-`/app/core` is where shared, non feature specific, functionality lives. It's important to consider if something is truly shared before adding it here. I swear to fuck if this just blows out into a big old dumping ground of shit I'm moving to the bush to farm witchetty grubs for a living.
+`app/core/domains` is where services containing business logic live. These are framework agnostic, loosely coupled, and used throughout the application. This is where business logic should live to prevent tightly coupling feature folders.
+
+The remainder of `/app/core` is where shared, non feature specific, functionality lives. It's important to consider if something is truly shared before adding it here.
 
 Where applicable, files within the `lib` folder should be _domain_ specific, rather than single use files. E.g. `date.ts` will contain all date functions.
 
@@ -101,7 +103,7 @@ Feature arch is split into four main parts:
 
 - API files - These are the files responsible for communicating with BE services. These files do nothing but send requests and receives responses, then either returning the data or throwing an error if something went wrong. They should be relatively lean and not contain any business logic.
 - Services - These are the files responsible for the business logic of the feature. For the most part these are what are implementing the API files. They handle errors, manipulate data, and act as the brains of much of the code. They should be framework agnostic, and not contain React specific code whatsoever. Their inputs and outputs should be clear as possible, and they should be easily testable.
-- Hooks - These are the files that take the services and turn them into something React can use. In a way these act as the `ViewModel` for views, and provide for the React views the data and functions they need to render.
+- Hooks - These are the files that take the services and turn them into something React can use. In a way these act as the `ViewModel` for views, and provide for the React views the data and functions they need to render. They're the layer that integrates the framework agnostic business logic with the framework.
 - Views - These are the React files rendering the UI. They should be as "dumb" as possible in that they contain no business logic, only logic related to rendering the UI. They should otherwise implement the hooks to get what they need.
 
 The flow of data through a feature should hopefully be as standardised and clear as possible, with data entering the API via an API file, being validated and transformed by a service file, translated into something React can render by a hook, then being rendered by a view.
