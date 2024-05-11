@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AccountScreen, AccountScreenName } from '@feature/account';
 import { CreateEventScreen, CreateEventScreenName, JoinEventScreen, JoinEventScreenName } from '@feature/events';
-import { AllEventsScreen, AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import { ConfirmPhotosScreen, ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { EditEventScreen, EditEventScreenName } from '@feature/events/screens/EditEventScreen/EditEventScreen';
 import { EventScreen, EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
@@ -25,7 +24,6 @@ function HomeTabStack() {
   return (
     <RootStack.Navigator initialRouteName={HomeScreenName} screenOptions={{ headerBackTitleVisible: false, headerShadowVisible: false }}>
       <RootStack.Screen name={HomeScreenName} component={HomeScreen} />
-      <RootStack.Screen name={AllEventsScreenName} component={AllEventsScreen} />
       <RootStack.Screen name={JoinEventScreenName} component={JoinEventScreen} options={{ title: 'Join Event' }} />
       <RootStack.Screen name={EventScreenName} component={EventScreen} />
       <RootStack.Screen name={ConfirmPhotosScreenName} component={ConfirmPhotosScreen} />
