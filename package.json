@@ -15,7 +15,8 @@
     "build:prod:ios": "npx eas build --profile production-simulator --platform ios",
     "build:dev:android": "eas build --profile development --platform android",
     "build:prod:android": "eas build --profile production --platform android",
-    "test": "jest"
+    "test": "jest",
+    "check-deps": "npm outdated"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.574.0",
