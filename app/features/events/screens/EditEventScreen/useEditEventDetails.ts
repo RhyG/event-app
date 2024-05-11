@@ -1,4 +1,5 @@
-import { useEventDetailsQuery } from '@core/domains/events/api/useEventQuery';
+import { useEventDetailsQuery } from '@feature/events/api/useEventQuery';
+
 import { EventById } from '@core/domains/events/types';
 
 function selector(data: EventById) {

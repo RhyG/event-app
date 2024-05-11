@@ -1,10 +1,10 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 
-import { getEventPhotos } from '@core/domains/photo-management/services/PhotoService';
+import { eventDetailsQueryKey, eventPhotosQueryKey } from '@feature/events/api/query-keys';
 
-import { EventById } from '../types';
-import { EventsAPI } from './EventsAPI';
-import { eventDetailsQueryKey, eventPhotosQueryKey } from './query-keys';
+import { EventsAPI } from '@core/domains/events/api/EventsAPI';
+import { EventById } from '@core/domains/events/types';
+import { getEventPhotos } from '@core/domains/photo-management/services/PhotoService';
 
 export function useEventDetailsQuery<TSelector = undefined>(
   eventId: string,

@@ -2,9 +2,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRef } from 'react';
 
+import { eventDetailsQueryKey } from '@feature/events/api/query-keys';
+
 import { useToastContext } from '@core/context/ToastContext';
 import { EventsAPI } from '@core/domains/events/api/EventsAPI';
-import { eventDetailsQueryKey } from '@core/domains/events/api/query-keys';
 import { Event } from '@core/domains/events/types';
 
 export function useEditEventForm(currentDetails: Pick<Event, 'event_name' | 'event_description' | 'event_date'>, eventId: string) {
