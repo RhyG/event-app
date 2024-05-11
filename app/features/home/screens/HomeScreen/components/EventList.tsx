@@ -1,8 +1,8 @@
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 import { EventCard } from '@feature/events/components/EventCard';
+import { useAllEventsQuery } from '@feature/home/api/useEventsQuery';
 
-import { useAllEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
 import { Event } from '@core/domains/events/types';
 
 function selectSortedEvents(events: Event[]) {

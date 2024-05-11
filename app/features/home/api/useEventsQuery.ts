@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useUserContext } from '@core/context/UserContext';
 
-import { Event } from '../types';
-import { EventsAPI } from './EventsAPI';
+import { EventsAPI } from '../../../core/domains/events/api/EventsAPI';
+import { Event } from '../../../core/domains/events/types';
 
 const userEventsQueryKey = ['events'];
 

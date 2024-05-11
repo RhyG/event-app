@@ -4,8 +4,8 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { EventCard } from '@feature/events/components/EventCard';
 import { AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
+import { usePreviousEventsQuery } from '@feature/home/api/useEventsQuery';
 
-import { usePreviousEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
 import { Event } from '@core/domains/events/types';
 
 import { Text } from '@ui/components/Text';

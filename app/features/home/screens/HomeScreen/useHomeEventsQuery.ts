@@ -1,4 +1,4 @@
-import { useAllEventsQuery } from '@core/domains/events/api/useUserEventsQuery';
+import { useAllEventsQuery } from '@feature/home/api/useEventsQuery';
 
 export function useHomeEventsQuery() {
   const data = useAllEventsQuery();
