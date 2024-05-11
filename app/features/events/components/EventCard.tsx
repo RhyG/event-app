@@ -13,7 +13,9 @@ import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { Event } from '../../../core/domains/events/types';
 import { useEventPreviewImageQuery } from '../api/useEventPreviewQuery';
+import { ConfirmPhotosScreenName } from '../screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { EventScreenName } from '../screens/EventScreen/EventScreen';
+import { useImagePicker } from '../screens/EventScreen/useImagePicker';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
@@ -35,6 +37,10 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
   const navigation = useNavigation();
 
   const { styles, theme } = useThemedStyles(stylesFn);
+
+  const { pickImages } = useImagePicker({
+    onSuccess: photos => navigation.navigate(ConfirmPhotosScreenName, { photos, eventId: id }),
+  });
 
   const formattedDate = isToday(event_date) ? 'Today' : formatTimestamp(event_date);
 
@@ -61,7 +67,7 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
         <HBox gap="extraSmall" pt="small">
           <Button
             preset="secondary"
-            onPress={() => console.log('Upload photos')}
+            onPress={pickImages}
             label="Add Photos"
             style={{ flex: 6 }}
             LeftAccessory={() => <Icon family="Feather" name="plus" size={20} />}
