@@ -31,7 +31,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@shopify/flash-list": "1.6.4",
     "@supabase/supabase-js": "^2.42.0",
-    "@tanstack/react-query": "^5.28.14",
+    "@tanstack/react-query": "^5.35.5",
     "base64-arraybuffer": "^1.0.2",
     "expo": "^50.0.14",
     "expo-blur": "^12.9.2",
@@ -54,7 +54,7 @@
     "react-native-screens": "~3.30.1",
     "react-native-url-polyfill": "^2.0.0",
     "web-streams-polyfill": "^4.0.0",
-    "zod": "^3.22.4",
+    "zod": "^3.23.8",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
@@ -83,7 +83,7 @@
     "react-test-renderer": "^18.2.0",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "private": true
 }
