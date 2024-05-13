@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import { useCopyEventInvite } from '@core/hooks/useCopyEventInvite';
 import { formatTimestamp, isToday } from '@core/lib/date';
 
 import { Button } from '@ui/components/Button';
@@ -33,7 +34,7 @@ export function EventCardImage({ photoURL }: { photoURL: string }) {
   );
 }
 
-export function EventCard({ event_name, event_date, preview_url, id }: Event) {
+export function EventCard({ event_name, event_date, preview_url, id, access_code }: Event) {
   const navigation = useNavigation();
 
   const { styles, theme } = useThemedStyles(stylesFn);
@@ -41,6 +42,8 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
   const { pickImages } = useImagePicker({
     onSuccess: photos => navigation.navigate(ConfirmPhotosScreenName, { photos, eventId: id }),
   });
+
+  const copyEventInvite = useCopyEventInvite();
 
   const formattedDate = isToday(event_date) ? 'Today' : formatTimestamp(event_date);
 
@@ -73,7 +76,7 @@ export function EventCard({ event_name, event_date, preview_url, id }: Event) {
             LeftAccessory={() => <Icon family="Feather" name="plus" size={20} />}
           />
 
-          <Button preset="secondary" onPress={() => console.log('Share event')} label="View Event" style={{ flex: 1 }}>
+          <Button preset="secondary" onPress={() => copyEventInvite(event_name, access_code)} label="View Event" style={{ flex: 1 }}>
             <Icon family="Feather" name="share" size={16} />
           </Button>
         </HBox>

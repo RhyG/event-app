@@ -43,7 +43,7 @@ export const EventsAPI = {
     return data as Event;
   },
   async getUserEvents(userId: string): Promise<Array<Event>> {
-    const { data, error } = await supabase.from('Events').select('id,event_name,event_date,preview_url').eq('host_id', userId);
+    const { data, error } = await supabase.from('Events').select('id,event_name,event_date,preview_url,access_code').eq('host_id', userId);
 
     if (error) throw error;
 
