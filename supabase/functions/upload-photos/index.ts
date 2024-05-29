@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { PutObjectCommand, S3Client } from 'npm:@aws-sdk/client-s3';
+import { PutObjectCommand, PutObjectCommandInput, S3Client } from 'npm:@aws-sdk/client-s3';
 
 const AWS_ACCESS_KEY_ID = Deno.env.get('AWS_ACCESS_KEY_ID');
 const AWS_SECRET_ACCESS_KEY = Deno.env.get('AWS_SECRET_ACCESS_KEY');
@@ -25,10 +25,13 @@ Deno.serve(async req => {
 
   const fileStream = file.stream();
 
-  const uploadParams = {
+  const { eventId, photoId } = await req.json();
+
+  const uploadParams: PutObjectCommandInput = {
     Bucket: S3_BUCKET_NAME,
-    Key: file.name, // TODO: Update to match `eventId/photoId` naming convention
+    Key: `${eventId}/${photoId}.jpeg`,
     Body: fileStream,
+    ContentType: 'image/jpeg',
   };
 
   try {
