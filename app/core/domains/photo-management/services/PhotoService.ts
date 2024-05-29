@@ -81,7 +81,7 @@ export async function _uploadPhoto(eventId: string, file: string) {
  * @returns an array of signed URLs to the uploaded photos.
  */
 export async function uploadPhotos(eventId: string, files: PhotoFile[]) {
-  const uploaded = await Promise.allSettled(files.map(file => uploadPhoto(eventId, file.base64)));
+  const uploaded = await Promise.allSettled(files.map(file => uploadPhoto(eventId, file.uri)));
 
   return uploaded
     .filter((response): response is PromiseFulfilledResult<{ signedUrl: string }> => response.status === 'fulfilled')

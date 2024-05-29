@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { PhotoAPI } from '@core/domains/photo-management/api/PhotoAPI';
 import { getPhoto } from '@core/domains/photo-management/services/PhotoService';
 
 export const eventPreviewQueryKey = (photoURL: string) => ['eventPreview', photoURL] as const;
