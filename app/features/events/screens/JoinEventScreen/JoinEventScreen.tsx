@@ -3,6 +3,7 @@ import { Controller } from 'react-hook-form';
 
 import { ScreenProp } from '@app/navigation/types';
 
+import { QRCodeScannerScreenName } from '@feature/code-scanning/screens/QRCodeScannerScreen/QRCodeScannerScreen';
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
@@ -14,7 +15,7 @@ import { useTheme } from '@ui/theme/useTheme';
 
 import { useJoinEventForm } from './JoinEventScreen.hooks';
 
-export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
+export function JoinEventScreen({ navigation }: ScreenProp<typeof JoinEventScreenName>) {
   const theme = useTheme();
 
   const {
@@ -59,7 +60,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<'JoinEventScreen'>) {
         <Text align="center" colour={theme.colours.textSubdued}>
           {I18n.t('joinEventScreen.scanQrCode')}
         </Text>
-        <Button preset="outlined" onPress={() => navigation.navigate('QRCodeScannerScreen')} label={I18n.t('joinEventScreen.openCamera')} />
+        <Button preset="outlined" onPress={() => navigation.navigate(QRCodeScannerScreenName)} label={I18n.t('joinEventScreen.openCamera')} />
       </VBox>
     </WelcomeFlowScreen>
   );

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AccountScreen, AccountScreenName } from '@feature/account';
+import { QRCodeScannerScreen, QRCodeScannerScreenName } from '@feature/code-scanning/screens/QRCodeScannerScreen/QRCodeScannerScreen';
 import { CreateEventScreen, CreateEventScreenName, JoinEventScreen, JoinEventScreenName } from '@feature/events';
 import { ConfirmPhotosScreen, ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { EditEventScreen, EditEventScreenName } from '@feature/events/screens/EditEventScreen/EditEventScreen';
@@ -29,6 +30,7 @@ function HomeTabStack() {
       <RootStack.Screen name={ConfirmPhotosScreenName} component={ConfirmPhotosScreen} />
       <RootStack.Screen name={EditEventScreenName} component={EditEventScreen} />
       <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}>
+        <RootStack.Screen name={QRCodeScannerScreenName} component={QRCodeScannerScreen} />
         <RootStack.Screen name={PhotoCarouselScreenName} component={PhotoCarouselScreen} />
       </RootStack.Group>
     </RootStack.Navigator>
@@ -94,6 +96,7 @@ export function AppNavigator() {
             <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}>
               <RootStack.Screen name={PhotoCarouselScreenName} component={PhotoCarouselScreen} />
             </RootStack.Group>
+            <RootStack.Screen name={QRCodeScannerScreenName} component={QRCodeScannerScreen} />
           </>
         )}
       </RootStack.Navigator>
