@@ -9,7 +9,7 @@ export function SelectedIndicator() {
 
   return (
     <View style={styles.selectedIndicator}>
-      <Icon family="Feather" name="check" size={12} color="white" />
+      <Icon name="check" size={12} color="white" />
     </View>
   );
 }

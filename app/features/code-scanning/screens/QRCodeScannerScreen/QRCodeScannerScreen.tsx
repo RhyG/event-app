@@ -10,8 +10,8 @@ import { VBox } from '@ui/components/layout/Box';
 
 function CloseButton({ onPress }: { onPress: () => void }) {
   return (
-    <Button onPress={onPress} style={{ position: 'absolute', top: 16, right: 16 }}>
-      <Icon family="Feather" name="x" size={32} color="white" />
+    <Button onPress={onPress} style={{ position: 'absolute', top: 60, right: 20 }}>
+      <Icon name="x" size={32} color="white" />
     </Button>
   );
 }

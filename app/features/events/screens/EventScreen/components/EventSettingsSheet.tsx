@@ -37,7 +37,7 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
   useHeaderOptions({
     headerRight: () => (
       <TouchableOpacity onPress={openSheet} hitSlop={{ left: 30, top: 40, right: 40, bottom: 40 }}>
-        <Icon family="Feather" name="menu" size={26} color={theme.colours.white} />
+        <Icon name="menu" size={26} color={theme.colours.white} />
       </TouchableOpacity>
     ),
   });
@@ -72,16 +72,12 @@ export function EventSettingsSheet({ accessCode, eventName, eventId }: { accessC
         <SettingsRow
           label={I18n.t('eventScreen.shareEventInvite')}
           onPress={() => copyEventInvite(eventName, accessCode)}
-          icon={<Icon family="Feather" name="share" size={20} />}
+          icon={<Icon name="share" size={20} />}
         />
-        <SettingsRow
-          label={I18n.t('eventScreen.copyEventAccessCode')}
-          onPress={() => copyEventAccessCode(accessCode)}
-          icon={<Icon family="Feather" name="copy" size={20} />}
-        />
+        <SettingsRow label={I18n.t('eventScreen.copyEventAccessCode')} onPress={() => copyEventAccessCode(accessCode)} icon={<Icon name="copy" size={20} />} />
         {/* TODO: Link to printable PDF hosted somewhere that shows the QR code and a nice message */}
         <SettingsRow label={I18n.t('eventScreen.generateQRCode')} onPress={() => {}} icon={<Icon family="AntDesign" name="qrcode" size={20} />} />
-        <SettingsRow label={I18n.t('eventScreen.editEvent')} onPress={navigateToEditEventScreen} icon={<Icon family="Feather" name="edit-2" size={20} />} />
+        <SettingsRow label={I18n.t('eventScreen.editEvent')} onPress={navigateToEditEventScreen} icon={<Icon name="edit-2" size={20} />} />
       </VBox>
     </BottomSheetModal>
   );

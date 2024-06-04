@@ -15,7 +15,7 @@ function NotificationIcon() {
   return (
     <>
       <TouchableOpacity style={styles.notificationIconContainer}>
-        <Icon family="Feather" name="bell" size={18} />
+        <Icon name="bell" size={18} />
       </TouchableOpacity>
       {hasNotifications ? <View style={styles.notificationIndicator} /> : null}
     </>

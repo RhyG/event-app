@@ -28,7 +28,7 @@ function NoEventsView({ onCreateEventPress, onJoinEventPress }: { onCreateEventP
 
 function JoinEventButton({ onPress, style }: { onPress: () => void; style?: ViewStyle }) {
   return (
-    <Button onPress={onPress} preset="outlined" style={style} LeftAccessory={() => <Icon family="Feather" name="user-plus" size={18} />}>
+    <Button onPress={onPress} preset="outlined" style={style} LeftAccessory={() => <Icon name="user-plus" size={18} />}>
       {I18n.t('homeScreen.joinEvent')}
     </Button>
   );
@@ -36,7 +36,7 @@ function JoinEventButton({ onPress, style }: { onPress: () => void; style?: View
 
 function CreateEventButton({ onPress, style }: { onPress: () => void; style?: ViewStyle }) {
   return (
-    <Button onPress={onPress} style={style} LeftAccessory={() => <Icon family="Feather" name="plus" size={18} color="white" />}>
+    <Button onPress={onPress} style={style} LeftAccessory={() => <Icon name="plus" size={18} color="white" />}>
       {I18n.t('homeScreen.createEvent')}
     </Button>
   );

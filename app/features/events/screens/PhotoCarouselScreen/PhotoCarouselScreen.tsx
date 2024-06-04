@@ -111,7 +111,7 @@ export function PhotoCarouselScreen({ route, navigation }: ScreenProp<typeof Pho
         ) : null}
       </View>
       <TouchableOpacity onPress={() => navigation.pop()} style={{ position: 'absolute', right: 20, top: 40 }}>
-        <Icon family="Feather" name="x" size={24} color="white" />
+        <Icon name="x" size={24} color="white" />
       </TouchableOpacity>
     </>
   );

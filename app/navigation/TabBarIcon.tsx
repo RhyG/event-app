@@ -12,5 +12,5 @@ const focusedColour = colours.sky['800'];
 const blurredColour = colours.slate['500'];
 
 export function TabBarIcon(props: TabBarIconProps) {
-  return <Icon family="Feather" name={props.name} size={24} color={props.focused ? focusedColour : blurredColour} />;
+  return <Icon name={props.name} size={24} color={props.focused ? focusedColour : blurredColour} />;
 }

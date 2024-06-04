@@ -68,16 +68,10 @@ export function EventCard({ event_name, event_date, preview_url, id, access_code
         </HBox>
 
         <HBox gap="extraSmall" pt="small">
-          <Button
-            preset="secondary"
-            onPress={pickImages}
-            label="Add Photos"
-            style={{ flex: 6 }}
-            LeftAccessory={() => <Icon family="Feather" name="plus" size={20} />}
-          />
+          <Button preset="secondary" onPress={pickImages} label="Add Photos" style={{ flex: 6 }} LeftAccessory={() => <Icon name="plus" size={20} />} />
 
           <Button preset="secondary" onPress={() => copyEventInvite(event_name, access_code)} label="View Event" style={{ flex: 1 }}>
-            <Icon family="Feather" name="share" size={16} />
+            <Icon name="share" size={16} />
           </Button>
         </HBox>
       </VBox>

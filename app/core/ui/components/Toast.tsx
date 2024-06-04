@@ -15,14 +15,14 @@ const TOAST_DURATION = 3000;
 
 function ToastIcon({ type }: { type: 'ERROR' | 'SUCCESS' | 'INFO' }) {
   if (type === 'ERROR') {
-    return <Icon family="Feather" name="alert-circle" size={20} color={theme.colours.angry} />;
+    return <Icon name="alert-circle" size={20} color={theme.colours.angry} />;
   }
 
   if (type === 'SUCCESS') {
     return <Icon family="Octicons" name="check-circle" size={20} color={theme.colours.success} />;
   }
 
-  return <Icon family="Feather" name="info" size={20} color={theme.colours.palette.blue['400']} />;
+  return <Icon name="info" size={20} color={theme.colours.palette.blue['400']} />;
 }
 
 export function Toast() {

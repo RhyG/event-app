@@ -24,7 +24,7 @@ export function PasswordInput({ onChangeText, optional, label, placeholder, ...p
       autoCapitalize="none"
       RightAccessory={() => (
         <TouchableOpacity onPress={toggleHidden}>
-          <Icon family="Feather" name={`eye${hidden ? '' : '-off'}`} size={20} />
+          <Icon name={`eye${hidden ? '' : '-off'}`} size={20} />
         </TouchableOpacity>
       )}
     />

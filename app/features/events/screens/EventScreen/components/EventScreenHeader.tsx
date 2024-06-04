@@ -17,7 +17,7 @@ function PhotoCountView({ count }: { count: number }) {
     <View style={photoCountStyles.container}>
       <BlurView style={photoCountStyles.blurView} intensity={15}>
         <HBox gap="small" alignItems="center" ph="medium" pv="extraSmall">
-          <Icon family="Feather" name="camera" size={20} color="white" />
+          <Icon name="camera" size={20} color="white" />
           <Text colour="white">{count}</Text>
         </HBox>
       </BlurView>
