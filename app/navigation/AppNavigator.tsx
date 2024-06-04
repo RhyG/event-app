@@ -96,7 +96,11 @@ export function AppNavigator() {
             <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}>
               <RootStack.Screen name={PhotoCarouselScreenName} component={PhotoCarouselScreen} />
             </RootStack.Group>
-            <RootStack.Screen name={QRCodeScannerScreenName} component={QRCodeScannerScreen} />
+            <RootStack.Screen
+              name={QRCodeScannerScreenName}
+              component={QRCodeScannerScreen}
+              options={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}
+            />
           </>
         )}
       </RootStack.Navigator>
