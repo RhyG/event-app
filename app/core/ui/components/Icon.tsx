@@ -18,14 +18,18 @@ const IconFamilyMap: Record<IconFamily, React.ComponentType<GenericIconProps>> =
 };
 
 interface Props extends GenericIconProps {
-  family: keyof typeof IconFamilyMap;
+  /**
+   * Font family to use - try to stick to feather to maintain UI consistency
+   * @default Feather
+   */
+  family?: keyof typeof IconFamilyMap;
 }
 
 /**
- * Wrapper around icons exported by @expo/vector-icons
+ * Wrapper around icons exported by `@expo/vector-icons`
  * @link For all icons see https://icons.expo.fyi/
  */
-export function Icon({ family, ...props }: Props) {
+export function Icon({ family = 'Feather', ...props }: Props) {
   const theme = useTheme();
 
   const IconComponent = IconFamilyMap[family];
