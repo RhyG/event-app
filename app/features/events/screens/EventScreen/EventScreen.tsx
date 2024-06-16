@@ -26,6 +26,14 @@ import { ShareButton } from './components/ShareButton';
 import { useImagePicker } from './useImagePicker';
 import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
 
+function InterimStateWrapper({ text }: { text: string }) {
+  return (
+    <VBox flex={1} justifyContent="center" alignItems="center">
+      <Text>{text}</Text>
+    </VBox>
+  );
+}
+
 export function EventScreen(props: ScreenProp<typeof EventScreenName>) {
   const { shouldPreventBack } = props.route.params;
 
@@ -69,11 +77,11 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
   }
 
   if (isLoading) {
-    return <Text>Loading</Text>;
+    return <InterimStateWrapper text="Loading" />;
   }
 
   if (isError) {
-    return <Text>Error</Text>;
+    return <InterimStateWrapper text="Error" />;
   }
 
   if (!event) return null;
