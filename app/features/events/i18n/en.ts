@@ -22,6 +22,9 @@ export const en = {
   editEventScreen: {
     heading: 'Edit Event',
     updateButton: 'Update Event Details',
+    deleteEvent: 'Delete Event',
+    deleteEventAlertTitle: 'Are you sure you wish to delete',
+    deleteEventAlertMessage: 'Event and all photos will be permanently deleted.',
   },
   eventCommon: {
     name: 'Name',

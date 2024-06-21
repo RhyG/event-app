@@ -1,5 +1,5 @@
 import I18n from 'i18n-js';
-import { StyleSheet } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
@@ -23,6 +23,10 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
 
   if (!data) {
     return null;
+  }
+
+  function deleteEvent() {
+    Alert.alert(`${I18n.t('editEventScreen.deleteEventAlertTitle')} ${data!.event_name}`, I18n.t('editEventScreen.deleteEventAlertMessage'));
   }
 
   const { event_name, event_description, event_date, eventIsInPast } = data;
@@ -51,6 +55,10 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
         {/* TODO: Allow for changing event passwords - probably post V1 */}
 
         <Button onPress={updateEvent} label={I18n.t('editEventScreen.updateButton')} />
+      </VBox>
+
+      <VBox style={{ marginTop: 'auto' }}>
+        <Button label={I18n.t('editEventScreen.deleteEvent')} preset="danger" onPress={deleteEvent} />
       </VBox>
     </WelcomeFlowScreen>
   );
