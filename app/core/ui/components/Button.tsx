@@ -80,6 +80,9 @@ const textPresets = {
   },
   disabled: {},
   secondary: {},
+  danger: {
+    color: theme.button.dangerText,
+  },
 };
 
 const presets = StyleSheet.create({
@@ -95,11 +98,17 @@ const presets = StyleSheet.create({
     ...baseStyles,
     backgroundColor: theme.button.outlinedBackground,
     borderWidth: theme.button.borderWidth,
-    borderColor: theme.button.outlinedBorderColor,
+    borderColor: theme.button.outlinedBorderColour,
   },
   disabled: {
     ...baseStyles,
     backgroundColor: theme.button.disabledBackground,
+  },
+  danger: {
+    ...baseStyles,
+    backgroundColor: theme.colours.white,
+    borderColor: theme.button.dangerBorderColour,
+    borderWidth: theme.button.borderWidth,
   },
 });
 

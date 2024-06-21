@@ -33,14 +33,17 @@ export const theme = {
 
     secondaryBackground: palette.grey['200'],
     secondaryText: colours.textPrimary,
-    secondaryBorderColor: colours.palette.grey['200'],
+    secondaryBorderColour: colours.palette.grey['200'],
 
     outlinedBackground: palette.white,
     outlinedText: colours.textPrimary,
-    outlinedBorderColor: colours.palette.grey['200'],
+    outlinedBorderColour: colours.palette.grey['200'],
 
     disabledBackground: palette.slate['200'],
     disabledText: colours.textPrimary,
+
+    dangerBorderColour: palette.red['500'],
+    dangerText: palette.red['500'],
 
     borderWidth: 1,
     borderRadius: 14,
@@ -48,7 +51,7 @@ export const theme = {
   },
   input: {
     background: palette.white,
-    // borderColor: colours.grey['300'], // TODO these colours when I need this component
+    // borderColour: colours.grey['300'], // TODO these colours when I need this component
     // textColor: colours.grey['900'],
     borderRadius: 14,
     padding: spacing.small,
