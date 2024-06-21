@@ -66,11 +66,10 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
   const { data: event, isLoading, isError } = useEventDetailsQuery(id);
   const { data: photos = [] } = useEventPhotosQuery(id);
 
-  const { data } = useEventPreviewImageQuery({
+  const { data: signedUrl } = useEventPreviewImageQuery({
     photoURL: event?.preview_url ?? '',
     enabled: !!event,
   });
-  const previewImage = { signedUrl: data };
 
   function onImagePress(index: number) {
     navigation.navigate(PhotoCarouselScreenName, { initialIndex: index, eventId: id });
@@ -89,7 +88,7 @@ export function _EventScreen({ route, navigation }: ScreenProp<typeof EventScree
   return (
     <>
       <ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
-        <EventScreenHeader previewImage={previewImage?.signedUrl ?? ''} photoCount={photos.length} />
+        {signedUrl ? <EventScreenHeader previewImage={signedUrl} photoCount={photos.length} /> : null}
 
         <VBox ph="small" mt="base" gap="small">
           <HBox justifyContent="space-between" alignItems="center">
