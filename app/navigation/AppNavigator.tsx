@@ -27,8 +27,6 @@ function HomeTabStack() {
       <RootStack.Screen name={HomeScreenName} component={HomeScreen} />
       <RootStack.Screen name={JoinEventScreenName} component={JoinEventScreen} options={{ title: 'Join Event' }} />
       <RootStack.Screen name={EventScreenName} component={EventScreen} />
-      <RootStack.Screen name={ConfirmPhotosScreenName} component={ConfirmPhotosScreen} />
-      <RootStack.Screen name={EditEventScreenName} component={EditEventScreen} />
       <RootStack.Group screenOptions={{ presentation: 'transparentModal', animation: 'fade', headerShown: false }}>
         <RootStack.Screen name={QRCodeScannerScreenName} component={QRCodeScannerScreen} />
         <RootStack.Screen name={PhotoCarouselScreenName} component={PhotoCarouselScreen} />
@@ -82,6 +80,12 @@ export function AppNavigator() {
             {/* Event creation screens - render above tabs */}
             <RootStack.Group>
               <RootStack.Screen name={CreateEventScreenName} component={CreateEventScreen} options={{ title: 'Create Event' }} />
+            </RootStack.Group>
+
+            {/* Event screens that should be rendered above the tabs */}
+            <RootStack.Group>
+              <RootStack.Screen name={EditEventScreenName} component={EditEventScreen} />
+              <RootStack.Screen name={ConfirmPhotosScreenName} component={ConfirmPhotosScreen} />
             </RootStack.Group>
 
             <RootStack.Screen name="TabNavigator" component={TabNavigator} options={{ headerShown: false }} />
