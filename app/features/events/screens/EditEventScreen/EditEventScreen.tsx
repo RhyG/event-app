@@ -10,13 +10,14 @@ import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { VBox } from '@ui/components/layout/Box';
 
 import { DateInput } from '../CreateEventScreen/DateInput';
-import { useEditEventForm } from './EditEventScreen.hooks';
-import { useEditEventDetails } from './useEditEventDetails';
+import { useDeleteEvent, useEditEventDetails, useEditEventForm } from './EditEventScreen.hooks';
 
 export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName>) {
   const { id } = route.params;
 
   const { data } = useEditEventDetails(id);
+
+  const deleteEvent = useDeleteEvent(id);
 
   // TODO: Narrow in hook, but we can safely assume data is defined.
   const { setDetail, updateEvent } = useEditEventForm(data!, id);
@@ -25,8 +26,15 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
     return null;
   }
 
-  function deleteEvent() {
-    Alert.alert(`${I18n.t('editEventScreen.deleteEventAlertTitle')} ${data!.event_name}`, I18n.t('editEventScreen.deleteEventAlertMessage'));
+  function onDeletePress() {
+    Alert.alert(`${I18n.t('editEventScreen.deleteEventAlertTitle')} ${data!.event_name}`, I18n.t('editEventScreen.deleteEventAlertMessage'), [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      { text: 'Yes', onPress: deleteEvent },
+    ]);
   }
 
   const { event_name, event_description, event_date, eventIsInPast } = data;
@@ -58,7 +66,7 @@ export function EditEventScreen({ route }: ScreenProp<typeof EditEventScreenName
       </VBox>
 
       <VBox style={{ marginTop: 'auto' }}>
-        <Button label={I18n.t('editEventScreen.deleteEvent')} preset="danger" onPress={deleteEvent} />
+        <Button label={I18n.t('editEventScreen.deleteEvent')} preset="danger" onPress={onDeletePress} />
       </VBox>
     </WelcomeFlowScreen>
   );
