@@ -5,7 +5,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
 
-import { useEventPreviewImageQuery } from '@core/domains/events/api/useEventPreviewQuery';
+import { useEventPreviewImageQuery } from '@core/domains/events/api/queries/useEventPreviewQuery';
 import { Event } from '@core/domains/events/types';
 import { useCopyEventInvite } from '@core/hooks/useCopyEventInvite';
 import { useImagePicker } from '@core/hooks/useImagePicker';
