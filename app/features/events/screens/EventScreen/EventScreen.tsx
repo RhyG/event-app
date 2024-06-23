@@ -4,9 +4,8 @@ import { ScrollView, StyleSheet } from 'react-native';
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { useEventPreviewImageQuery } from '@feature/events/api/useEventPreviewQuery';
-import { useEventDetailsQuery, useEventPhotosQuery } from '@feature/events/api/useEventQuery';
-
+import { useEventPreviewImageQuery } from '@core/domains/events/api/useEventPreviewQuery';
+import { useEventDetailsQuery, useEventPhotosQuery } from '@core/domains/events/api/useEventQuery';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';
 import { formatTimestamp } from '@core/lib/date';
@@ -15,6 +14,7 @@ import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { theme } from '@ui/theme/theme';
 
+import { useImagePicker } from '../../../../core/hooks/useImagePicker';
 import { Gallery } from '../../components/Gallery/Gallery';
 import { ConfirmPhotosScreenName } from '../ConfirmPhotosScreen/ConfirmPhotosScreen';
 import { PhotoCarouselScreenName } from '../PhotoCarouselScreen/PhotoCarouselScreen';
@@ -23,7 +23,6 @@ import { EventScreenHeader } from './components/EventScreenHeader';
 import { EventSettingsSheet } from './components/EventSettingsSheet';
 import { EventTags } from './components/EventTags';
 import { ShareButton } from './components/ShareButton';
-import { useImagePicker } from './useImagePicker';
 import { usePopulatePhotoURLs } from './usePopulatePhotoURLs';
 
 function InterimStateWrapper({ text }: { text: string }) {

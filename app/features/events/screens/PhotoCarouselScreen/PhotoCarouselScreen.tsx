@@ -4,8 +4,7 @@ import { ActivityIndicator, Dimensions, FlatList, ListRenderItem, TouchableOpaci
 
 import { ScreenProp } from '@app/navigation/types';
 
-import { eventPhotosPathsQueryKey } from '@feature/events/api/query-keys';
-
+import { eventPhotosPathsQueryKey } from '@core/domains/events/api/query-keys';
 import { getPhoto } from '@core/domains/photo-management/services/PhotoService';
 import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { useRenderAfterInteractions } from '@core/hooks/useRenderAfterInteractions';

@@ -1,4 +1,4 @@
-import { supabase } from '@app/core/lib/supabase';
+import { supabase } from '@core/lib/supabase';
 
 /**
  * Gets the current user in session.

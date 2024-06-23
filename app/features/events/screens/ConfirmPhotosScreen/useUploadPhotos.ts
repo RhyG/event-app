@@ -1,7 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 
-import { eventPhotosQueryKey } from '@feature/events/api/query-keys';
-
+import { eventPhotosQueryKey } from '@core/domains/events/api/query-keys';
 import { PhotosModule } from '@core/domains/photo-management/modules/PhotosModule';
 import { _uploadPhoto } from '@core/domains/photo-management/services/PhotoService';
 import { PhotoFile } from '@core/domains/photo-management/types';

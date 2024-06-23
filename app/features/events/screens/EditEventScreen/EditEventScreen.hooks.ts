@@ -2,12 +2,12 @@ import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRef } from 'react';
 
-import { eventDetailsQueryKey } from '@feature/events/api/query-keys';
-import { useEventDetailsQuery } from '@feature/events/api/useEventQuery';
 import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 
 import { useToastContext } from '@core/context/ToastContext';
 import { EventsAPI } from '@core/domains/events/api/EventsAPI';
+import { eventDetailsQueryKey } from '@core/domains/events/api/query-keys';
+import { useEventDetailsQuery } from '@core/domains/events/api/useEventQuery';
 import { Event } from '@core/domains/events/types';
 import { EventById } from '@core/domains/events/types';
 
@@ -46,9 +46,13 @@ export function useDeleteEvent(id: string) {
   const navigation = useNavigation();
   const { showToast } = useToastContext();
 
+  const queryClient = useQueryClient();
+
   return async function () {
     try {
       await EventsAPI.deleteEvent(id);
+
+      queryClient.removeQueries({ queryKey: eventDetailsQueryKey(id) });
 
       showToast({ type: 'SUCCESS', message: 'Event deleted successfully' });
 

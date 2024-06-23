@@ -2,7 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
+import { ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
+import { EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
+
+import { useEventPreviewImageQuery } from '@core/domains/events/api/useEventPreviewQuery';
+import { Event } from '@core/domains/events/types';
 import { useCopyEventInvite } from '@core/hooks/useCopyEventInvite';
+import { useImagePicker } from '@core/hooks/useImagePicker';
 import { formatTimestamp, isToday } from '@core/lib/date';
 
 import { Button } from '@ui/components/Button';
@@ -11,12 +17,6 @@ import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
-
-import { Event } from '../../../core/domains/events/types';
-import { useEventPreviewImageQuery } from '../api/useEventPreviewQuery';
-import { ConfirmPhotosScreenName } from '../screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
-import { EventScreenName } from '../screens/EventScreen/EventScreen';
-import { useImagePicker } from '../screens/EventScreen/useImagePicker';
 
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';

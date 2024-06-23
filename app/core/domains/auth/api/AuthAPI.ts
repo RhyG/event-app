@@ -1,4 +1,4 @@
-import { supabase } from '@app/core/lib/supabase';
+import { supabase } from '@core/lib/supabase';
 
 export const AuthAPI = {
   async login(email: string, password: string) {

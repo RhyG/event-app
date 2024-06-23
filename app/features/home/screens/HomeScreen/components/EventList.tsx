@@ -1,9 +1,9 @@
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { EventCard } from '@feature/events/components/EventCard';
-import { useAllEventsQuery } from '@feature/home/api/useEventsQuery';
-
 import { Event } from '@core/domains/events/types';
+
+import { useAllEventsQuery } from '../../../api/useEventsQuery';
+import { EventCard } from './EventCard';
 
 function selectSortedEvents(events: Event[]) {
   return events.sort((a: Event, b: Event) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());

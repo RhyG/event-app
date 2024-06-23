@@ -69,7 +69,13 @@ export const EventsAPI = {
   },
   async deleteEvent(eventId: string) {
     console.log('Deleting event with ID', eventId);
-    const { error } = await supabase.from('Events').delete().eq('id', eventId);
+
+    const event = await EventsAPI.getEventById(eventId);
+    console.log(event);
+
+    const { error, ...rest } = await supabase.from('Events').delete().eq('id', eventId);
+
+    console.log({ error, rest });
 
     if (error) throw error;
 
