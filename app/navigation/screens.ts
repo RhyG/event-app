@@ -1,9 +1,10 @@
-import { AccountScreenName } from '@feature/account';
+import { AccountScreenName } from '@feature/account/screens/AccountScreen';
 import { QRCodeScannerScreenName } from '@feature/code-scanning/screens/QRCodeScannerScreen/QRCodeScannerScreen';
-import { CreateEventScreenName, JoinEventScreenName } from '@feature/events';
 import { ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
+import { CreateEventScreenName } from '@feature/events/screens/CreateEventScreen/CreateEventScreen';
 import { EditEventScreenName } from '@feature/events/screens/EditEventScreen/EditEventScreen';
 import { EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
+import { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/JoinEventScreen';
 import { PhotoCarouselScreenName } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
 import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 import { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';

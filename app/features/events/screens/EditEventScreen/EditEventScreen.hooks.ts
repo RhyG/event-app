@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRef } from 'react';
 
-import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
+import { Screens } from '@app/navigation/screens';
 
 import { useToastContext } from '@core/context/ToastContext';
 import { eventDetailsQueryKey } from '@core/domains/events/api//queries/query-keys';
@@ -56,7 +56,7 @@ export function useDeleteEvent(id: string) {
 
       showToast({ type: 'SUCCESS', message: 'Event deleted successfully' });
 
-      navigation.navigate(HomeScreenName);
+      navigation.navigate(Screens.HomeScreen);
     } catch (error) {
       console.log(error);
     }

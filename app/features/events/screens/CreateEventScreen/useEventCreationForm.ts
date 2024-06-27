@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Screens } from '@app/navigation/screens';
+
 import { queryClient } from '@core/context/QueryClientProvider';
 import { useToastContext } from '@core/context/ToastContext';
 import { useUserContext } from '@core/context/UserContext';
 import { createEvent } from '@core/domains/events/services/EventService';
-
-import { EventScreenName } from '../EventScreen/EventScreen';
 
 const CreateEventSchema = z.object({
   name: z.string(),
@@ -43,7 +43,7 @@ export function useEventCreationForm() {
 
       queryClient.refetchQueries({ queryKey: ['events'], type: 'active', exact: true });
 
-      navigation.navigate(EventScreenName, { id: data.id, name: data.event_name, shouldPreventBack: true });
+      navigation.navigate(Screens.EventScreen, { id: data.id, name: data.event_name, shouldPreventBack: true });
     } catch (error) {
       showToast({ message: 'Something went wrong creating the event.', type: 'ERROR' });
     } finally {

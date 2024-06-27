@@ -1,9 +1,9 @@
 import I18n from 'i18n-js';
 import { Controller } from 'react-hook-form';
 
+import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
-import { QRCodeScannerScreenName } from '@feature/code-scanning/screens/QRCodeScannerScreen/QRCodeScannerScreen';
 import { PasswordInput } from '@feature/onboarding/components/PasswordInput';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 
@@ -60,7 +60,7 @@ export function JoinEventScreen({ navigation }: ScreenProp<typeof JoinEventScree
         <Text align="center" colour={theme.colours.textSubdued}>
           {I18n.t('joinEventScreen.scanQrCode')}
         </Text>
-        <Button preset="outlined" onPress={() => navigation.navigate(QRCodeScannerScreenName)} label={I18n.t('joinEventScreen.openCamera')} />
+        <Button preset="outlined" onPress={() => navigation.navigate(Screens.QRCodeScannerScreen)} label={I18n.t('joinEventScreen.openCamera')} />
       </VBox>
     </WelcomeFlowScreen>
   );

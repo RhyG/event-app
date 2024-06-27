@@ -2,9 +2,9 @@ import { Image } from 'expo-image';
 import I18n from 'i18n-js';
 import { Platform, StyleSheet, View } from 'react-native';
 
+import { Screens } from '@app/navigation/screens';
 import { ScreenProp } from '@app/navigation/types';
 
-import { JoinEventScreenName } from '@feature/events';
 import { TwoPartPressableText } from '@feature/onboarding/components/TwoPartPressableText';
 import { WelcomeFlowScreen } from '@feature/onboarding/components/WelcomeFlowScreen';
 import { useWelcomeFlowContext } from '@feature/onboarding/context/WelcomeFlowContext';
@@ -16,9 +16,6 @@ import { HBox, VBox } from '@ui/components/layout/Box';
 import { Theme } from '@ui/theme';
 import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
-import { EmailLoginScreenName } from '../EmailLoginScreen/EmailLoginScreen';
-import { EmailSignUpScreenName } from '../EmailSignUpScreen/EmailSignUpScreen';
-
 export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenName>) {
   const { styles, theme } = useThemedStyles(stylesFn);
 
@@ -27,9 +24,9 @@ export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenNam
 
   function navigateToEmailAuthScreen() {
     if (showingLogin) {
-      navigation.navigate(EmailLoginScreenName);
+      navigation.navigate(Screens.EmailLoginScreen);
     } else {
-      navigation.navigate(EmailSignUpScreenName);
+      navigation.navigate(Screens.EmailSignUpScreen);
     }
   }
 
@@ -70,7 +67,7 @@ export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenNam
         <View style={styles.divider} />
       </HBox>
 
-      <Button onPress={() => navigation.navigate(JoinEventScreenName)} label={I18n.t('common.joinEvent')} />
+      <Button onPress={() => navigation.navigate(Screens.JoinEventScreen)} label={I18n.t('common.joinEvent')} />
     </WelcomeFlowScreen>
   );
 }
