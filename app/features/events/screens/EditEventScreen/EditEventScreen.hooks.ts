@@ -5,9 +5,9 @@ import { useRef } from 'react';
 import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
 
 import { useToastContext } from '@core/context/ToastContext';
+import { eventDetailsQueryKey } from '@core/domains/events/api//queries/query-keys';
 import { EventsAPI } from '@core/domains/events/api/EventsAPI';
 import { useEventDetailsQuery } from '@core/domains/events/api/queries/useEventQuery';
-import { eventDetailsQueryKey } from '@core/domains/events/api/query-keys';
 import { Event } from '@core/domains/events/types';
 import { EventById } from '@core/domains/events/types';
 
