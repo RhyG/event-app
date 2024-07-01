@@ -1,17 +1,3 @@
-import { AccountScreenName } from '@feature/account/screens/AccountScreen';
-import { QRCodeScannerScreenName } from '@feature/code-scanning/screens/QRCodeScannerScreen/QRCodeScannerScreen';
-import { ConfirmPhotosScreenName } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
-import { CreateEventScreenName } from '@feature/events/screens/CreateEventScreen/CreateEventScreen';
-import { EditEventScreenName } from '@feature/events/screens/EditEventScreen/EditEventScreen';
-import { EventScreenName } from '@feature/events/screens/EventScreen/EventScreen';
-import { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/JoinEventScreen';
-import { PhotoCarouselScreenName } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
-import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
-import { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';
-import { EmailSignUpScreenName } from '@feature/onboarding/screens/EmailSignUpScreen/EmailSignUpScreen';
-import { ResetPasswordScreenName } from '@feature/onboarding/screens/ResetPasswordScreen/ResetPasswordScreen';
-import { WelcomeScreenName } from '@feature/onboarding/screens/WelcomeScreen/WelcomeScreen';
-
 import type { RootStackParamList } from './types';
 
 export const Screens: { [K in keyof RootStackParamList]: K } = {
@@ -19,20 +5,20 @@ export const Screens: { [K in keyof RootStackParamList]: K } = {
   CreateEventNavigator: 'CreateEventNavigator',
 
   WelcomeNavigator: 'WelcomeNavigator',
-  WelcomeScreen: WelcomeScreenName,
-  EmailLoginScreen: EmailLoginScreenName,
-  EmailSignUpScreen: EmailSignUpScreenName,
-  ResetPasswordScreen: ResetPasswordScreenName,
+  WelcomeScreen: 'WelcomeScreen',
+  EmailLoginScreen: 'EmailLoginScreen',
+  EmailSignUpScreen: 'EmailSignUpScreen',
+  ResetPasswordScreen: 'ResetPasswordScreen',
 
-  HomeScreen: HomeScreenName,
-  JoinEventScreen: JoinEventScreenName,
-  CreateEventScreen: CreateEventScreenName,
-  EventScreen: EventScreenName,
-  QRCodeScannerScreen: QRCodeScannerScreenName,
-  AccountScreen: AccountScreenName,
-  ConfirmPhotosScreen: ConfirmPhotosScreenName,
-  EditEventScreen: EditEventScreenName,
-  PhotoCarouselScreen: PhotoCarouselScreenName,
+  HomeScreen: 'HomeScreen',
+  JoinEventScreen: 'JoinEventScreen',
+  CreateEventScreen: 'CreateEventScreen',
+  EventScreen: 'EventScreen',
+  QRCodeScannerScreen: 'QRCodeScannerScreen',
+  AccountScreen: 'AccountScreen',
+  ConfirmPhotosScreen: 'ConfirmPhotosScreen',
+  EditEventScreen: 'EditEventScreen',
+  PhotoCarouselScreen: 'PhotoCarouselScreen',
 } as const;
 
 export type Screen = keyof typeof Screens;
