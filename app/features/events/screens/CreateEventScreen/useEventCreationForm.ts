@@ -35,6 +35,7 @@ export function useEventCreationForm() {
   async function _submitNewEvent(eventData: CreateEventForm) {
     try {
       setIsCreatingEvent(true);
+
       if (!user?.id) {
         return;
       }

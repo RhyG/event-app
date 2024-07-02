@@ -3,17 +3,16 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AccountScreenName } from '@feature/account';
 import { CreateEventScreenName } from '@feature/events';
-import { AllEventsScreenName } from '@feature/events/screens/AllEventsScreen/AllEventsScreen';
 import type { ConfirmPhotosScreenName, ConfirmPhotosScreenParams } from '@feature/events/screens/ConfirmPhotosScreen/ConfirmPhotosScreen';
 import type { EditEventScreenName, EditEventScreenParams } from '@feature/events/screens/EditEventScreen/EditEventScreen';
 import type { EventScreenName, EventScreenParams } from '@feature/events/screens/EventScreen/EventScreen';
-import { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/JoinEventScreen';
+import type { JoinEventScreenName } from '@feature/events/screens/JoinEventScreen/JoinEventScreen';
 import type { PhotoCarouselScreenName, PhotoCarouselScreenParams } from '@feature/events/screens/PhotoCarouselScreen/PhotoCarouselScreen';
-import { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
-import { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';
-import { EmailSignUpScreenName } from '@feature/onboarding/screens/EmailSignUpScreen/EmailSignUpScreen';
-import { ResetPasswordScreenName } from '@feature/onboarding/screens/ResetPasswordScreen/ResetPasswordScreen';
-import { WelcomeScreenName } from '@feature/onboarding/screens/WelcomeScreen/WelcomeScreen';
+import type { HomeScreenName } from '@feature/home/screens/HomeScreen/HomeScreen';
+import type { EmailLoginScreenName } from '@feature/onboarding/screens/EmailLoginScreen/EmailLoginScreen';
+import type { EmailSignUpScreenName } from '@feature/onboarding/screens/EmailSignUpScreen/EmailSignUpScreen';
+import type { ResetPasswordScreenName } from '@feature/onboarding/screens/ResetPasswordScreen/ResetPasswordScreen';
+import type { WelcomeScreenName } from '@feature/onboarding/screens/WelcomeScreen/WelcomeScreen';
 
 export type TabParamList = {
   HomeTab: NavigatorScreenParams<Record<string, never>>;
@@ -38,7 +37,6 @@ export type RootStackParamList = {
   [JoinEventScreenName]: undefined;
   [CreateEventScreenName]: undefined;
   [EventScreenName]: EventScreenParams;
-  [AllEventsScreenName]: undefined;
   [ConfirmPhotosScreenName]: ConfirmPhotosScreenParams;
   [EditEventScreenName]: EditEventScreenParams;
   [PhotoCarouselScreenName]: PhotoCarouselScreenParams;
