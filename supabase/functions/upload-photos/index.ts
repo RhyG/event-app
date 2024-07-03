@@ -12,6 +12,31 @@ Deno.serve(async req => {
     return new Response('Method Not Allowed', { status: 405 });
   }
 
+  try {
+    const authHeader = req.headers.get('Authorization')!;
+
+    if (!authHeader) {
+      return new Response(JSON.stringify({ error: 'No authorization header passed' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    }
+
+    const supabaseClient = createClient(Deno.env.get('SUPABASE_URL') ?? '', Deno.env.get('SUPABASE_ANON_KEY') ?? '', {
+      global: { headers: { Authorization: authHeader } },
+    });
+
+    const { eventId } = await req.json();
+
+    const { data, error } = await supabaseClient
+      .from('Photos')
+      .insert([{ event_id: eventId }])
+      .select('id');
+
+    if (error) {
+      return new Response(JSON.stringify({ error: 'Failed to save photo details.' }), { status: 500 });
+    }
+  } catch (error) {
+    return new Response(JSON.stringify({ error }), { status: 500 });
+  }
+
   if (!AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
     return new Response('AWS credentials not found.', { status: 500 });
   }
