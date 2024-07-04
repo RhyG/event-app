@@ -1,10 +1,8 @@
 import { supabase } from '@core/lib/supabase';
 
-import { PhotosModule } from '../modules/PhotosModule';
-
 export const PhotoAPI = {
   async uploadPhoto({ eventId, photoId, file }: { eventId: string; photoId: string; file: ArrayBuffer }) {
-    const response = await PhotosModule.uploadPhoto({ eventId, photoId, file });
+    const response = await supabase.storage.from('photos').upload(`${eventId}/${photoId}.jpg`, file, { contentType: 'image/jpg' });
 
     if (response.error) {
       console.log('Error in PhotoAPI upload:', response.error);

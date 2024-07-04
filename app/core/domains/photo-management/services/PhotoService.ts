@@ -1,4 +1,8 @@
+import { PutObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
 import { decode } from 'base64-arraybuffer';
+
+import { S3Client } from '@core/lib/aws';
+import { supabase } from '@core/lib/supabase';
 
 import { PhotoAPI } from '../api/PhotoAPI';
 import { PhotosModule } from '../modules/PhotosModule';
@@ -55,6 +59,22 @@ export async function uploadPhoto(eventId: string, file: string) {
   }
 }
 
+export async function uploadFile(photoId: string, eventId: string, file: Blob) {
+  try {
+    const uploadParams: PutObjectCommandInput = {
+      Bucket: 'event-app-photos',
+      Key: `${eventId}/${photoId}.jpeg`,
+      Body: file,
+      ContentType: 'image/jpeg',
+    };
+
+    const res = await S3Client.send(new PutObjectCommand(uploadParams));
+    console.log({ res });
+  } catch (error) {
+    console.log('Error uploading to S3:', error);
+  }
+}
+
 export async function _uploadPhoto(eventId: string, file: string) {
   try {
     const savedPhoto = await PhotoAPI.savePhotoDetails(eventId);
@@ -67,7 +87,7 @@ export async function _uploadPhoto(eventId: string, file: string) {
     const response = await fetch(file);
     const blob = await response.blob();
 
-    await PhotosModule.uploadFile(savedPhoto.id, eventId, blob);
+    await uploadFile(savedPhoto.id, eventId, blob);
   } catch (error) {
     console.log('Error uploading photo:', error);
     throw error;
