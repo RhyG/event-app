@@ -34,7 +34,7 @@
     "@supabase/supabase-js": "^2.43.1",
     "@tanstack/react-query": "^5.35.5",
     "base64-arraybuffer": "^1.0.2",
-    "expo": "~51.0.14",
+    "expo": "^51.0.32",
     "expo-blur": "^13.0.2",
     "expo-camera": "~15.0.11",
     "expo-dev-client": "~4.0.18",
