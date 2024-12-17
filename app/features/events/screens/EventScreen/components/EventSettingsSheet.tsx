@@ -9,8 +9,8 @@ import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { EditEventScreenName } from '../../EditEventScreen/EditEventScreen';
 import { useEventSettingsSheet } from './EventSettingsSheet.hooks';

@@ -9,7 +9,7 @@ import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
-import { useTheme } from '@ui/theme/useTheme';
+import { useTheme } from '@ui/hooks/useTheme';
 
 import { Gallery } from '../../components/Gallery/Gallery';
 import { useUploadPhotos } from './useUploadPhotos';

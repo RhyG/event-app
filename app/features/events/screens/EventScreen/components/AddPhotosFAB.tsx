@@ -4,8 +4,8 @@ import { StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, { BounceInDown, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 const FAB_VISIBLE_BOTTOM_VALUE = 30;
 const FAB_HIDDEN_BOTTOM_VALUE = -180;

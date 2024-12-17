@@ -4,7 +4,7 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { IconProps } from '@expo/vector-icons/build/createIconSet';
 import * as React from 'react';
 
-import { useTheme } from '@ui/theme/useTheme';
+import { useTheme } from '@ui/hooks/useTheme';
 
 type GenericIconProps = IconProps<any>;
 

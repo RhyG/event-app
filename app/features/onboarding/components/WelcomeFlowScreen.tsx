@@ -6,8 +6,8 @@ import { useHeaderOptions } from '@core/hooks/useHeaderOptions';
 import { Screen } from '@ui/components/Screen';
 import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 type Props = PropsWithChildren<{
   heading: string;

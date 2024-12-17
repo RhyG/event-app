@@ -6,8 +6,8 @@ import { useToastContext } from '@core/context/ToastContext';
 import { getEventInvite } from '@core/domains/events/services/EventService';
 
 import { Icon } from '@ui/components/Icon';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 function copyEventInvite(eventName: string, eventAccessCode: string) {
   const invite = getEventInvite(eventName, eventAccessCode);

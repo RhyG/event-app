@@ -3,8 +3,8 @@ import { FlatList, ListRenderItem, StyleSheet, TouchableOpacity } from 'react-na
 
 import { Text } from '@ui/components/Text';
 import { HBox } from '@ui/components/layout/Box';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 const placeholder_tags = ['Getting ready', 'Reception', 'Ceremony', 'Dinner', 'After party', 'Bux night', "Hen's night"];
 

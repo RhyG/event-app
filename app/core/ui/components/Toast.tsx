@@ -4,8 +4,8 @@ import Animated, { Easing, useAnimatedStyle, withTiming } from 'react-native-rea
 
 import { useToastContext } from '@core/context/ToastContext';
 
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { Icon } from './Icon';
 import { Text } from './Text';

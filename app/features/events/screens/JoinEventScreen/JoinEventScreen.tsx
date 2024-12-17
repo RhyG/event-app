@@ -11,7 +11,7 @@ import { Button } from '@ui/components/Button';
 import { InputWithLabel } from '@ui/components/InputWithLabel';
 import { Text } from '@ui/components/Text';
 import { VBox } from '@ui/components/layout/Box';
-import { useTheme } from '@ui/theme/useTheme';
+import { useTheme } from '@ui/hooks/useTheme';
 
 import { useJoinEventForm } from './JoinEventScreen.hooks';
 

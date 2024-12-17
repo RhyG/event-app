@@ -5,8 +5,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 function formatDate(date: Date): string {
   return new Intl.DateTimeFormat('en-AU', { day: '2-digit', month: 'short', year: 'numeric' }).format(date);

@@ -13,8 +13,8 @@ import { Button } from '@ui/components/Button';
 import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
 import { HBox, VBox } from '@ui/components/layout/Box';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 export function WelcomeScreen({ navigation }: ScreenProp<typeof WelcomeScreenName>) {
   const { styles, theme } = useThemedStyles(stylesFn);

@@ -1,7 +1,7 @@
 import { TextInput as RNTextInput, StyleSheet, TextInputProps, ViewStyle } from 'react-native';
 
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 import { HBox } from './layout/Box';
 

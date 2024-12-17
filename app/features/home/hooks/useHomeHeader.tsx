@@ -4,8 +4,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Icon } from '@ui/components/Icon';
 import { Text } from '@ui/components/Text';
+import { useThemedStyles } from '@ui/hooks/useThemedStyles';
 import { Theme } from '@ui/theme';
-import { useThemedStyles } from '@ui/theme/useThemedStyles';
 
 function NotificationIcon() {
   const { styles } = useThemedStyles(stylesFn);
